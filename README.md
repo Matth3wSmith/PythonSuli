@@ -1,2 +1,2 @@
-# PythonsSuli
+# PythonSuli
 Python programozás
