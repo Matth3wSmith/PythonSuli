@@ -41,11 +41,10 @@ else:
 #        hossz = len(lista)
 #        print(negyzetSzam)
 #print(hossz)
-
+szamok = []
 for d in range(1, 50):
     if len(str(d*d))==3:
         print(d);
-        szamok = []
         szamok.append(d)
 else:
-    print(len(szamok))
+    print("Ennyi háromjegyű négyzetszám van:", len(szamok))
