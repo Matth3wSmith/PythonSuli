@@ -14,7 +14,7 @@ valtok = [  [10, 10, 10 ,1000, 1],
             [10, 10, 10, 100, 1000, 1],
             [10, 10, 10, 100, 1]]
 
-print("#"*35);
+print("#"*40);
 #for elem in tipusok:
 #    print(elem)
 
@@ -24,7 +24,7 @@ for i,elem in enumerate(tipusok):
     print("\t",str(i+1)+":", elem);
 
 print("\t 0: Kilépés");
-print("#"*35);
+print("#"*40);
 
 tipusId="";
 
@@ -37,7 +37,7 @@ while tipusId=="" or tipusId not in range(len(tipusok)+1):
     except:
         print("Nem jó! Válassz a listából!")
 
-print("#"*35)
+print("#"*40)
 tipusId -=1
 print("Mértékegység típus:", tipusok[tipusId])
 
@@ -48,7 +48,7 @@ for i,elem in enumerate(egysegek[tipusId]):
     print("\t",str(i+1)+":", elem);
 
 print("\t 0: Kilépés");
-print("#"*35);
+print("#"*40);
 
 egysegId="";
 
@@ -61,7 +61,7 @@ while egysegId=="" or egysegId not in range(len(egysegek[tipusId])+1):
     except:
         print("Nem jó! Válassz a listából!")
 
-print("#"*35)
+print("#"*40)
 egysegId-=1
 print("Kívánt mértékegységből való átváltás:", egysegek[tipusId][egysegId])
 
@@ -71,7 +71,7 @@ for i,elem in enumerate(egysegek[tipusId]):
     print("\t",str(i+1)+":", elem);
 
 print("\t 0: Kilépés");
-print("#"*35);
+print("#"*40);
 
 egysegId2="";
 
@@ -86,8 +86,9 @@ while egysegId2=="" or egysegId not in range(len(egysegek[tipusId])+1):
 
 
 egysegId2-=1
-print("#"*35)
+print("#"*40)
 print("Kívánt mértékegységbe váltás:", egysegek[tipusId][egysegId2])
+print("#"*40)
 
 szam=float(input("Írd be az átváltani kívánt mennyiséget!:"))
 
@@ -102,7 +103,8 @@ else:
     szorzo = 1
     for e in valtok[tipusId][egysegId2:egysegId]:
         szorzo *= e
-     eredmeny = szam*szorzo
+    eredmeny = szam*szorzo
+print("#"*40)
 
 print(szam, egysegek[tipusId][egysegId], eredmeny, egysegek[tipusId][egysegId2])
 
