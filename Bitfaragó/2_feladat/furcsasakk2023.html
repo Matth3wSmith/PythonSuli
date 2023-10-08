@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+	<title>Fura sakk</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<style type="text/css" media="screen,projection,print">
+		body{
+			font-family: Arial, Helvetica, sans-serif;
+			margin: auto;
+		}
+		section{
+			min-width:400px;
+			padding:20px;
+			margin: 10px auto 10px auto;
+		}
+		h1,p,h2{
+			text-align:center;
+		}
+		h2{
+			width:200px;
+			padding:30px;
+			margin:10px auto;
+			border:1px solid black;
+		}
+		#palya {
+			background:orange;
+			font-size:2em;text-align:center;
+			margin: auto;
+			border-color: orange;
+			box-shadow: 10px 10px 5px #d0d0d0;
+		}
+
+		#pontok
+		{
+			text-align: center;
+		}
+		.kozep
+		{
+			text-align: center;
+		}
+
+		#gameover{
+			display:none;
+			width:400px;
+			padding: 150px 0;
+			margin:10px auto;
+			border:1px solid orange;
+			margin-top: -500px;
+			box-shadow: 10px 10px 5px #d0d0d0aa;
+			background-color: azure;
+			position: relative;
+			z-index: 1000;
+			text-align: center;
+			font-size: 50px;
+		}
+
+	</style>
+</head>
+<body>
+	<section>
+		<div class="kozep">
+			<label>Max kör:<input type="number" id="maxkor" min="0" value=""> <small>(nem kötelező megadni)</small></label>
+		</div>
+		<h2 id="fordulo">Ki jön:</h2>
+		<div id="pontok">
+			<div>
+				Világos: <span id="jatekos0">0</span>
+				<input type="button" value="Joker" id="joker0" onclick="joker(0,this)">
+				<input type="button" value="Dupla lépés" id="dupla0" onclick="dupla(0,this)">
+			</div>
+			<div>
+				Sötét: <span id="jatekos1">0</span>
+				<input type="button" value="Joker" id="joker1" onclick="joker(1,this)">
+				<input type="button" value="Dupla lépés" id="dupla1" onclick="dupla(1,this)">
+			</div>
+		</div>
+		<table id="palya" align="center">
+		</table>
+		<div id="gameover"></div>
+	</section>
+	<script>
+		var nrow = 12;
+		var ncell = 8;
+		var tt = new Array(nrow);
+		var figure_cell_list =
+			[[0,0,'B'],[0,1,'H'],[0,2,'F'],[0,3,'V'],[0,4,'K'],[0,5,'F'],[0,6,'H'],[0,7,'B'],
+			[1,0,'G'],[1,1,'G'],[1,2,'G'],[1,3,'G'],[1,4,'G'],[1,5,'G'],[1,6,'G'],[1,7,'G']];
+		var figure_cell_list2 =
+			[[nrow-1,0,'B'],[nrow-1,1,'H'],[nrow-1,2,'F'],[nrow-1,3,'V'],[nrow-1,4,'K'],[nrow-1,5,'F'],[nrow-1,6,'H'],[nrow-1,7,'B'],
+			[nrow-2,0,'G'],[nrow-2,1,'G'],[nrow-2,2,'G'],[nrow-2,3,'G'],[nrow-2,4,'G'],[nrow-2,5,'G'],[nrow-2,6,'G'],[nrow-2,7,'G']];
+
+
+
+		var newrow;
+
+		var kiJon=0;//0: világos, 1:sötét
+		var pontok=[0,0];
+    	var figuraErtek={G:1,F:2,H:2,K:2,B:3,V:5};
+
+		function init()
+		{
+			for(var i=0;i<nrow;i++){
+				newrow=document.getElementById("palya").insertRow(i);
+				tt[i] = new Array(ncell);
+				for(var j=0;j<ncell;j++){
+					tt[i][j]=newrow.insertCell(j);
+					tt[i][j].id=i*ncell+j;
+					tt[i][j].onclick=function(){cellClicked(this);};
+					tt[i][j].style.width="50px";
+					tt[i][j].style.height="50px";
+					tt[i][j].style.color="#fcfcfc";
+					if((i%2==0 && j%2==0) || (i%2==1 && j%2==1))
+					{
+						tt[i][j].style.background="#ffffff";
+					}
+					else
+					{
+						tt[i][j].style.background="#000000";
+					}
+					tt[i][j].innerHTML="";
+				}
+			}
+			for (var i=0; i<figure_cell_list.length; i++)
+			{
+				var trow=figure_cell_list[i][0];
+				var tcol=figure_cell_list[i][1];
+				var tfigure=figure_cell_list[i][2];
+				tt[trow][tcol].innerHTML=tfigure;
+				tt[trow][tcol].style.color="#0c0c0c";
+				tt[trow][tcol].dataset.szin="sötét";
+				tt[trow][tcol].style.textShadow="0px 0px 3px #ffffff";
+				if(tfigure=="G")
+				{
+					tt[trow][tcol].dataset.irany=1;
+				}
+			}
+
+			for (var i=0; i<figure_cell_list2.length; i++)
+			{
+				var trow=figure_cell_list2[i][0];
+				var tcol=figure_cell_list2[i][1];
+				var tfigure=figure_cell_list2[i][2];
+				tt[trow][tcol].innerHTML=tfigure;
+				tt[trow][tcol].dataset.szin="világos";
+				if(tfigure=="G")
+				{
+					tt[trow][tcol].dataset.irany=-1;
+				}
+				tt[trow][tcol].style.textShadow="0px 0px 3px #000000";
+			}
+
+			if(kiJon==0)
+			{
+				document.getElementById("fordulo").innerHTML="Világos kezd";
+			}
+			else
+			{
+				document.getElementById("fordulo").innerHTML="Sötét kezd";
+			}
+			document.getElementById("maxkor").value="";
+		}
+
+		function clearBackground()
+		{
+			for(var i=0;i<nrow;i++){
+				for(var j=0;j<ncell;j++){
+					if((i%2==0 && j%2==0) || (i%2==1 && j%2==1))
+					{
+						tt[i][j].style.background="#ffffff";
+					}
+					else
+					{
+						tt[i][j].style.background="#000000";
+					}
+				}
+			}
+		}
+
+		var babu=[];
+		function cellClicked(obj)
+		{
+			var row = parseInt(obj.id/ncell);
+			var column = obj.id%ncell;
+
+			//ha zöld, akkor ide léphet
+			if(tt[row][column].style.background=="rgb(0, 255, 0)")
+			{
+				//ha ütés van
+				if(tt[row][column].innerHTML!="")
+				{
+					pontok[kiJon]+=figuraErtek[tt[row][column].innerHTML];
+    				document.getElementById("jatekos0").innerHTML=pontok[0];
+    				document.getElementById("jatekos1").innerHTML=pontok[1];
+				}
+				tt[row][column].innerHTML=tt[babu[0]][babu[1]].innerHTML;
+				tt[row][column].dataset.szin=tt[babu[0]][babu[1]].dataset.szin;
+				tt[row][column].dataset.irany=tt[babu[0]][babu[1]].dataset.irany;
+				tt[row][column].style.color=tt[babu[0]][babu[1]].style.color;
+				tt[row][column].style.textShadow=tt[babu[0]][babu[1]].style.textShadow;
+
+				tt[babu[0]][babu[1]].innerHTML="";
+				tt[babu[0]][babu[1]].dataset.szin="";
+				tt[babu[0]][babu[1]].dataset.irany="";
+				tt[babu[0]][babu[1]].style.color="";
+				//tt[babu[0]][babu[1]].style.textShadow="";
+
+				//ha gyalog beér, akkor megfordul
+				if(tt[row][column].innerHTML=="G" 
+					&& (row==0 || row==nrow-1))
+				{
+					tt[row][column].dataset.irany*=-1;
+				}
+				//ha gyalog, akkor merre is megy
+				if(tt[row][column].innerHTML=="G")
+				{
+					if(tt[row][column].dataset.irany==1) {tt[row][column].style.textDecoration="underline";}
+					if(tt[row][column].dataset.irany==-1) {tt[row][column].style.textDecoration="overline";}
+				}
+				else
+				{
+					tt[row][column].style.textDecoration="";
+				}
+
+				clearBackground();
+				if(duplaLepes)
+				{
+					duplaLepes=false;
+				}
+				else
+				{
+					if(kiJon==0)
+					{
+						document.getElementById("fordulo").innerHTML="Sötét lép";
+						document.getElementById("fordulo").style.backgroundColor="black";
+						document.getElementById("fordulo").style.color="white";
+						kiJon=1;
+					}
+					else
+					{
+						document.getElementById("fordulo").innerHTML="Világos lép";
+						document.getElementById("fordulo").style.backgroundColor="white";
+						document.getElementById("fordulo").style.color="black";
+						kiJon=0;
+						if(document.getElementById("maxkor").value!="")
+						{
+							document.getElementById("maxkor").value=""+((parseInt(document.getElementById("maxkor").value))-1);
+						}
+
+						//ha elfogynak a körök
+						if(parseInt(document.getElementById("maxkor").value)<=0)
+						{
+							for(var i=0;i<nrow;i++){
+								for(var j=0;j<ncell;j++){
+									tt[i][j].onclick="";
+								}
+							}
+							//kellene egy GAME OVER cucc
+							gameover();
+							//alert("VÉGE!");
+						}
+					}
+				}
+				
+			}
+			else
+			{
+				clearBackground();
+
+
+				babu=[row,column];
+				//Amelyik játékos jön, az legyen kattintható
+				if((kiJon==0 && tt[row][column].dataset.szin=="világos")
+					|| (kiJon==1 && tt[row][column].dataset.szin=="sötét"))
+				{
+					tt[row][column].style.background="#00aa00";
+
+					//merre lehet lépni
+					//ha gyalog
+					if(tt[row][column].innerHTML=="G" || jokerLepes)
+					{
+						//lefelé
+						if(tt[row][column].dataset.irany==1)
+						{
+							//lépés
+							for(let i=row+1;i<=row+3;i++)
+							{
+								if(i<nrow && tt[i][column].innerHTML=="")
+								{
+									tt[i][column].style.background="#00ff00";
+								}
+								else
+								{
+									//ha van bábu, ne menjen tovább
+									break;
+								}								
+							}
+							//ütés
+							if(row+1<nrow)
+							{
+								if(column+1<ncell 
+									&& tt[row+1][column+1].innerHTML!="" 
+									&& tt[row+1][column+1].dataset.szin!=tt[row][column].dataset.szin)
+								{
+									tt[row+1][column+1].style.background="#00ff00";
+								}
+								if(column-1>=0 
+									&& tt[row+1][column-1].innerHTML!="" 
+									&& tt[row+1][column-1].dataset.szin!=tt[row][column].dataset.szin)
+								{
+									tt[row+1][column-1].style.background="#00ff00";
+								}
+							}
+						}
+						else if(tt[row][column].dataset.irany==-1)//felfelé
+						{
+							//lépés
+							for(let i=row-1;i>=row-3;i--)
+							{
+								if(i>=0 && tt[i][column].innerHTML=="")
+								{
+		
+									tt[i][column].style.background="#00ff00";
+								}
+								else
+								{
+									//console.log(tt[i][column].innerHTML);
+									//ha van bábu, ne menjen tovább
+									break;
+								}								
+							}
+							//ütés
+							if(row-1>=0)
+							{
+								
+								if(column+1<ncell 
+									&& tt[row-1][column+1].innerHTML!="" 
+									&& tt[row-1][column+1].dataset.szin!=tt[row][column].dataset.szin)
+								{
+									tt[row-1][column+1].style.background="#00ff00";
+								}
+								if(column-1>=0 
+									&& tt[row-1][column-1].innerHTML!="" 
+									&& tt[row-1][column-1].dataset.szin!=tt[row][column].dataset.szin)
+								{
+									tt[row-1][column-1].style.background="#00ff00";
+								}
+							}
+						}
+					}
+					if(tt[row][column].innerHTML=="B" || tt[row][column].innerHTML=="V" || tt[row][column].innerHTML=="K" || jokerLepes)
+					{
+						//lépés lefelé
+						for(let i=row+1;i<nrow;i++)
+						{
+							if(tt[row][column].innerHTML=="K" && i>row+2){break;}//király max 2-őt lép
+							if(tt[i][column].innerHTML=="")
+							{
+								tt[i][column].style.background="#00ff00";
+							}
+							else
+							{
+								//ha van bábu, ne menjen tovább
+								if(tt[i][column].innerHTML!=""
+									&& tt[i][column].dataset.szin!=tt[row][column].dataset.szin)
+								{
+									tt[i][column].style.background="#00ff00";
+								}
+								break;
+							}								
+						}
+						//lépés felfelé
+						for(let i=row-1;i>=0;i--)
+						{
+							if(tt[row][column].innerHTML=="K" && i<row-2){break;}//király max 2-őt lép
+							if(tt[i][column].innerHTML=="")
+							{
+								tt[i][column].style.background="#00ff00";
+							}
+							else
+							{
+								//ha van bábu, ne menjen tovább
+								if(tt[i][column].innerHTML!=""
+									&& tt[i][column].dataset.szin!=tt[row][column].dataset.szin)
+								{
+									tt[i][column].style.background="#00ff00";
+								}
+								break;
+							}								
+						}
+						//lépés jobbra
+						for(let i=column-1;i>=0;i--)
+						{
+							if(tt[row][column].innerHTML=="K" && i<column-2){break;}//király max 2-őt lép
+							if(tt[row][i].innerHTML=="")
+							{
+								tt[row][i].style.background="#00ff00";
+							}
+							else
+							{
+								//ha van bábu, ne menjen tovább
+								if(tt[row][i].innerHTML!=""
+									&& tt[row][i].dataset.szin!=tt[row][column].dataset.szin)
+								{
+									tt[row][i].style.background="#00ff00";
+								}
+								break;
+							}								
+						}
+						//lépés balra
+						for(let i=column+1;i<ncell;i++)
+						{
+							if(tt[row][column].innerHTML=="K" && i>column+2){break;}//király max 2-őt lép
+							if(tt[row][i].innerHTML=="")
+							{
+								tt[row][i].style.background="#00ff00";
+							}
+							else
+							{
+								//ha van bábu, ne menjen tovább
+								if(tt[row][i].innerHTML!=""
+									&& tt[row][i].dataset.szin!=tt[row][column].dataset.szin)
+								{
+									tt[row][i].style.background="#00ff00";
+								}
+								break;
+							}								
+						}
+					}
+					if(tt[row][column].innerHTML=="F" || tt[row][column].innerHTML=="V" || tt[row][column].innerHTML=="K" || jokerLepes)
+					{
+						//lépés bal-fel
+						for(let i=1;i<nrow;i++)
+						{
+							if(tt[row][column].innerHTML=="K" && i>2){break;}//király max 2-őt lép
+
+							let r=row-i;
+							let c=column-i;
+							if(r<0 || c<0){break;}
+
+							//függvényesítés, hogy rövidebb legyen
+							if(!szinez(r,c,row,column)){break;}
+
+							/*
+							//régi változat
+							if(tt[r][c].innerHTML=="")
+							{
+								tt[r][c].style.background="#00ff00";
+							}
+							else
+							{
+								//ha van bábu, ne menjen tovább
+								if(tt[r][c].innerHTML!=""
+									&& tt[r][c].dataset.szin!=tt[row][column].dataset.szin)
+								{
+									tt[r][c].style.background="#00ff00";
+								}
+								break;
+							}*/
+						}
+						//lépés jobb-fel
+						for(let i=1;i<nrow;i++)
+						{
+							if(tt[row][column].innerHTML=="K" && i>2){break;}//király max 2-őt lép
+							let r=row-i;
+							let c=column+i;
+							if(r<0 || c>=ncell){break;}
+
+							//függvényesítés, hogy rövidebb legyen
+							if(!szinez(r,c,row,column)){break;}
+						}
+						//lépés jobb-le
+						for(let i=1;i<nrow;i++)
+						{
+							if(tt[row][column].innerHTML=="K" && i>2){break;}//király max 2-őt lép
+							let r=row+i;
+							let c=column+i;
+							if(r>=nrow || c>=ncell){break;}
+
+							//függvényesítés, hogy rövidebb legyen
+							if(!szinez(r,c,row,column)){break;}
+						}
+						//lépés bal-le
+						for(let i=1;i<nrow;i++)
+						{
+							if(tt[row][column].innerHTML=="K" && i>2){break;}//király max 2-őt lép
+							let r=row+i;
+							let c=column-i;
+							if(r>=nrow || c<0){break;}
+
+							//függvényesítés, hogy rövidebb legyen
+							if(!szinez(r,c,row,column)){break;}
+						}
+					}
+					//huszár
+					if(tt[row][column].innerHTML=="H" || jokerLepes)
+					{
+						
+						let r=row-2;	let c=column-1;		if(r>=0 && c>=0){szinez(r,c,row,column);}
+						r=row-2;		c=column+1;		if(r>=0 && c<ncell){szinez(r,c,row,column);}
+						r=row-1;		c=column-2;		if(r>=0 && c>=0){szinez(r,c,row,column);}
+						r=row-1;		c=column+2;		if(r>=0 && c<ncell){szinez(r,c,row,column);}
+						r=row+1;		c=column-2;		if(r<nrow && c>=0){szinez(r,c,row,column);}
+						r=row+1;		c=column+2;		if(r<nrow && c<ncell){szinez(r,c,row,column);}
+						r=row+2;		c=column-1;		if(r<nrow && c>=0){szinez(r,c,row,column);}
+						r=row+2;		c=column+1;		if(r<nrow && c<ncell){szinez(r,c,row,column);}
+					}
+
+					jokerLepes=false;
+				}
+			}
+			vanMegSzin();
+
+/*
+			for(var j=0;j<ncell;j++){
+				if (j!=column)
+					tt[row][j].style.background="#ff0000";
+			}
+			for(var j=0;j<nrow;j++){
+				if (j!=row)
+					tt[j][column].style.background="#0000ff";
+			}
+			*/
+		}
+		function szinez(r,c,row,column)
+		{
+			console.log("sadsd",r,c)
+			if(tt[r][c].innerHTML=="")
+			{
+				tt[r][c].style.background="#00ff00";
+			}
+			else
+			{
+				//ha van bábu, ne menjen tovább
+				if(tt[r][c].innerHTML!=""
+					&& tt[r][c].dataset.szin!=tt[row][column].dataset.szin)
+				{
+					tt[r][c].style.background="#00ff00";
+				}
+				//break;
+				return false;
+			}								
+			return true;
+		}
+
+		var jokerLepes=false;
+		function joker(jatekos,obj)
+		{
+			if(jatekos!=kiJon) return false;
+			jokerLepes=true;
+			obj.disabled=true;
+		}
+		var duplaLepes=false;
+		function dupla(jatekos,obj)
+		{
+			if(jatekos!=kiJon) return false;
+			duplaLepes=true;
+			obj.disabled=true;
+		}
+
+		function gameover()
+		{
+			if(pontok[0]>pontok[1])
+			{
+				document.getElementById("gameover").innerHTML="Világos nyert!";
+				document.getElementById("gameover").style.backgroundColor="white";
+				document.getElementById("gameover").style.color="black";
+			}
+			else if(pontok[0]<pontok[1])
+			{
+				document.getElementById("gameover").innerHTML="Sötét nyert!";
+				document.getElementById("gameover").style.backgroundColor="black";
+				document.getElementById("gameover").style.color="white";
+			}
+			else
+			{
+				document.getElementById("gameover").innerHTML="Döntetlen!";
+				document.getElementById("gameover").style.backgroundColor="#999999";
+				document.getElementById("gameover").style.color="orange";
+			}
+			document.getElementById("gameover").style.display="block";
+		}
+
+		//van-e még figura
+		function vanMegSzin()
+		{
+			let sotet=0;
+			let vilagos=0;
+			for(var i=0;i<nrow;i++){
+				for(var j=0;j<ncell;j++){
+					if(tt[i][j].innerHTML!="")
+					{
+						if(tt[i][j].dataset.szin=="sötét")
+						{
+							sotet++;
+						}
+						if(tt[i][j].dataset.szin=="világos")
+						{
+							vilagos++;
+						}
+					}
+				}
+			}
+
+			if(vilagos==0 || sotet==0)
+			{
+				gameover();
+			}
+
+		}
+	</script>
+	<script> init(); </script>
+</body>
+</html>
