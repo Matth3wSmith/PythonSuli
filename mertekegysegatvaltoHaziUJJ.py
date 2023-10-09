@@ -204,39 +204,46 @@ while tipusId!=0 or egysegId!=0 or egysegId2!=0:
                 for e in valtok[2][egysegId:2]:
                     print("hello",e)
                     szorzo *= e
-                szam2 = szam/szorzo
+                eredmeny = szam/szorzo
+                print(eredmeny)
             elif egysegId > 2 and egysegId < 5:
                 szorzo = 1
                 for e in valtok[2][egysegId:2]:
                     szorzo *= e
-                szam2 = szam*szorzo
+                eredmeny = szam*szorzo
                 #Most már dm3-ből literbe át van váltva (1dm3=1l)
-            if egysegId2 < 8:
-                print("hello")
+            if egysegId2 < 8 and 'eredmeny' in globals():
+                print("helloo")
                 szorzo = 1
-                for e in valtok[4][(egysegId2-5):8]:
+                for e in valtok[4][(egysegId2-5):3]:
                     szorzo *= e
-                eredmeny = szam2*szorzo
+                print(szorzo)
+                eredmeny = eredmeny*szorzo
             elif egysegId2 > 8:
                 szorzo = 1
-                for e in valtok[4][3]:
+                for e in valtok[4][3:4]:
                     szorzo *= e
-                eredmeny = szam/szorzo
-            #else:
-                #if egysegId2 < 8:
-                   # szorzo = 1
-                  #  for e in valtok[4][egysegId2:3]:
-                    #    szorzo *= e
-                   # eredmeny = szam*szorzo
-                #elif egysegId2 > 8:
-                   # szorzo = 1
-                   # for e in valtok[4][3:egysegId2]:
-                  #      szorzo *= e
-                  #  eredmeny = szam/szorzo
+                eredmeny = eredmeny/szorzo
+            else:
+                if egysegId2 < 8:
+                    szorzo = 1
+                    for e in valtok[4][egysegId2:3]:
+                        szorzo *= e
+                    eredmeny = szam*szorzo
+                elif egysegId2 > 8:
+                    szorzo = 1
+                    for e in valtok[4][3:egysegId2]:
+                        szorzo *= e
+                    eredmeny = szam/szorzo
+        elif egysegId==2 and egysegId2==8:
+            szam=eredmeny
         
     print("#"*40)
     if tipusId == 5:
-        print("Eredmény:", szam, terfogatUr[egysegId], "=", eredmeny, terfogatUr[egysegId2])
+        if egysegId==2  and egysegId2==8
+            print("Eredmény:", szam, egysegek[tipusId][egysegId], "=", eredmeny, egysegek[tipusId][egysegId2])
+        else:
+            print("Eredmény:", szam, terfogatUr[egysegId], "=", eredmeny, terfogatUr[egysegId2])
     else:
         print("Eredmény:", szam, egysegek[tipusId][egysegId], "=", eredmeny, egysegek[tipusId][egysegId2])
 
