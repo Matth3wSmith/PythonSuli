@@ -240,7 +240,7 @@ while tipusId!=0 or egysegId!=0 or egysegId2!=0:
         
     print("#"*40)
     if tipusId == 5:
-        if egysegId==2  and egysegId2==8
+        if egysegId==2 and egysegId2==8
             print("Eredmény:", szam, egysegek[tipusId][egysegId], "=", eredmeny, egysegek[tipusId][egysegId2])
         else:
             print("Eredmény:", szam, terfogatUr[egysegId], "=", eredmeny, terfogatUr[egysegId2])
