@@ -197,7 +197,7 @@ while tipusId!=0 or egysegId!=0 or egysegId2!=0:
                     szorzo *= e
                 eredmeny = szam*szorzo
         #Ha űrmértékből térfogatba vagy fordítva   
-        if egysegId < 5 or egysegId > 4 and egysegId2 < 5 or egysegId2 > 4:
+        if (egysegId < 5 or egysegId > 4) and (egysegId2 < 5 or egysegId2 > 4) and (egysegId!=2 or egysegId!=8) and (egysegId2!=8 or egysegId2!=2):
             #dm3-be váltás
             if egysegId < 2:
                 szorzo = 1
@@ -236,12 +236,12 @@ while tipusId!=0 or egysegId!=0 or egysegId2!=0:
                         szorzo *= e
                     eredmeny = szam/szorzo
         elif egysegId==2 and egysegId2==8:
-            szam=eredmeny
+            eredmeny = szam
         
     print("#"*40)
     if tipusId == 5:
-        if egysegId==2 and egysegId2==8
-            print("Eredmény:", szam, egysegek[tipusId][egysegId], "=", eredmeny, egysegek[tipusId][egysegId2])
+        if egysegId==2 and egysegId2==8:
+            print("Eredmény:", szam, terfogatUr[egysegId], "=", eredmeny, terfogatUr[egysegId2])
         else:
             print("Eredmény:", szam, terfogatUr[egysegId], "=", eredmeny, terfogatUr[egysegId2])
     else:
