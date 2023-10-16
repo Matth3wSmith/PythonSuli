@@ -1,0 +1,81 @@
+<canvas id="myCanvas" width="500" height="500" style="border:1px solid #d3d3d3;">
+    Your browser does not support the HTML5 canvas tag.</canvas>
+    
+    <script>
+
+        function rajzol(ctx, pontok, szin)
+        {
+			ctx.beginPath();
+            ctx.strokeStyle = szin;
+
+            ctx.moveTo(pontok[0][0], pontok[0][1]);
+
+            for(let i=0; i<pontok.length;i++)
+            {
+                ctx.lineTo(pontok[i][0], pontok[i][1]);
+
+            }
+            ctx.lineTo(pontok[0][0], pontok[0][1]);
+
+			ctx.stroke();
+        }
+
+		function zoom(pontok, xzoom, yzoom){
+			for (let i=0; i < pontok.length; i++){
+				pontok[i][0] *= xzoom;
+				pontok[i][1] *= yzoom; 
+			}
+
+			return pontok;
+		}
+
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+        /*
+        ctx.moveTo(50,50);
+        ctx.lineTo(200,50);
+        ctx.lineTo(200,100);
+        ctx.lineTo(50,100);
+        ctx.lineTo(50,50);
+        ctx.stroke();
+        ctx.fillStyle = "#FF0000";
+        ctx.beginPath();
+        ctx.arc(95, 50, 40, 0, 2 * Math.PI);
+        ctx.fill();
+        */
+        /*
+        ctx.strokeStyle = "#0aa00FF";
+        ctx.moveTo(100,100);
+        ctx.lineTo(200,100);
+        ctx.lineTo(200,0);
+        ctx.lineTo(100,0);
+        ctx.lineTo(100,100);
+        ctx.stroke();
+        */
+        pontok = [[100,100], [200,100], [200,0], [100,0]];
+        pontok2 = [[200,200], [400,200], [400,0], [200,0]];
+
+        rajzol(ctx, pontok, "#f0e566");
+        rajzol(ctx, pontok2, "#058633");
+
+		a = [[0,100],
+			 [10,100],
+			 [10,50],
+			 [20,50],
+			 [20,100],
+			 [30,100],
+			 [30,0],
+			 [0,0],
+			];
+		aLyuk= [[10,40],
+				[20,40],
+				[20,10],
+				[10,10]]
+		
+		rajzol(ctx,zoom(a, 2, 2),"#f00")
+		rajzol(ctx,zoom(aLyuk, 2, 2),"f00")
+
+		
+
+    </script>
+    
