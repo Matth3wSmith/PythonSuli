@@ -9,9 +9,11 @@ while bekert != 0:
     bekert = int(input("Adj meg egy számot a fentiek közül:"))-1;
     if bekert+1 == 0:
         break
-    while bekert not in range((len(valaszto))):
+    while bekert not in range((len(valaszto))):        
         try:
             bekert = int(input("Adj meg egy számot a fentiek közül:"))-1;
+            if bekert+1 == 0:
+                break
             if  bekert not in range(len(valaszto)):
                 raise
         except:
