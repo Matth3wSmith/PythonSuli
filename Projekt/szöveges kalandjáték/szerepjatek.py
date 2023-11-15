@@ -39,31 +39,56 @@ elif nyelvId[nyelv[nyelvValasztas]] == "szovegEng" :
 tortenet=[
         [
             1,#szál ID
-            t.text[""], #szöveg szovehun fájlból választja ki a nyelvet
-            [t.text["fogmosás"], t.text["reggeli"], t.text["öltözés"]], #választái lehetőségek
-            [2,3,4] # hova ugorjon
+            t.text["Megérkezel a kazamata bejáratához. Csikorogva kinyílik az ajtó és egy sötét, dohos folyosó fogad."], #szöveg szovehun fájlból választja ki a nyelvet
+            [t.text["belépsz és gyyújtasz egy fáklyát"], t.text["besétálsz a sötétbe"]], #választái lehetőségek
+            [3,2] #hova ugorjon
         ],
         [
             2,#szál ID
-            t.text["Elmegyek fogat mosni. Sikálom rendesen, ahogy kell!"], #szöveg
-            [t.text["fogmosás"], t.text["reggeli"], t.text["öltözés"]], #választái lehetőségek
-            [2,3,4] # hova ugorjon
+            t.text["Túl hideg van, halálra fagytál!"], #szöveg
+            [t.text["újrakezdés"], t.text["kilépés"]], #választái lehetőségek
+            [1,66] #hova ugorjon
         ],
         [
             3,#szál ID
-            t.text["Kellene valamit enni! Anya csinált valamit? Nézzük meg!"], #szöveg
-            [t.text["fogmosás"], t.text["reggeli"], t.text["öltözés"]], #választái lehetőségek
-            [2,3,4] # hova ugorjon
+            t.text["Gyújtasz egy fáklyát. Balra van egy nyitott ajtó, de a fény nem hatol be. Jobbra egy zárt, rozoga ajtó."], #szöveg
+            [t.text["Jobb oldali ajtó"], t.text["Bal oldali ajtó"]], #választái lehetőségek
+            [4,5] #hova ugorjon
         ],
         [
             4,#szál ID
-            t.text["Kissé hűvös van, kellene valami ruha. \nFelveszek egy nadrágot, meg egy pólót!"], #szöveg
-            [t.text["fogmosás"], t.text["reggeli"], t.text["öltözés"],t.text["66-os parancs"]], #választái lehetőségek
-            [2,3,4,66] # hova ugorjon
+            t.text["Megpróbálod kinyitni az ajtó. Nincs zárva, ezért lassan csikorogva kinyílik. Egy kobold van a szobában."], #szöveg
+            [t.text["harc! (kockadobás)"], t.text["menekülés"]], #választái lehetőségek
+            [2,3,4,66] #hova ugorjon
+        ],
+        [
+            5,#szál ID
+            t.text["Besétálsz a nyitott szobába, a fáklyád nem ér semmit, ezért nem látsz és belesétálsz egy medvecsapdába."], #szöveg
+            [t.text["harc! (kockadobás)"], t.text["menekülés"]], #választái lehetőségek
+            [7 if roll(12) else 9 if roll(12) else 8,6
+             #győzelem          #] #hova ugorjon
+        ],
+        [
+            6,#szál ID
+            t.text["Gyáván megfutamodtál. A játék véget ért!"], #szöveg
+            [t.text["újrakezdés"], t.text["kilépés"]], #választái lehetőségek
+            [1,66] #hova ugorjon
+        ],
+        [
+            7,#szál ID
+            t.text["Nagyobbat dobtál mint az ellenfél, ezért csúnyán megverted!"], #szöveg
+            [t.text[""], t.text[""]], #választái lehetőségek
+            [2,6] #hova ugorjon
+        ],
+        [
+            8,#szál ID
+            t.text["Kevesebbet dobtál mint az ellenfél, ezért csúnyán megvert! Meghaltál!"], #szöveg
+            [t.text["újrakezdés"], t.text["kilépés"]], #választái lehetőségek
+            [1,66] #hova ugorjon
         ],
         [
             66,#szál ID
-            t.text["Véde mindennek...."], #szöveg
+            t.text[], #szöveg
             [], #választái lehetőségek
             [] #hova ugorjon
         ],
