@@ -1,4 +1,9 @@
 #Lista kiíratás függvénye
+#KOCKADOBÁS
+import random
+def roll(minimum):
+    return minimum<=random.randint(1,20)
+#MENÜ KIÍRATÁS
 def menu(lista):
     for i, elem in enumerate(lista):
         print("{} - {}".format(i+1, elem))
@@ -35,6 +40,7 @@ if nyelvId[nyelv[nyelvValasztas]] == "szovegHun":
 elif nyelvId[nyelv[nyelvValasztas]] == "szovegEng" : 
     import szovegEng as t
 
+bonusz = 0
 
 tortenet=[
         [
@@ -57,16 +63,16 @@ tortenet=[
         ],
         [
             4,#szál ID
-            t.text["Megpróbálod kinyitni az ajtó. Nincs zárva, ezért lassan csikorogva kinyílik. Egy kobold van a szobában."], #szöveg
-            [t.text["harc! (kockadobás)"], t.text["menekülés"]], #választái lehetőségek
-            [2,3,4,66] #hova ugorjon
+            t.text["Besétálsz a nyitott szobába, a fáklyád nem ér semmit, ezért nem látsz és belesétálsz egy medvecsapdába."], #szöveg
+            [t.text["harc! (könnyű)"], t.text["menekülés"]], #választái lehetőségek
+            [7 if roll(12-bonusz) else 7 if roll(12-bonusz) else 8,6]
+             #győzelem          #] #hova ugorjon
         ],
         [
             5,#szál ID
-            t.text["Besétálsz a nyitott szobába, a fáklyád nem ér semmit, ezért nem látsz és belesétálsz egy medvecsapdába."], #szöveg
-            [t.text["harc! (kockadobás)"], t.text["menekülés"]], #választái lehetőségek
-            [7 if roll(12) else 9 if roll(12) else 8,6
-             #győzelem          #] #hova ugorjon
+            t.text["Megpróbálod kinyitni az ajtó. Nincs zárva, ezért lassan csikorogva kinyílik. Egy kobold van a szobában."], #szöveg
+            [t.text["újrakezdés"], t.text["kilépés"]], #választái lehetőségek
+            [1,66] #hova ugorjon
         ],
         [
             6,#szál ID
@@ -74,17 +80,60 @@ tortenet=[
             [t.text["újrakezdés"], t.text["kilépés"]], #választái lehetőségek
             [1,66] #hova ugorjon
         ],
+        #nyertél vesztettél
         [
             7,#szál ID
             t.text["Nagyobbat dobtál mint az ellenfél, ezért csúnyán megverted!"], #szöveg
-            [t.text[""], t.text[""]], #választái lehetőségek
-            [2,6] #hova ugorjon
+            t.text["kifosztod"], t.text["átvizsgálod a szobát"]], #választái lehetőségek
+            [9,11] #hova ugorjon
         ],
         [
             8,#szál ID
             t.text["Kevesebbet dobtál mint az ellenfél, ezért csúnyán megvert! Meghaltál!"], #szöveg
             [t.text["újrakezdés"], t.text["kilépés"]], #választái lehetőségek
             [1,66] #hova ugorjon
+        ],
+        [
+            9,#szál ID
+            t.text["Átkutatod a koboldot. Találsz nála egy rozsdás kenőkést, és egy félig megevett zsíroskerenyeret. A rozsdás kenőkés szerencsét hoz!"], #szöveg
+            [t.text["átvizsgálod a szobát"], t.text["visszamész a folysóra"]], #választái lehetőségek
+            [11,10] #hova ugorjon
+        ],
+        [
+            10,#szál ID
+            t.text["A folysó továbbra is üres. Most megfigyeled a végét, és látod hogy nincs folytatása."], #szöveg
+            [t.text["vissza a szobába"], #választái lehetőségek
+            [11] #hova ugorjon
+        ],
+        [
+            11,#szál ID
+            t.text["A szobát bevilágítja a fáklyád. Van bent egy asztal, és pár szék. Előtted és jobbról is egy ajtó van."], #szöveg
+            [t.text["Előttem lévő ajtó kinyitása"], t.text["jobb oldali ajtó kinyitása"]], #választái lehetőségek
+            [12,12] #hova ugorjon
+        ],
+        [
+            12,#szál ID
+            t.text["Odasétálsz az ajtóhoz, és szerencsédre nyitva van"], #szöveg
+            [t.text["bemész"], t.text["másik ajtó megnézése"]], #választái lehetőségek
+            [14,13] #hova ugorjon
+        ],
+        [
+            13,#szál ID
+            t.text["A jobb oldali ajtó zárva van. Lehetetlen kinyitni."], #szöveg
+            [t.text["vissza a másikhoz"], #választái lehetőségek
+            [14] #hova ugorjon
+        ],
+        [
+            14,#szál ID
+            t.text["Besétálsz az ajtón, és látsz egy kijáratot, fény szűrődik onnan. De egy hatalmas ork állja az utad."], #szöveg
+            [t.text[""], #választái lehetőségek
+            [14] #hova ugorjon
+        ],
+        [
+            15,#szál ID
+            t.text["A jobb oldali ajtó zárva van. Lehetetlen kinyitni."], #szöveg
+            [t.text["vissza a másikhoz"], #választái lehetőségek
+            [14] #hova ugorjon
         ],
         [
             66,#szál ID
