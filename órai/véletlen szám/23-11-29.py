@@ -18,3 +18,5 @@ for i in range(12):
 txt="Osztályátlagok {:.2f}"
 for k in osztalyAtlagok:
 	print(txt.format(k))
+
+#osztaly=[[tanulo.append(random.randrange(1,6)) for a in range(random.randrange(8,13)), tanulo=[]] for i in range(12)]
