@@ -2,7 +2,8 @@ adatok=[]
 f=open("helsinki.txt")
 
 for sor in f:
-    adatok.append(sor.split())
+    adatok.append(sor.strip().split(" "))
+
 f.close()
 
 for elem in adatok:
