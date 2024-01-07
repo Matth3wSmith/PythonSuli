@@ -1,4 +1,4 @@
 print("Gyártó: Kovács Máté")
-szamolas=(((5+2)*3)-((2+4)*4))/(2/4)
+szamolas=((3*4.2/(49*47+8))*(3/4)/3)**2
 szoveg="Számolás eredménye: {}"
 print(szoveg.format(szamolas))
