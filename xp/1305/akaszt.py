@@ -134,29 +134,32 @@ while kitalalt!=szo:
         break
     print("\nRossz tippeid:"+str(rossztipp))
     tipp=input("Mondj egy tippet!")
-    lepes+=1
-    if tipp in szo:
-        if tipp in tippelt:
-            print("Ez már volt...")
-            lepes-=1
-        else:
-            tippelt.append(tipp)
-            print("\nBenne van!")
-            for i in range(len(szo)):
-                if tipp==szo[i]:
-                    szoHossz[i]=tipp
-            for b in szoHossz:
-                print(b,end=" ")
-            k+=1
-        if k==len(szo):
-            print("\nEnnyi tippből sikerült rájönnöd: "+str(lepes))
-            print("\nKitaláltad a szót, gratulálok! Legközelebb nem lesz ilyen szerencséd...")
-            break
+    if len(tipp)>1:
+        print("Csak egy betűt adj meg!")
     else:
-        if tipp in rossztipp:
-            print("Ez már volt...")
-            lepes-=1
+        lepes+=1
+        if tipp in szo:
+            if tipp in tippelt:
+                print("Ez már volt...")
+                lepes-=1
+            else:
+                tippelt.append(tipp)
+                print("\nBenne van!")
+                for i in range(len(szo)):
+                    if tipp==szo[i]:
+                        szoHossz[i]=tipp
+                for b in szoHossz:
+                    print(b,end=" ")
+                k+=1
+            if k==len(szo):
+                print("\nEnnyi tippből sikerült rájönnöd: "+str(lepes))
+                print("\nKitaláltad a szót, gratulálok! Legközelebb nem lesz ilyen szerencséd...")
+                break
         else:
-            rossztipp.append(tipp)
-            hiba+=1
-            akasztas(hiba)
+            if tipp in rossztipp:
+                print("Ez már volt...")
+                lepes-=1
+            else:
+                rossztipp.append(tipp)
+                hiba+=1
+                akasztas(hiba)

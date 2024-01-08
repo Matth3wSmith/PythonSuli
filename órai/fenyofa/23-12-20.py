@@ -26,6 +26,10 @@ pontok=[40,40,400,40,400,400,40,400,40,40]
 canvas.create_line(pontok,width=5,fill="blue")
 canvas.create_line(eltolas(pontok,100,200),width=5,fill="blue")
 
+fenyofa=[]
+
+
+
 
 win.mainloop()
 
