@@ -31,6 +31,25 @@ def fasorsol(db):
 
 
     return lista
+
+#x'=cos αx - sin αy
+#y'=sin αx + cos αy
+#
+#Elforgatás
+def forgatPont(x,y,szog):
+    x2= math.cos(math.radians(szog))*x - math.sin(math.radians(szog))*y
+    y2=math.cos(math.radians(szog))*y + math.sin(math.radians(szog))*x
+    return x2,y2
+
+def forgat(lista,szog,oX=0,oY=0):
+
+    lista=eltolas(lista,-oX,-oY)
+    for i in range(0,len(lista),2):
+        lista[i],lista[i+1]=forgatPont(lista[i],lista[i+1],szog)
+    
+    lista=eltolas(lista,oX,oY)
+    return lista
+
 #ablak létrehozása
 win=Tk()
 
@@ -69,9 +88,15 @@ fenyo2=[200,0,
         400,100,
         200,0]
 
-fenyo2=nagyit(fenyo2,2,1)
-fenyo2=eltolas(fenyo2,100,100)
+fenyo2=nagyit(fenyo2,0.3,0.5)
+fenyo2=forgat(fenyo2,90)
+fenyo2=eltolas(fenyo2,300,300)
 canvas.create_line(fenyo2,width=5,fill="green")
+fenyo2=forgat(fenyo2,90,200,200)
+canvas.create_line(fenyo2,width=5,fill="green")
+
+
+
 
 win.mainloop()
 
