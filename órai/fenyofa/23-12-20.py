@@ -96,6 +96,24 @@ fenyo2=forgat(fenyo2,90,200,200)
 canvas.create_line(fenyo2,width=5,fill="green")
 
 
+#Középont kiszámolása; a koordináták átlag
+
+def kozeppont(lista):
+    xOssz=0
+    yOssz=0
+    for i in range(len(lista)):
+        print(i)
+        if i%2==0:
+            xOssz+=lista[i]
+        else:
+            yOssz+=lista[i]
+    x=xOssz/(len(lista)/2)
+    y=yOssz/(len(lista)/2)
+    return (x,y)
+
+print(kozeppont(fenyo2))
+    
+#KÉT MÁSOIK MÓDSZERREL AZ ÁLTAGSZMÍTÁST 01-17
 
 
 win.mainloop()
