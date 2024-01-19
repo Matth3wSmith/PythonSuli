@@ -9,6 +9,7 @@ def eltolas(pontok,x,y):
         pontok[i+1]+=y
     return pontok
 
+#Nagyítás
 def nagyit(pontok,x,y=-1):
     if y==-1:
         for i in range(len(pontok)):
@@ -20,6 +21,7 @@ def nagyit(pontok,x,y=-1):
             else:
                 pontok[i]*=y
     return pontok
+
 
 def fasorsol(db):
     lista=[]
@@ -34,21 +36,45 @@ def fasorsol(db):
 
 #x'=cos αx - sin αy
 #y'=sin αx + cos αy
-#
+
 #Elforgatás
 def forgatPont(x,y,szog):
     x2= math.cos(math.radians(szog))*x - math.sin(math.radians(szog))*y
     y2=math.cos(math.radians(szog))*y + math.sin(math.radians(szog))*x
     return x2,y2
 
-def forgat(lista,szog,oX=0,oY=0):
+def forgat(lista,szog,oX="",oY=""):
 
-    lista=eltolas(lista,-oX,-oY)
-    for i in range(0,len(lista),2):
-        lista[i],lista[i+1]=forgatPont(lista[i],lista[i+1],szog)
+    if oX=="" and oY=="":
+        oX,oY=kozeppont(lista)
+    elif oX=="" or oY=="":
+        
+        return lista
     
-    lista=eltolas(lista,oX,oY)
-    return lista
+    else:
+        lista=eltolas(lista,-oX,-oY)
+        for i in range(0,len(lista),2):
+            lista[i],lista[i+1]=forgatPont(lista[i],lista[i+1],szog)
+        
+        lista=eltolas(lista,oX,oY)
+        return lista
+
+
+#Középont kiszámolása; a koordináták átlag
+
+def kozeppont(lista):
+    xOssz=0
+    yOssz=0
+    for i in range(len(lista)):
+        print(i)
+        if i%2==0:
+            xOssz+=lista[i]
+        else:
+            yOssz+=lista[i]
+    x=xOssz/(len(lista)/2)
+    y=yOssz/(len(lista)/2)
+    return (x,y)
+    
 
 #ablak létrehozása
 win=Tk()
@@ -89,31 +115,14 @@ fenyo2=[200,0,
         200,0]
 
 fenyo2=nagyit(fenyo2,0.3,0.5)
-fenyo2=forgat(fenyo2,90)
+#fenyo2=forgat(fenyo2,90)
+#canvas.create_line(fenyo2,width=5,fill="green")
+
+kX,kY=kozeppont(fenyo2)
+fenyo2=forgat(fenyo2,60,kX,kY)
 fenyo2=eltolas(fenyo2,300,300)
-canvas.create_line(fenyo2,width=5,fill="green")
-fenyo2=forgat(fenyo2,90,200,200)
-canvas.create_line(fenyo2,width=5,fill="green")
+canvas.create_line(fenyo2,width=4, fill="red")
 
-
-#Középont kiszámolása; a koordináták átlag
-
-def kozeppont(lista):
-    xOssz=0
-    yOssz=0
-    for i in range(len(lista)):
-        print(i)
-        if i%2==0:
-            xOssz+=lista[i]
-        else:
-            yOssz+=lista[i]
-    x=xOssz/(len(lista)/2)
-    y=yOssz/(len(lista)/2)
-    return (x,y)
-
-print(kozeppont(fenyo2))
-    
-#KÉT MÁSOIK MÓDSZERREL AZ ÁLTAGSZMÍTÁST 01-17
 
 
 win.mainloop()
