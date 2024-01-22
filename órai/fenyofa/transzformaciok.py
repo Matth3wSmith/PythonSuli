@@ -41,7 +41,7 @@ def forgat(lista,szog,oX="",oY=""):
             lista[i],lista[i+1]=forgatPont(lista[i],lista[i+1],szog)
         
         lista=eltolas(lista,oX,oY)
-        return lista
+    return lista
 
 
 #Középont kiszámolása; a koordináták átlag
