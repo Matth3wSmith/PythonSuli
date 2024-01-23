@@ -85,13 +85,21 @@ mate=[[0,0,
    300,0,
    0,0]]
 
-mate2=[]
+mate2=[]                                                                                                                                                                                                        
 for e in mate:
         e=transzformaciok.nagyit(e,0.4)
         e=transzformaciok.eltolas(e, 100, 100)
         e=transzformaciok.forgat(e, 45)
         mate2.append(e)
+
 print(mate2)
-for e in mate2:
-        canvas.create_line(e,width=5,fill="black")
+
+mate2=transzformaciok.nagyit(mate2,0.4)
+mate2=transzformaciok.eltolas(mate2,100,100)
+mate2=transzformaciok.forgat(mate2,-45)
+
+for e in range(len(mate2)):
+        #if e%2==0:  
+                #canvas.create_line(transzformaciok.eltolas(mate2[e],225,225),width=5,fill="black")
+        canvas.create_line(mate2[e],width=5,fill="black")
 win.mainloop()

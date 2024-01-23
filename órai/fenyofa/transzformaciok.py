@@ -2,22 +2,32 @@ import math
 
 #eltolás
 def eltolas(pontok,x,y):
-    for i in range(0,len(pontok),2):
-        pontok[i]+=x
-        pontok[i+1]+=y
+    
+    if isinstance(pontok[0], list):
+        for i in range(len(pontok)):
+            pontok[i]=eltolas(pontok[i],x,y)
+    else:
+        for i in range(0,len(pontok),2):
+            pontok[i]+=x
+            pontok[i+1]+=y
     return pontok
 
 #Nagyítás
 def nagyit(pontok,x,y=-1):
-    if y==-1:
+    
+    if isinstance(pontok[0], list):
         for i in range(len(pontok)):
-            pontok[i]*=x
+            pontok[i]=nagyit(pontok[i],x,y)
     else:
-        for i in range(len(pontok)):
-            if i%2==0:
+        if y==-1:
+            for i in range(len(pontok)):
                 pontok[i]*=x
-            else:
-                pontok[i]*=y
+        else:
+            for i in range(len(pontok)):
+                if i%2==0:
+                    pontok[i]*=x
+                else:
+                    pontok[i]*=y
     return pontok
 
 #Elforgatás
@@ -29,17 +39,19 @@ def forgatPont(x,y,szog):
 
 def forgat(lista,szog,oX="",oY=""):
 
-    if oX=="" and oY=="":
-        oX,oY=kozeppont(lista)
-    elif oX=="" or oY=="":
-        
-        return lista
-    
+    if isinstance(lista[0], list):
+        for i in range(len(lista)):
+            lista[i]=forgat(lista[i],szog,oX,oY)
     else:
+        if oX=="" and oY=="":
+            oX,oY=kozeppont(lista)
+
+        elif oX=="" or oY=="":
+            return lista
+        
         lista=eltolas(lista,-oX,-oY)
         for i in range(0,len(lista),2):
             lista[i],lista[i+1]=forgatPont(lista[i],lista[i+1],szog)
-        
         lista=eltolas(lista,oX,oY)
     return lista
 
@@ -47,16 +59,25 @@ def forgat(lista,szog,oX="",oY=""):
 #Középont kiszámolása; a koordináták átlag
 
 def kozeppont(lista):
-    xOssz=0
-    yOssz=0
-    for i in range(len(lista)):
-        print(i)
-        if i%2==0:
-            xOssz+=lista[i]
-        else:
-            yOssz+=lista[i]
-    x=xOssz/(len(lista)/2)
-    y=yOssz/(len(lista)/2)
+    
+    if isinstance(lista[0], list):
+        uj=[]
+        for i in range(len(lista)):
+            x,y=kozeppont(lista[i])
+            uj.append(x)
+            uj.append(y)
+        x,y=kozeppont(uj)
+    else:
+        xOssz=0
+        yOssz=0
+        for i in range(len(lista)):
+            print(i)
+            if i%2==0:
+                xOssz+=lista[i]
+            else:
+                yOssz+=lista[i]
+        x=xOssz/(len(lista)/2)
+        y=yOssz/(len(lista)/2)
     return (x,y)
 
 if __name__ == '__main__':
