@@ -85,21 +85,31 @@ mate=[[0,0,
    300,0,
    0,0]]
 
+hatter="#ffffff"
+betuszinek=["red", hatter, "blue"]
+
 mate2=[]                                                                                                                                                                                                        
-for e in mate:
-        e=transzformaciok.nagyit(e,0.4)
-        e=transzformaciok.eltolas(e, 100, 100)
-        e=transzformaciok.forgat(e, 45)
-        mate2.append(e)
+#for e in mate:
+        #e=transzformaciok.nagyit(e,0.4)
+        #e=transzformaciok.eltolas(e, 100, 100)
+        #e=transzformaciok.forgat(e, 45)
+        #mate2.append(e)
 
 print(mate2)
-
+mate2=transzformaciok.masol(mate)
 mate2=transzformaciok.nagyit(mate2,0.4)
 mate2=transzformaciok.eltolas(mate2,100,100)
 mate2=transzformaciok.forgat(mate2,-45)
 
-for e in range(len(mate2)):
+#for e in range(len(mate2)):
         #if e%2==0:  
                 #canvas.create_line(transzformaciok.eltolas(mate2[e],225,225),width=5,fill="black")
-        canvas.create_line(mate2[e],width=5,fill="black")
-win.mainloop()
+        #canvas.create_line(mate2[e],width=5,fill="black")
+
+while True:
+        canvas.delete("all")
+        mate2=transzformaciok.forgat(mate2,0.009)
+        for i,e in enumerate(mate2):
+                canvas.create_polygon(e,width=betuszinek[i],fill="blue")
+        win.update_idletasks()
+        win.update()
