@@ -123,8 +123,8 @@ mate2=[[100.0, 100.0, 100.0, 140.0, 140.0, 140.0, 140.0, 300.0, 100.0, 300.0, 10
 #for e in mate2:
         #canvas.create_line(e,width=5,fill="black")
 
-xMozgas=0.5
-yMozgas=0.5
+xMozgas=0.2
+yMozgas=0.2
 while True:
         canvas.delete("all")
         #mate2=transzformaciok.forgat(mate2,0.02)
@@ -134,6 +134,7 @@ while True:
         print(szelesseg)
         xLista=[]
         yLista=[]
+        #koordináták kigyűjtése
         for elem in mate2:
                 for i in range(len(elem)):
                         #X koord kigyűjtése
@@ -142,10 +143,14 @@ while True:
                         #Y koord kigyűjtése
                         else:
                                 yLista.append(elem[i])
+        #Legnagyobb koordináta megkeresése
         xLegnagyobb=max(xLista)
         yLegnagyobb=max(yLista)
+        #Legkisebb koordináta megkeresése
         xLegkisebb=min(xLista)
         yLegkisebb=min(yLista)
+
+        #Változtasson irányt, ha a széléhez ér
         if yLegnagyobb>magassag or yLegkisebb<0:
                 yMozgas*=-1
         elif xLegnagyobb>szelesseg or xLegkisebb<0:
