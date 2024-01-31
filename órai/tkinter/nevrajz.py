@@ -123,15 +123,16 @@ mate2=[[100.0, 100.0, 100.0, 140.0, 140.0, 140.0, 140.0, 300.0, 100.0, 300.0, 10
 #for e in mate2:
         #canvas.create_line(e,width=5,fill="black")
 
-xMozgas=0.2
-yMozgas=0.2
+xMozgas=0.4
+yMozgas=0.4
+speed=0.02
+mate2=transzformaciok.nagyit(mate2,0.5)
 while True:
         canvas.delete("all")
-        #mate2=transzformaciok.forgat(mate2,0.02)
+        mate2=transzformaciok.eltolas(mate2,xMozgas,yMozgas)
+        mate2=transzformaciok.forgat(mate2,speed)
         magassag=win.winfo_height()
         szelesseg=win.winfo_width()
-        print(magassag)
-        print(szelesseg)
         xLista=[]
         yLista=[]
         #koordináták kigyűjtése
@@ -153,12 +154,13 @@ while True:
         #Változtasson irányt, ha a széléhez ér
         if yLegnagyobb>magassag or yLegkisebb<0:
                 yMozgas*=-1
+                mate2=transzformaciok.eltolas(mate2,xMozgas,yMozgas)
         elif xLegnagyobb>szelesseg or xLegkisebb<0:
                 xMozgas*=-1
+                mate2=transzformaciok.eltolas(mate2,xMozgas,yMozgas)
         
-        mate2=transzformaciok.eltolas(mate2,xMozgas,yMozgas)
         for i,e in enumerate(mate2):
-                canvas.create_line(e,width=5)
+                canvas.create_line(e,width=3)
         win.update_idletasks()
         win.update()
 win.mainloop()
