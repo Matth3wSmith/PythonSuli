@@ -5,6 +5,25 @@
 from tkinter import *
 import random
 
+def rajzol():
+    labdaPos[0]+=labdaSpeed[0]*labdaSize
+    labdaPos[1]+=labdaSpeed[1]*labdaSize
+    szelesseg=win.winfo_width()
+    magassag=win.winfo_height()
+    if labdaPos[0]+labdaSize>=szelesseg or labdaPos[0]<0:
+        labdaSpeed[0]*=-1
+        #labdaColor=randomColor()
+    elif labdaPos[1]+labdaSize>magassag or labdaPos[1]<0:
+        labdaSpeed[1]*=-1
+        #labdaColor=randomColor()
+
+    labdaLista.append(canvas.create_oval(labdaPos[0],labdaPos[1],labdaPos[0]+labdaSize,labdaPos[1]+labdaSize, fill=labdaColor, outline=""))
+    if len(labdaLista)==labdaListaHossz:
+        canvas.delete(labdaLista[0])
+        labdaLista.pop(0)
+
+    win.after(jatekSpeed,rajzol)
+
 def randomColor():
     r=random.randint(0,255)
     g=random.randint(0,255)
@@ -23,11 +42,40 @@ def atmenetColor(red, green, blue):
         blue-=255
     
     return ("#"+hex(red)[-2:]+hex(green)[-2:]+hex(blue)[-2:]).replace("x","0"),red,green,blue
+
+def gombLe(event):
+    if event.keysym=="Up":
+        #print("Fel")
+        labdaSpeed[0]=0
+        labdaSpeed[1]=-1
+    elif event.keysym=="Down":
+        labdaSpeed[0]=0
+        labdaSpeed[1]=1
+        #print("Le")
+    elif event.keysym=="Right":
+        labdaSpeed[0]=1
+        labdaSpeed[1]=0
+        #print("Right")
+    elif event.keysym=="Left":
+        labdaSpeed[0]=-1
+        labdaSpeed[1]=0
+        #print("Bal")
+    #print(event)
+        
+kajaLista=[]
+def kaja():
+    x=random.randint(0,win.winfo_width()-kajaSize)
+    y=random.randint(0,win.winfo_height()-kajaSize)
+    kajaLista.append(canvas.create_oval(x,y,x+kajaSize, y+kajaSize, fill=kajaColor, outline=""))
+    win.after(kajaSpeed,kaja)
+    #ÜTKÖZÉS python tkinter (part 5): Collision Detection
+
 #ablak létrehozása
 win=Tk()
 
 jatekHatter="lightgray"
-
+jatekSpeed=100
+kajaSpeed=5000
 #ablak mérete
 win.geometry("1000x600")
 
@@ -40,32 +88,19 @@ canvas=Canvas(win, width=600, height=600, bg=jatekHatter)
 canvas.pack(fill = BOTH, expand = 1)
 
 
-labdaSpeed=[2,1]
-labdaPos=[0,0]
-labdaSize=50
-
+labdaSpeed=[0,0]
+labdaPos=[100,100]
+labdaSize=20
+kajaSize=20
 labdaColor="green"
-
+kajaColor="red"
 labdaLista=[]
-labdaListaHossz=100
+labdaListaHossz=10
 red,green,blue=0,0,0
-while True:
-    labdaColor,red,green,blue=atmenetColor(red,green,blue)
-    labdaPos[0]+=labdaSpeed[0]
-    labdaPos[1]+=labdaSpeed[1]
-    szelesseg=win.winfo_width()
-    magassag=win.winfo_height()
-    if labdaPos[0]+labdaSize>=szelesseg or labdaPos[0]<0:
-        labdaSpeed[0]*=-1
-        #labdaColor=randomColor()
-    elif labdaPos[1]+labdaSize>magassag or labdaPos[1]<0:
-        labdaSpeed[1]*=-1
-        #labdaColor=randomColor()
 
-    labdaLista.append(canvas.create_oval(labdaPos[0],labdaPos[1],labdaPos[0]+labdaSize,labdaPos[1]+labdaSize, fill=labdaColor, outline=""))
-    if len(labdaLista)==labdaListaHossz:
-        canvas.delete(labdaLista[0])
-        labdaLista.pop(0)
-    canvas.update()
+win.bind("<KeyPress>",gombLe)
+
+win.after(jatekSpeed,rajzol)
+win.after(kajaSpeed,kaja)
 
 win.mainloop()
