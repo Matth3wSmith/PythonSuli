@@ -18,6 +18,8 @@ def rajzol():
         #labdaColor=randomColor()
 
     labdaLista.append(canvas.create_oval(labdaPos[0],labdaPos[1],labdaPos[0]+labdaSize,labdaPos[1]+labdaSize, fill=labdaColor, outline=""))
+
+    kajaCheck()
     if len(labdaLista)==labdaListaHossz:
         canvas.delete(labdaLista[0])
         labdaLista.pop(0)
@@ -70,6 +72,21 @@ def kaja():
     win.after(kajaSpeed,kaja)
     #ÜTKÖZÉS python tkinter (part 5): Collision Detection
 
+def kajaCheck():
+    f=canvas.bbox(labdaLista[-1])
+    #Kígyó közepe
+    fKozep=[(f[0]+f[2])/2,(f[1]+f[3])/2]
+    for egyKaja in kajaLista:
+        k=canvas.bbox(egyKaja)
+        #Kaja közepe
+        kKozep=[(k[0]+k[2])/2,(k[1]+k[3])/2]
+
+        x=fKozep[0]-kKozep[0]
+        y=fKozep[1]-kKozep[1]
+
+        #Ha eléri a kaját
+        if x**2+y**2 <= ((labdaSize+kajaSize)*0.8)**2:
+            print("HAMMM!")
 #ablak létrehozása
 win=Tk()
 
