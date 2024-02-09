@@ -6,8 +6,8 @@ from tkinter import *
 import random
 
 def rajzol():
-    labdaPos[0]+=labdaSpeed[0]*labdaSize
-    labdaPos[1]+=labdaSpeed[1]*labdaSize
+    labdaPos[0]+=labdaSpeed[0]*(labdaSize+2)
+    labdaPos[1]+=labdaSpeed[1]*(labdaSize+2)
     szelesseg=win.winfo_width()
     magassag=win.winfo_height()
     if labdaPos[0]+labdaSize>=szelesseg or labdaPos[0]<0:
@@ -20,11 +20,13 @@ def rajzol():
     labdaLista.append(canvas.create_oval(labdaPos[0],labdaPos[1],labdaPos[0]+labdaSize,labdaPos[1]+labdaSize, fill=labdaColor, outline=""))
 
     kajaCheck()
+    utkozes()
     if len(labdaLista)==labdaListaHossz:
         canvas.delete(labdaLista[0])
         labdaLista.pop(0)
 
-    win.after(jatekSpeed,rajzol)
+    if not halal:
+        win.after(jatekSpeed,rajzol)
 
 def randomColor():
     r=random.randint(0,255)
@@ -63,7 +65,8 @@ def gombLe(event):
         labdaSpeed[1]=0
         #print("Bal")
     #print(event)
-        
+
+halal=False
 kajaLista=[]
 def kaja():
     x=random.randint(0,win.winfo_width()-kajaSize)
@@ -73,6 +76,7 @@ def kaja():
     #ÜTKÖZÉS python tkinter (part 5): Collision Detection
 
 def kajaCheck():
+    global labdaListaHossz
     f=canvas.bbox(labdaLista[-1])
     #Kígyó közepe
     fKozep=[(f[0]+f[2])/2,(f[1]+f[3])/2]
@@ -85,14 +89,39 @@ def kajaCheck():
         y=fKozep[1]-kKozep[1]
 
         #Ha eléri a kaját
-        if x**2+y**2 <= ((labdaSize+kajaSize)*0.8)**2:
+        #kajaSize és labdaSize átmérő és sugár kell!!
+        if x**2+y**2 <= ((labdaSize+kajaSize)*0.5)**2:
             print("HAMMM!")
+            kajaLista.remove(egyKaja)
+            canvas.delete(egyKaja)
+            labdaListaHossz+=1
+
+def utkozes():
+    global halal
+    f=canvas.bbox(labdaLista[-1])
+    #Kígyó közepe
+    fKozep=[(f[0]+f[2])/2,(f[1]+f[3])/2]
+
+    for egyLabda in labdaLista[:-1]:
+        k=canvas.bbox(egyLabda)
+        #Kaja közepe
+        kKozep=[(k[0]+k[2])/2,(k[1]+k[3])/2]
+
+        x=fKozep[0]-kKozep[0]
+        y=fKozep[1]-kKozep[1]
+
+        #Ha eléri a kaját
+        #kajaSize és labdaSize átmérő és sugár kell!!
+        if x**2+y**2 <= labdaSize**2:
+            print("GAME OVER!")
+            halal=True
+            
 #ablak létrehozása
 win=Tk()
 
 jatekHatter="lightgray"
 jatekSpeed=100
-kajaSpeed=5000
+kajaSpeed=2000
 #ablak mérete
 win.geometry("1000x600")
 
@@ -112,7 +141,7 @@ kajaSize=20
 labdaColor="green"
 kajaColor="red"
 labdaLista=[]
-labdaListaHossz=10
+labdaListaHossz=3
 red,green,blue=0,0,0
 
 win.bind("<KeyPress>",gombLe)
