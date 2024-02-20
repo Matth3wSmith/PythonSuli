@@ -5,12 +5,11 @@
 from tkinter import *
 import random
 
-class Jel:
+class Elem:
 	x = 0
 	y = 0
 	meret = 100
 	szin="black"
-	r=meret*0.06
 
 	def __init__(self,x,y,meret,canvas):
 		self.x=x
@@ -20,15 +19,9 @@ class Jel:
 		self.rajz()
 
 
-	def rajz(self, vonalak=[]):
+	def rajz(self):
 		self.canvas.create_rectangle(self.x, self.y, self.x+self.meret, self.y+self.meret, fill="grey")
 
-		for egyvonal in vonalak:
-			self.canvas.create_line(egyvonal, width=self.meret*0.03, fill=self.szin)
-
-
-class Elem(Jel):
-	def rajz(self):
 		vonalak=[
 			[
 				self.x, self.y+self.meret*0.5,
@@ -47,28 +40,8 @@ class Elem(Jel):
 				self.x+self.meret, self.y+self.meret*0.5,
 			]
 		]
-		Jel.rajz(self,vonalak)
-
-class Kapcsolo(Jel):
-	def rajz(self):
-		vonalak=[
-			[
-				self.x, self.y+self.meret*0.5,
-				self.x+self.meret*0.333-self.r, self.y+self.meret*0.5,
-			],
-			[
-				self.x+self.meret*0.333+self.r, self.y+self.meret*0.5,
-				self.x+self.meret*0.666-self.r, self.y+self.meret*0.3,
-			],
-			[
-				self.x+self.meret*0.666+self.r, self.y+self.meret*0.5,
-				self.x+self.meret, self.y+self.meret*0.5,
-			]
-		]
-		Jel.rajz(self,vonalak)
-
-
-
+		for egyvonal in vonalak:
+			self.canvas.create_line(egyvonal, width=self.meret*0.03, fill=self.szin)
 #ablak létrehozása
 win=Tk()
 
@@ -88,6 +61,5 @@ canvas.pack(fill = BOTH, expand = 1)
 
 elem1=Elem(200,200,100,canvas)
 #elem1.rajz()
-kapcsolo1=Kapcsolo(400,300,100,canvas)
 
 win.mainloop()
