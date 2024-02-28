@@ -80,7 +80,9 @@ class Kapcsolo(Jel):
 		Jel.rajz(self,vonalak,korok)
 
 class Lampa(Jel):
+	
 	def rajz(self):
+		self.r=self.meret*0.2
 		dx=self.r/math.sqrt(2)
 		vonalak=[
 			[
@@ -102,15 +104,35 @@ class Lampa(Jel):
 		]
 		korok=[
 			[
-				self.x+self.meret*0.333-self.r, self.y+self.meret*0.5-self.r,
-				self.x+self.meret*0.333+self.r, self.y+self.meret*0.5+self.r
-			],
-			[
-				self.x+self.meret*0.666-self.r, self.y+self.meret*0.5-self.r,
-				self.x+self.meret*0.666+self.r, self.y+self.meret*0.5+self.r
+				self.x+self.meret*0.5-self.r, self.y+self.meret*0.5-self.r,
+				self.x+self.meret*0.5+self.r, self.y+self.meret*0.5+self.r
 			]
 		]
 		Jel.rajz(self,vonalak,korok)
+
+class Ellenallas(Jel):
+	
+	def rajz(self):
+		
+		vonalak=[
+			[
+				self.x, self.y+self.meret*0.5,
+				self.x+self.meret*0.25, self.y+self.meret*0.5,
+			],
+			[
+				self.x+self.meret*0.25, self.y+self.meret*0.4,
+				self.x+self.meret*0.25, self.y+self.meret*0.6,
+				self.x+self.meret*0.75, self.y+self.meret*0.6,
+				self.x+self.meret*0.75, self.y+self.meret*0.4,
+				self.x+self.meret*0.25, self.y+self.meret*0.4,
+			],
+			[
+				self.x+self.meret*0.75, self.y+self.meret*0.5,
+				self.x+self.meret, self.y+self.meret*0.5,
+			]
+		]
+		
+		Jel.rajz(self,vonalak)
 
 #ablak létrehozása
 win=Tk()
@@ -135,4 +157,7 @@ kapcsolo1=Kapcsolo(200,100,100,canvas)
 
 lampa1=Lampa(300,100,100,canvas)
 lampa1.rajz()
+
+ellenallas1=Ellenallas(400,100,100,canvas)
+ellenallas1.rajz()
 win.mainloop()
