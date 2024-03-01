@@ -24,13 +24,49 @@ class Jel:
 		self.rajz()
 
 	def vezetek(self,masik,sajatBKP=1,masikBKP=0):
-		vonalak=[
-			[
-				self.bkp[sajatBKP][0],self.bkp[sajatBKP][1],
-				masik.bkp[masikBKP][0],masik.bkp[masikBKP][1]
+
+		if sajatBKP==1 and masikBKP==0 and self.bkp[sajatBKP][0] < masik.bkp[masikBKP][0]:
+			vonalak=[
+			
+				[
+					self.bkp[sajatBKP][0],self.bkp[sajatBKP][1],
+					(self.bkp[sajatBKP][0]+masik.bkp[masikBKP][0])/2,self.bkp[sajatBKP][1],
+					(self.bkp[sajatBKP][0]+masik.bkp[masikBKP][0])/2,masik.bkp[masikBKP][1],
+					masik.bkp[masikBKP][0],masik.bkp[masikBKP][1]
+				]
 			]
-		]
+		elif (sajatBKP==1 and masikBKP==1) and self.bkp[sajatBKP][0] < masik.bkp[masikBKP][0]:
+			vonalak=[
+			
+				[
+					self.bkp[sajatBKP][0], self.bkp[sajatBKP][1],
+					(self.bkp[sajatBKP][0]+masik.x)/2, self.bkp[sajatBKP][1],
+					(self.bkp[sajatBKP][0]+masik.x)/2, masik.y+masik.meret*1.2,
+					masik.x+masik.meret*1.2, masik.y+masik.meret*1.2,
+					masik.x+masik.meret*1.2, masik.bkp[masikBKP][1],
+					masik.x+masik.meret,masik.bkp[masikBKP][1]
+				]
+			]
+		elif (sajatBKP==1 and masikBKP==1) and self.x<masik.x<self.x+self.meret:
+			vonalak=[
+				[
+					self.bkp[sajatBKP][0], self.bkp[sajatBKP][1],
+					(self.bkp[sajatBKP][0]+masik.x)/2, self.bkp[sajatBKP][1],
+					(self.bkp[sajatBKP][0]+masik.x)/2, masik.y+masik.meret*1.2,
+					masik.x+masik.meret*1.2, masik.y+masik.meret*1.2,
+					masik.x+masik.meret*1.2, masik.bkp[masikBKP][1],
+					masik.x+masik.meret,masik.bkp[masikBKP][1]
+				]
+			]
+		else:
+			vonalak=[
+				[
+					self.bkp[sajatBKP][0],self.bkp[sajatBKP][1],
+					masik.bkp[masikBKP][0],masik.bkp[masikBKP][1]
+				]
+			]
 		
+			
 		for egyvonal in vonalak:
 			self.canvas.create_line(egyvonal, width=self.meret*0.03, fill=self.szin)
 
@@ -165,14 +201,15 @@ canvas=Canvas(win, width=600, height=600, bg=jatekHatter)
 #canvas akkora amekkora az ablak
 canvas.pack(fill = BOTH, expand = 1)
 
-elem1=Elem(100,100,100,canvas)
+#elem1=Elem(100,100,100,canvas)
 #elem1.rajz()
-kapcsolo1=Kapcsolo(200,100,100,canvas)
+#kapcsolo1=Kapcsolo(200,100,100,canvas)
 
-lampa1=Lampa(300,150,100,canvas)
+lampa1=Lampa(400,50,100,canvas)
 lampa1.rajz()
 
-ellenallas1=Ellenallas(500,100,100,canvas)
+ellenallas1=Ellenallas(500,150,100,canvas)
 ellenallas1.rajz()
 lampa1.vezetek(ellenallas1)
+lampa1.vezetek(ellenallas1,masikBKP=1)
 win.mainloop()
