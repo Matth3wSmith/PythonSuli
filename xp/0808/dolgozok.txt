@@ -1,0 +1,28 @@
+1;Gyenge Tamás;Fekete Eszter;Kisvárda;Dugovics Titusz utca u.19;420000;5000;2002-04-15;1958-11-02;Kisvárda
+2;Kiss Béla;Kis Kitti;Gyömrő;Kárpát utca u.69;680000;0;2004-11-20;1979-03-03;Gyömrő
+3;Almási György;Fekete Kinga;Kőszeg;Holdfény utca u.77;510000;0;1997-07-16;1963-01-03;Tokaj
+4;Almási Károly;Gyenge Erika;Nyírmada;Liszt Ferenc utca u.99;620000;10000;2000-01-25;1951-09-27;Nyírmada
+5;Fehér József;Fekete Barbara;Vajszló;Eszperantó utca u.120;480000;5000;2006-10-26;1985-09-13;Vajszló
+6;Nagy Ferenc;Fehér Mónika;Sarkad;Dévény utca u.80;60000;5000;2009-09-14;1987-08-01;Sarkad
+7;Fehér Tibor;Szabó Tünde;Gyomaendrőd;Corvina utca u.53;150000;10000;2006-01-05;1950-04-21;Szendrő
+8;Gyenge József;Fekete Mónika;Hajdúböszörmény;Kard utca u.82;410000;5000;1998-06-24;1965-05-21;Hajdúböszörmény
+9;Gyenge László;Szabó Mária;Zalaegerszeg;Kárpát utca u.37;590000;5000;2002-08-11;1989-04-05;Zalaegerszeg
+10;Szabó József;Almási Brigitta;Piliscsaba;Gyulai Pál utca u.98;300000;10000;2008-09-05;1961-05-12;Piliscsaba
+11;Erdős Zoltán;Erdős Margit;Recsk;Gábor Áron utca u.58;80000;5000;2002-10-26;1958-10-27;Nyírbátor
+12;Nagy Tibor;Nagy Barbara;Harkány;Janus Pannonius utca u.24;360000;0;1998-09-02;1960-04-06;Tompa
+13;Kiss József;Erdős Csilla;Tata;Janus Pannonius utca u.58;140000;0;2002-09-13;1960-11-20;Tata
+14;Kiss Tamás;Almási Bernadett;Újfehértó;Gerecse utca u.1;110000;5000;2000-03-07;1975-10-23;Újfehértó
+15;Fekete Lajos;Fehér Kinga;Mohács;Gárdonyi Géza utca u.61;580000;0;2008-01-15;1984-08-08;Cigánd
+16;Almási Dániel;Erdős Emese;Mezőkövesd;Márkus Géza utca u.72;750000;10000;1996-10-03;1979-08-20;Budapest
+17;Kiss Tamás;Fehér Réka;Kistarcsa;Gyulai Pál utca u.4;250000;10000;1998-02-15;1971-07-09;Dombrád
+18;Erdős Béla;Kiss Dóra;Eger;Corvina utca u.116;120000;0;2002-05-20;1958-11-07;Eger
+19;Nagy László;Gyenge Adrienn;Lenti;Kard utca u.88;220000;5000;2002-05-14;1961-04-02;Mátészalka
+20;Erős Károly;Erdős Ilona;Komló;Baross utca u.107;390000;0;2007-04-25;1964-08-23;Komló
+21;Erdős Károly;Fekete Hanna;Pincehely;Kard utca u.14;40000;0;2006-11-13;1970-06-25;Pincehely
+22;Szabó Tamás;Fekete Klára;Mezőkovácsháza;Eszperantó utca u.36;230000;0;2002-05-25;1954-01-23;Mezőkovácsháza
+23;Kis Dániel;Kiss Margit;Pásztó;Csilléry utca u.116;350000;5000;1996-06-23;1972-05-26;Pásztó
+24;Fehér Dániel;Erdős Barbara;Békéscsaba;Gerecse utca u.19;140000;10000;1998-10-14;1964-10-07;Mérk
+25;Kiss Károly;Erdős Veronika;Vép;Gyulai Pál utca u.93;380000;10000;2006-07-24;1988-03-11;Vép
+26;Gyenge Béla;Kiss Anikó;Kerekegyháza;Holdfény utca u.34;770000;10000;2009-07-10;1988-02-25;Kerekegyháza
+27;Nagy Gábor;Kiss Zsófia;Vecsés;Csengery utca u.32;660000;5000;2009-03-20;1988-05-25;Vecsés
+28;Erős József;Fekete Anett;Fehérgyarmat;Dugovics Titusz utca u.105;310000;10000;1996-05-23;1964-08-24;Fehérgyarmat
