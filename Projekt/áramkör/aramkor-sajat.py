@@ -71,6 +71,7 @@ class Jel:
 			self.canvas.create_line(egyvonal, width=self.meret*0.03, fill=self.szin)
 
 	def rajz(self, vonalak=[],korok=[]):
+		
 		self.teszt=self.canvas.create_rectangle(self.x, self.y, self.x+self.meret, self.y+self.meret, fill="grey")
 
 		for egyvonal in vonalak:
@@ -232,13 +233,13 @@ def ellenallasSpawn(event):
 
 
 def motion(event,kivElem=0,objX=0,objY=0):
-	print(event.state)
+	print(event)
 	x, y = event.x, event.y
 	print('{}, {}'.format(x, y))
 	
 	tavX=event.x-objX
 	tavY=event.y-objY
-	canvas.move(kivElem.rajz,1,1)
+	canvas.move(kivElem,1,1)
 
 def mozgatas(event):
 	#Létrehozott alkatrészek vizsgálata
@@ -252,7 +253,7 @@ def mozgatas(event):
 			kivalasztottElem=alkatresz
 			objX=alkatresz.x
 			objY=alkatresz.y
-		win.bind('<Motion>', motion(event,kivElem=kivalasztottElem,objX=objX,objY=objY))
+			win.bind('<Motion>', motion)
 	return objX,objY,kivalasztottElem
 
 			
