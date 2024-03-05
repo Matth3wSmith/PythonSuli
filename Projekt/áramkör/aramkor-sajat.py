@@ -10,6 +10,9 @@ class Jel:
 	y = 0
 	meret = 100
 	szin="black"
+	korokRajz=0
+	vonalakRajz=[]
+	korokRajz=[]
 
 	def __init__(self,x,y,meret,canvas):
 		self.x=x
@@ -230,27 +233,29 @@ def ellenallasSpawn(event):
 	print(event)
 	alkatreszek.append(Ellenallas(0,0,100,canvas))
 
+mozgatasiElem=0
 
-
-def motion(event,kivElem=0,objX=0,objY=0):
+def felengedes(event,kivElem=0,objX=0,objY=0):
+	global mozgatasiElem
 	print(event)
 	x, y = event.x, event.y
 	print('{}, {}'.format(x, y))
-	for alkatresz in alkatreszek:
-		#Megegyezik-e a kattintás koordinátái és az alkatrész koordinátái
-		if alkatresz.x<=event.x<alkatresz.x+alkatresz.meret and alkatresz.y<event.y<alkatresz.y+alkatresz.meret:
-			print("Felismerve")
-			alkatresz.x+=1
-			alkatresz.y+=1
-			tavX=event.x-objX
-			tavY=event.y-objY
-			B=canvas.gettags("A")
-			print(B)
-			canvas.move(B,1,1)
-			
-			#canvas.bind("<ButtonRelease-1>",kiiras)
+	print("Felismerve")
+	A=mozgatasiElem.gettags("A")
+	#print(A)
+	#canvas.move(A,x,y)
+	canvas.delete(A)
+	#canvas.delete(mozgatasiElem.vonalakRajz)
+	#canvas.delete(mozgatasiElem.korokRajz)
+	mozgatasiElem.x=x
+	mozgatasiElem.y=y
+	mozgatasiElem.rajz()
+	canvas.unbind("<ButtonRelease-1>")
+	
+	#canvas.bind("<ButtonRelease-1>",kiiras)
 
 def mozgatas(event):
+	global mozgatasiElem
 	#Létrehozott alkatrészek vizsgálata
 	kivalasztottElem=0
 	objX=0
@@ -258,13 +263,10 @@ def mozgatas(event):
 	for alkatresz in alkatreszek:
 		#Megegyezik-e a kattintás koordinátái és az alkatrész koordinátái
 		if alkatresz.x<=event.x<alkatresz.x+alkatresz.meret and alkatresz.y<event.y<alkatresz.y+alkatresz.meret:
+			mozgatasiElem=alkatresz
+			print(mozgatasiElem)
 			print("Felismerve")
-			kivalasztottElem=alkatresz
-			objX=alkatresz.x
-			objY=alkatresz.y
-			#win.bind('<Motion>', motion)
-			canvas.bind("<ButtonRelease-1>",motion)
-	return objX,objY,kivalasztottElem
+			canvas.bind("<ButtonRelease-1>",felengedes)
 
 			
 
