@@ -72,12 +72,12 @@ class Jel:
 
 	def rajz(self, vonalak=[],korok=[]):
 		
-		self.teszt=self.canvas.create_rectangle(self.x, self.y, self.x+self.meret, self.y+self.meret, fill="grey")
+		self.canvas.create_rectangle(self.x, self.y, self.x+self.meret, self.y+self.meret, fill="grey", tags="A")
 
 		for egyvonal in vonalak:
-			self.canvas.create_line(egyvonal, width=self.meret*0.03, fill=self.szin)
+			self.canvas.create_line(egyvonal, width=self.meret*0.03, fill=self.szin, tags="A")
 		for egykor in korok:
-			self.canvas.create_oval(egykor, outline=self.szin, width=self.meret*0.03)
+			self.canvas.create_oval(egykor, outline=self.szin, width=self.meret*0.03, tags="A")
 
 
 class Elem(Jel):
@@ -236,10 +236,19 @@ def motion(event,kivElem=0,objX=0,objY=0):
 	print(event)
 	x, y = event.x, event.y
 	print('{}, {}'.format(x, y))
-	
-	tavX=event.x-objX
-	tavY=event.y-objY
-	canvas.move(kivElem,1,1)
+	for alkatresz in alkatreszek:
+		#Megegyezik-e a kattintás koordinátái és az alkatrész koordinátái
+		if alkatresz.x<=event.x<alkatresz.x+alkatresz.meret and alkatresz.y<event.y<alkatresz.y+alkatresz.meret:
+			print("Felismerve")
+			alkatresz.x+=1
+			alkatresz.y+=1
+			tavX=event.x-objX
+			tavY=event.y-objY
+			B=canvas.gettags("A")
+			print(B)
+			canvas.move(B,1,1)
+			
+			#canvas.bind("<ButtonRelease-1>",kiiras)
 
 def mozgatas(event):
 	#Létrehozott alkatrészek vizsgálata
@@ -253,7 +262,8 @@ def mozgatas(event):
 			kivalasztottElem=alkatresz
 			objX=alkatresz.x
 			objY=alkatresz.y
-			win.bind('<Motion>', motion)
+			#win.bind('<Motion>', motion)
+			canvas.bind("<ButtonRelease-1>",motion)
 	return objX,objY,kivalasztottElem
 
 			
