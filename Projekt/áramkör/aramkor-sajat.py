@@ -236,6 +236,7 @@ def motion(event,kivElem=0,objX=0,objY=0):
 	print(event)
 	x, y = event.x, event.y
 	print('{}, {}'.format(x, y))
+	
 	for alkatresz in alkatreszek:
 		#Megegyezik-e a kattintás koordinátái és az alkatrész koordinátái
 		if alkatresz.x<=event.x<alkatresz.x+alkatresz.meret and alkatresz.y<event.y<alkatresz.y+alkatresz.meret:
