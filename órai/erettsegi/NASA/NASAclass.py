@@ -16,3 +16,11 @@ class Keres():
 
         self.keresesek.append(self)
 
+    def ByteMeret(self):
+        print(self.meret)
+        #self.meret=self.meret.strip("\n")
+        print(self.meret)
+        self.meret=int(self.meret)
+        print(self)
+        
+        
