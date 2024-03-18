@@ -2,25 +2,31 @@
 
 class Keres():
     keresesek=[]
-    domain=0
+    cim=0
     datum=0
     kep=0
     allapot=0
     meret=0
-    def __init__(self,domain,datum,kep,allapot,meret):
-        self.domain=domain
+    def __init__(self,cim,datum,kep,allapot,meret):
+        self.cim=cim
         self.datum=datum
         self.kep=kep
         self.allapot=allapot
-        self.meret=meret
+        
+        #6. feladat
+        meret=meret.strip("\n")
+        if meret =="-":
+            self.ByteMeret=0
+        else:
+            self.ByteMeret=int(meret)
 
         self.keresesek.append(self)
 
-    def ByteMeret(self):
-        print(self.meret)
-        #self.meret=self.meret.strip("\n")
-        print(self.meret)
-        self.meret=int(self.meret)
-        print(self)
+    #7. feladat
+    def Domain(self):
+        if not Keres.keresesek[0].cim[-1].isnumeric():
+            return "Van"
+        else:
+            return "Nincs"
         
         

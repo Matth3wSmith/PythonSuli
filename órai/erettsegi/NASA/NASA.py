@@ -16,6 +16,7 @@ for adat in adatok:
     Keres(adat[0],adat[1],adat[2],adat[3],adat[4])
 
 print("5. feladat: Kérések száma: "+str(len(Keres.keresesek)))
-Keres.keresesek[0].ByteMeret()
-
-#Keres.ByteMeret()
+osszMeret=0
+for kereses in Keres.keresesek:
+    osszMeret+=kereses.ByteMeret
+print("6. feladat: Válaszok összes mérete: "+str(osszMeret))
