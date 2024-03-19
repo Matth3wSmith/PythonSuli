@@ -2,6 +2,8 @@
 
 class Keres():
     keresesek=[]
+    kodok=[]
+    kodStat={}
     cim=0
     datum=0
     kep=0
@@ -12,7 +14,6 @@ class Keres():
         self.datum=datum
         self.kep=kep
         self.allapot=allapot
-        
         #6. feladat
         meret=meret.strip("\n")
         if meret =="-":
@@ -22,11 +23,21 @@ class Keres():
 
         self.keresesek.append(self)
 
+        #9. feladat
+        self.kodStat[allapot]=0
+            
     #7. feladat
     def Domain(self):
-        if not Keres.keresesek[0].cim[-1].isnumeric():
+        
+        if self.cim[-1].isnumeric()==False:
             return "Van"
         else:
             return "Nincs"
         
-        
+        #return not self.cim[-1].isnumeric()
+    def allapotKodok(self):
+        keys = self.kodStat.keys()
+        for egyKey in keys:
+            if self.allapot==egyKey:
+                self.kodStat[egyKey]+=1
+        return self.kodStat
