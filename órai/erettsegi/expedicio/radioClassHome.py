@@ -17,3 +17,8 @@ class Uzenet():
         """for amator in Uzenet.uzenetek:
             if amator.nap == min(self.napok):
                 legkisebb=amator.sorszam"""
+    def farkas(self):
+        if "farkas" in self.szoveg:
+            return self.nap,self.sorszam
+        else:
+            return False
