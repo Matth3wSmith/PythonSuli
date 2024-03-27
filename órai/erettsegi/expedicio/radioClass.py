@@ -7,4 +7,12 @@ class Uzenet():
     
     def farkasKereso(self):
         return "farkas" in self.uzenet
-        
+    
+
+class Nap:
+    def __init__(self, nap):
+        self.nap=nap
+        self.uzenetek=[]
+    
+    def hozzaAd(self,uzenet):
+        self.uzenetek.append(uzenet)
