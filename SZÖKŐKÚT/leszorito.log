@@ -1,0 +1,30 @@
+Solid Edge STL fájlformátumba mentése
+Dátum: kedd,április 02,2024 01:18du.
+Forrásfájl:G:\Suli\Programozási alapok\SZÖKÕKÚT\leszorito.par
+Forrás rendszer: SOLID EDGE
+
+Hardver:
+Processzor: 11th Gen Intel(R) Core(TM) i5-11600 @ 2.80GHz
+Operációs rendszer: Windows 10 Professional
+Memória mérete: 15,84 GB
+
+Szoftver Információ:
+Parasolid verzió: 34.0.153
+PSBodyshop Verzió: 34.0.110
+Solid Edge verzió: 222.00.00.132 x64
+
+STL exportálás beállításai:
+Kimeneti fájlformátum:BINARY
+Megjelenített alkatrészek kiírása:Kikapcsolva
+szerkezeti beállítások: Monolithic
+Mértékegység kiíratása:Millimeter
+Tûrés érték kiíratása:0,050000
+Tûrés típus kiíratása:Custom
+Felület sík bezárt szögének kiíratása:0,785398
+
+Fordítás folyamata:
+Lépés 1 / 2 parasolid információk begyûjtése...
+Lépés 2 / 2 parasolid fordítása külsõ fájlformátumba....
+Létrehozott STL fájlok száma : 1
+Fordítási folyamat befejezõdött
+Fordítás idõtartama:00 : 00 : 00
