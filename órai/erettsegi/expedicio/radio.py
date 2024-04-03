@@ -28,6 +28,18 @@ for uzenet in uzenetek:
 
 #4. feladat
 napok=[]
-tempNap=Nap(1)
-for uzenet in uzenetek:
-    pass
+nap=1
+while nap!=12:
+    tempNap=Nap(nap)
+    for uzenet in uzenetek:
+        if uzenet.nap==nap:
+            tempNap.hozzaAd(uzenet)
+    napok.append(tempNap)
+    nap+=1
+
+print("\n4. feladat:")
+for nap in napok:
+    print("{nap}. nap: {amator} rádióamatőr".format(nap=nap.nap,amator=nap.uzenetSzam()))
+print(len(napok))
+
+#Házi feladat: OPP program szorzótábla sorait tartalmazza, ennek segítségével 10x10-es szorzótábla készítése. Egy class egy sor adatai
