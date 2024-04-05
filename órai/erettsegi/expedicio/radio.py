@@ -13,7 +13,6 @@ for egySor in f:
         uzenetek.append(Uzenet(tempSor,egySor))
     sorszam+=1
 
-print(uzenetek)
 f.close()
 
 print("2. feladat:")
@@ -40,6 +39,10 @@ while nap!=12:
 print("\n4. feladat:")
 for nap in napok:
     print("{nap}. nap: {amator} rádióamatőr".format(nap=nap.nap,amator=nap.uzenetSzam()))
-print(len(napok))
 
-#Házi feladat: OPP program szorzótábla sorait tartalmazza, ennek segítségével 10x10-es szorzótábla készítése. Egy class egy sor adatai
+#5. feladat
+f=open("adaas2.txt","w")
+for nap in napok:
+    f.write(nap.helyreallit()+"\n")
+
+f.close()
