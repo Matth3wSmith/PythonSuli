@@ -5,16 +5,17 @@ class Uzenet():
 
 		self.uzenet=sor2
 		self.szamkereso()
-	def szamkereso(self):
 		
+	def szamkereso(self):
 		self.kifejlett=False
 		self.kolyok=False
 		szamok=self.uzenet.split(" ")[0].split("/")
 		if len(szamok)==2:
 			if szamok[0].isnumeric():
-				self.kifejlett=szamok[0]
+				self.kifejlett=int(szamok[0])
 			if szamok[1].isnumeric():
-				self.kolyok=szamok[1]
+				self.kolyok=int(szamok[1])
+				
 	def farkasKereso(self):
 		return "farkas" in self.uzenet
 	
