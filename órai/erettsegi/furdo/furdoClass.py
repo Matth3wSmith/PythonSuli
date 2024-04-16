@@ -7,6 +7,12 @@ class Furdo:
         self.ora=int(vag[3])
         self.perc=int(vag[4])
         self.masodperc=int(vag[5])
+
+        
         
     def ido(self):
         return ":".join([str(self.ora),str(self.perc),str(self.masodperc)])
+
+    def idoSec(self):
+        return self.ora*60*60 + self.perc*60 + self.masodperc
+        
