@@ -47,14 +47,42 @@ for egyElem in vendegek:
     if egyElem.belepett and egyElem.reszleg==0:
         bentiIdo=egyElem.idoSec()-kezdes
         if bentiIdo>idoMax:
-            print(idoMax,vendeg)
             idoMax=bentiIdo
             vendeg=egyElem.vendeg
     if not egyElem.belepett and egyElem.reszleg==0:
         kezdes=egyElem.idoSec()
 
-print(idoMax,vendeg)
-print("4. feladat")
+print("\n4. feladat")
 print("A legtöbb időt eltöltő vendég: ")
 print("{}. vendeg {}".format(vendeg,idoVissza(idoMax)))
 
+#5. feladat
+stat=[0,0,0]
+
+for egyElem in vendegek:
+    if egyElem.reszleg==0 and not egyElem.belepett:
+        if egyElem.ora<9:
+            stat[0]+=1
+        elif egyElem.ora<16:
+            stat[1]+=1
+        else:
+            stat[2]+=1
+
+print("\n5. feladat:")
+print("6-9 óra között {} vendég".format(stat[0]))
+print("9-16 óra között {} vendég".format(stat[1]))
+print("16-20 óra között {} vendég".format(stat[2]))
+
+#6. feladat
+szaunastat={}
+for egyElem in vendegek:
+    szaunastat[egyElem.vendeg]=0
+    if egyElem.reszleg==2:
+        if egyElem.belepett:
+            kezdoBentiIdo=egyElem.idoSec()
+        if not egyElem.belepett:
+            bentiIdo=egyElem.idoSec()-kezdoBentiIdo
+            szaunastat[egyElem.vendeg]+=bentiIdo
+print(szaunastat)
+    
+            
