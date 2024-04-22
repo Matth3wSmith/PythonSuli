@@ -76,7 +76,8 @@ print("16-20 óra között {} vendég".format(stat[2]))
 #6. feladat
 szaunastat={}
 for egyElem in vendegek:
-    szaunastat[egyElem.vendeg]=0
+    if egyElem.vendeg not in szaunastat.keys():
+        szaunastat[egyElem.vendeg]=0
     if egyElem.reszleg==2:
         if egyElem.belepett:
             kezdoBentiIdo=egyElem.idoSec()
@@ -84,5 +85,15 @@ for egyElem in vendegek:
             bentiIdo=egyElem.idoSec()-kezdoBentiIdo
             szaunastat[egyElem.vendeg]+=bentiIdo
 print(szaunastat)
+f=open("szauna.txt","w")
+for kulcs in szaunastat.keys():
+    if szaunastat[kulcs]!=0:
+        f.write("{} {}\n".format(kulcs,idoVissza(szaunastat[kulcs])))
+f.close()
     
-            
+#7. feladat
+reszlegStat={}
+for egyElem in vendegek:
+    if egyElem.reszleg not in reszlegStat.keys():
+        reszlegStat[egyElem.reszleg]=0
+                
