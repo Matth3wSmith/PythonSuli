@@ -4,7 +4,8 @@ def idoVissza(mp):
     ora=mp//(60*60)
     perc=mp%3600//60
     sec=mp%3600%60
-    return str(ora)+":"+str(perc)+":"+str(sec)
+    return "{:02}:{:02}:{:02}".format(ora,perc,sec)
+    #return str(ora)+":"+str(perc)+":"+str(sec)
 
 #1. feladat
 f=open("furdoadat.txt","r")
@@ -84,7 +85,7 @@ for egyElem in vendegek:
         if not egyElem.belepett:
             bentiIdo=egyElem.idoSec()-kezdoBentiIdo
             szaunastat[egyElem.vendeg]+=bentiIdo
-print(szaunastat)
+
 f=open("szauna.txt","w")
 for kulcs in szaunastat.keys():
     if szaunastat[kulcs]!=0:
@@ -93,7 +94,20 @@ f.close()
     
 #7. feladat
 reszlegStat={}
+voltReszleg=[]
 for egyElem in vendegek:
     if egyElem.reszleg not in reszlegStat.keys():
         reszlegStat[egyElem.reszleg]=0
-                
+    if elozoVendeg==egyElem.vendeg:
+        if egyElem.reszleg not in voltReszleg:
+            voltReszleg.append(egyElem.reszleg)
+            reszlegStat[egyElem.reszleg]+=1
+    else:
+        elozoVendeg=egyElem.vendeg
+        voltReszleg=[]
+
+print("\n7. feladat")
+print("Uszoda: {}".format(reszlegStat[1]))
+print("Szaunák: {}".format(reszlegStat[2]))
+print("Gyógyvizes medencék: {}".format(reszlegStat[3]))
+print("Strand: {}".format(reszlegStat[4]))
