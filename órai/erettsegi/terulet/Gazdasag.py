@@ -23,7 +23,7 @@ for sor in terulet:
 			legelo+=1
 
 legeloSzazalek=legelo*100/teruletha
-print("\n3. feladat: {:.2f}%".format(legeloSzazalek))
+print("3. feladat: {:.2f}%".format(legeloSzazalek))
 
 #4. feladat
 eszakiSzel=0
@@ -32,5 +32,37 @@ for i,sor in enumerate(terulet):
 		eszakiSzel+=i*100
 		break
 print("4. feladat: {}m".format(eszakiSzel))
+
+#5. feladat
+legeloHossz=0
+for sor in terulet:
+	tempHossz=0
+	for karakter in sor[0]:
+		if karakter=="L":
+			tempHossz+=100
+		else:
+			if tempHossz>legeloHossz:
+				legeloHossz=tempHossz
+			tempHossz=0
+print("5. feladat: {}m".format(legeloHossz))
+
+#6. és 7. feladat
+for i,sor in enumerate(terulet):
+	for karakter in sor[0]:
+		if karakter=="L":
+			legeloIndex=sor[0].index("L")
+			#Jobbra meddig tart a legelő
+			for l in range(len(sor[0])):
+				if sor[0][legeloIndex+l]!="L":
+					maxLegeloSzel=l
+					break
+			#Lefele meddig tart a legelő
+			for k in range(len(terulet)):
+				if terulet[i+k][0][legeloIndex]!="L":
+					maxLegeloHossz=k
+					break
+
+print(maxLegeloHossz,maxLegeloSzel)
+			
 
 
