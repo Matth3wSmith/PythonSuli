@@ -5,6 +5,7 @@ abc = list(string.ascii_uppercase)
 class Telek:
 	def __init__(self,sor) -> None:
 		vag=sor.strip().split(" ")
+		print(vag)
 		self.oldal=int(vag[0])
 		self.szelesseg=int(vag[1])
 		self.szin=vag[2]
@@ -35,10 +36,16 @@ print("Az utolsó telek házszáma: {}".format(telkek[-1].hazszam))
 oldalSzerint=[[],[]]
 szomszedosSzin=[]
 for telek in telkek:
+	#oldalSzerint[telek.oldal].append(telek)
 	if telek.oldal==0:
 		oldalSzerint[0].append(telek)
 	else:
 		oldalSzerint[1].append(telek)
+
+"""for i in range(1,len(oldalSzerint[1])):
+	if oldalSzerint[1][i].szin==oldalSzerint[1][i-1].szin and oldalSzerint[1][i] not in [":","#"]:
+		print("A szomszédossal egyezik a kerítés színe: {}".format(oldalSzerint[1][i-1].hazszam)
+		break"""
 
 for i,paratlanTelek in enumerate(oldalSzerint[1]):
 	if i+1<len(oldalSzerint[1]) and paratlanTelek.szin==oldalSzerint[1][i+1].szin:
@@ -57,11 +64,10 @@ kertHazszam=int(input("Add meg az eladott telek házszámát: "))
 for i,telek in enumerate(telkek):
 	if telek.hazszam==kertHazszam:
 		print("A kerítés színe / állapota: {}".format(telek.szin))
-		if i+1<len(telkek):
+		if i+1<len(telkek)-1:
 			szomszedokSzine.append(telkek[i+1].szin)
-		if i-1>0:
+		if i>0:
 			szomszedokSzine.append(telkek[i-1].szin)
-		lehetseges=0
 		lehetseges=random.choice(abc)
 		while lehetseges in szomszedokSzine:
 			lehetseges=random.choice(abc)
