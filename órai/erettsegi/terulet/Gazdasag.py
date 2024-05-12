@@ -47,22 +47,24 @@ for sor in terulet:
 print("5. feladat: {}m".format(legeloHossz))
 
 #6. és 7. feladat
+maxLegeloHossz=0
+maxLegeloSzel=0
 for i,sor in enumerate(terulet):
 	for karakter in sor[0]:
 		if karakter=="L":
 			legeloIndex=sor[0].index("L")
 			#Jobbra meddig tart a legelő
 			for l in range(len(sor[0])):
-				if sor[0][legeloIndex+l]!="L":
+				if  l+legeloIndex<len(sor[0]) and sor[0][legeloIndex+l]!="L" and maxLegeloSzel<l and l+legeloIndex<len(sor[0]): 
 					maxLegeloSzel=l
 					break
 			#Lefele meddig tart a legelő
 			for k in range(len(terulet)):
-				if terulet[i+k][0][legeloIndex]!="L":
+				if k+i<len(sor[0]) and terulet[i+k][0][legeloIndex]!="L" and maxLegeloHossz<k:
 					maxLegeloHossz=k
 					break
 
-print(maxLegeloHossz,maxLegeloSzel)
+print(maxLegeloHossz*maxLegeloSzel)
 			
 
 

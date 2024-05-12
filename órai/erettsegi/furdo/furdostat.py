@@ -91,7 +91,7 @@ for kulcs in szaunastat.keys():
     if szaunastat[kulcs]!=0:
         f.write("{} {}\n".format(kulcs,idoVissza(szaunastat[kulcs])))
 f.close()
-    
+elozoVendeg=0
 #7. feladat
 reszlegStat={}
 voltReszleg=[]
