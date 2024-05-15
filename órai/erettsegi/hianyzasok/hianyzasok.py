@@ -75,6 +75,18 @@ for hianyzo in hianyzok:
         hianyzasokDict[hianyzo.nev]=len(hianyzo.hianyzas)-hianyzo.hianyzas.count("O")
     else:
         hianyzasokDict[hianyzo.nev]+=len(hianyzo.hianyzas)-hianyzo.hianyzas.count("O")
+
 tempHiany=0
+tempHianyNev=0
+legtobbHianyzok=[]
 for nev in hianyzasokDict:
-    tempHiany=hianyzasokDict[nev]
+    if tempHiany<hianyzasokDict[nev]:
+        tempHiany=hianyzasokDict[nev]
+        tempHianyNev=nev
+    elif tempHiany==hianyzasokDict[nev]:
+        legtobbHianyzok.append(tempHianyNev)
+        legtobbHianyzok.append(nev)
+
+print("7. feladat")
+print("A legtöbbet hiényzó tanulók: {} {}".format(legtobbHianyzok[0],legtobbHianyzok[1]))
+
