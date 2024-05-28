@@ -1,7 +1,7 @@
 from sys import stdin, stdout,argv
-import time
+#import time
 def main():
-	kezdoIdo=time.time()
+	#kezdoIdo=time.time()
 	#print(argv[1])
 	adatok=[]
 	adatKell=[]
@@ -12,17 +12,18 @@ def main():
 		for sor in f:
 			#print(sor)
 				adatHossz+=1
-				adatok.append(list(map(int, sor.split())))
-				atlag=sum(adatok[-1])/napDb
-				if(max(adatok[-1])-atlag>atlag-min(adatok[-1])):
+				tempAdat=list(map(int, sor.split()))
+				#adatok.append(list(map(int, sor.split())))
+				atlag=sum(tempAdat)/napDb
+				if(max(tempAdat)-atlag>atlag-min(tempAdat)):
 					adatKell.append(adatHossz)
 		f.close()
 		
 
 	stdout.write(str(len(adatKell)) + " " + " ".join(list(map(str, adatKell))))
 
-	vegIdo=time.time()
-	print("\n",vegIdo-kezdoIdo)
+	#vegIdo=time.time()
+	#print("\n",vegIdo-kezdoIdo)
 main()
 
 
