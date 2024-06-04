@@ -1,15 +1,12 @@
 from sys import stdin, stdout,argv
 import time
 def main():
-	#kezdoIdo=time.time()
 	#print(argv[1])
 	adatok=[]
 	adatKell=[]
 	adatHossz=0
 	with open(argv[1],"r") as f:
-		#napDb=list(map(int, f.readline().split()))[1]
-		next(f)
-		napDb=1000
+		napDb=list(map(int, f.readline().split()))[1]
 
 		for sor in f:
 			#print(sor)
@@ -23,9 +20,7 @@ def main():
 
 	stdout.write(str(len(adatKell)) + " " + " ".join(adatKell))
 
-	#vegIdo=time.time()
-	#print("\n",vegIdo-kezdoIdo)
+kezdoIdo=time.time()
 main()
-
-
-
+vegIdo=time.time()
+print("\n",vegIdo-kezdoIdo)
