@@ -1,5 +1,5 @@
 from sys import stdin, stdout,argv
-
+import time
 def main():
 	kiemenet=[]
 	with open(argv[1],"r") as f:
@@ -14,4 +14,8 @@ def main():
 	
 	stdout.write(" ".join(kiemenet[0])+"\n"+" ".join(kiemenet[1]))
 
+kezdo=time.time()
 main()
+veg=time.time()
+ido=veg-kezdo
+print("\n",ido)
