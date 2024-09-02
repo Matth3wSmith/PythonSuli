@@ -1,4 +1,4 @@
-Boti Lóránt Ferenc 10.B:0
+Boti Lóránt Ferenc 10.B:1
 Farkas Balázs 10.B:0
 Janota-Hantosi Julianna 11.H:0
 Kovács Máté 10.B:0
@@ -8,6 +8,6 @@ Pap Zétény 10.H:0
 Rengel Tamás 10.B:0
 Simon Sára Franciska 10.H:0
 Suri Boglárka 10.H:0
-Takács Andor 8.H:0
+Takács Andor 8.H:1
 Tamás Bettina 12.B:0
 Török Ádám 10.B:0

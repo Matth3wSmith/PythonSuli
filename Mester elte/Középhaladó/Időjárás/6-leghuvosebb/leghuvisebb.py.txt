@@ -1,0 +1,10 @@
+from sys import stdin,stdout
+
+def main():
+	telepulesDb,napDb=list(map(int,input().split()))
+
+	for sor in stdin:
+		pass
+	
+	stdout.write()
+main()

@@ -4,6 +4,7 @@ import math
 def szamAtalakit(lista):
 	for i in lista:
 		i[1]=int(i[1])
+
 #Neveket tartalmazo txt beolvasása és mentése
 f=open("ember.txt","r",encoding="utf-8")
 nevek = []
@@ -13,8 +14,8 @@ f.close()
 
 szamAtalakit(nevek)
 
-#print("Összes név ",nevek)
-#print("*"*50)
+print("Összes név ",nevek)
+print("*"*50)
 
 #Régi nevek beolvasása
 f=open("sorsolt.txt","r",encoding="utf-8")
@@ -24,6 +25,7 @@ for elem in f:
 	regiNevek.append(elem.strip().split(":"))
 
 f.close()
+print(regiNevek)
 for i in range(len(regiNevek)):
 	if i<2:
 		regiNevek[i][1]=int(regiNevek[i][1])
