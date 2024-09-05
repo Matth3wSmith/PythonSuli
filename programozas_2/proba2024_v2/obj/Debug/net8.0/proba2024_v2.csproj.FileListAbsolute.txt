@@ -1,0 +1,15 @@
+D:\munkakönyvtár\Kovács Máté\PythonSuli\programozas_2\proba2024_v2\bin\Debug\net8.0\proba2024_v2.exe
+D:\munkakönyvtár\Kovács Máté\PythonSuli\programozas_2\proba2024_v2\bin\Debug\net8.0\proba2024_v2.deps.json
+D:\munkakönyvtár\Kovács Máté\PythonSuli\programozas_2\proba2024_v2\bin\Debug\net8.0\proba2024_v2.runtimeconfig.json
+D:\munkakönyvtár\Kovács Máté\PythonSuli\programozas_2\proba2024_v2\bin\Debug\net8.0\proba2024_v2.dll
+D:\munkakönyvtár\Kovács Máté\PythonSuli\programozas_2\proba2024_v2\bin\Debug\net8.0\proba2024_v2.pdb
+D:\munkakönyvtár\Kovács Máté\PythonSuli\programozas_2\proba2024_v2\obj\Debug\net8.0\proba2024_v2.GeneratedMSBuildEditorConfig.editorconfig
+D:\munkakönyvtár\Kovács Máté\PythonSuli\programozas_2\proba2024_v2\obj\Debug\net8.0\proba2024_v2.AssemblyInfoInputs.cache
+D:\munkakönyvtár\Kovács Máté\PythonSuli\programozas_2\proba2024_v2\obj\Debug\net8.0\proba2024_v2.AssemblyInfo.cs
+D:\munkakönyvtár\Kovács Máté\PythonSuli\programozas_2\proba2024_v2\obj\Debug\net8.0\proba2024_v2.csproj.CoreCompileInputs.cache
+D:\munkakönyvtár\Kovács Máté\PythonSuli\programozas_2\proba2024_v2\obj\Debug\net8.0\proba2024_v2.sourcelink.json
+D:\munkakönyvtár\Kovács Máté\PythonSuli\programozas_2\proba2024_v2\obj\Debug\net8.0\proba2024_v2.dll
+D:\munkakönyvtár\Kovács Máté\PythonSuli\programozas_2\proba2024_v2\obj\Debug\net8.0\refint\proba2024_v2.dll
+D:\munkakönyvtár\Kovács Máté\PythonSuli\programozas_2\proba2024_v2\obj\Debug\net8.0\proba2024_v2.pdb
+D:\munkakönyvtár\Kovács Máté\PythonSuli\programozas_2\proba2024_v2\obj\Debug\net8.0\proba2024_v2.genruntimeconfig.cache
+D:\munkakönyvtár\Kovács Máté\PythonSuli\programozas_2\proba2024_v2\obj\Debug\net8.0\ref\proba2024_v2.dll
