@@ -1,5 +1,4 @@
 from sys import stdin,stdout
-
 def main():
     rendelesek,napokSzama=list(map(int,stdin.readline().split()))
     napok=[]
