@@ -1,9 +1,11 @@
-from sys import stdin,stdout
+from sys import stdin,stdout,argv
 
 def main():
     sor,oszlop=list(map(int,input().split()))
+    print(argv[0])
     kep=[]
     for sor in stdin:
+        print(sor)
         kep.append(sor.split()[0])
     print(kep)
     maxPont=[0,0]
