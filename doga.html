@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dolgozat</title>
+    <style>
+        #doboz{
+            width: 100px;
+            height: 100px;
+            background-color: green;
+            text-align: center;
+            vertical-align: middle;
+            margin: auto;
+            font-size: 50px;
+            color: white;
+        }
+    </style>
+</head>
+<body onload="">
+
+    <div id="doboz"></div>
+
+    <script>
+        let szamlalo = 1;
+        let novel=true;
+        function change(){
+            doboz=document.getElementById("doboz");
+            doboz.innerHTML=szamlalo;
+            /*meret=Number(doboz.style.width.split("px")[0])+szamlalo*/
+            doboz.style.width=100+(szamlalo*2)+"px";
+            doboz.style.height=100+(szamlalo*2)+"px";
+            if (novel){
+                szamlalo++;
+                if (szamlalo==100){
+                    novel=!novel
+                }
+            }
+            else{
+                szamlalo--;
+                if (szamlalo==0){
+                    novel=!novel
+                }
+            }
+
+        }
+        setInterval(change,25);
+    </script>
+</body>
+</html>

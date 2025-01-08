@@ -1,5 +1,6 @@
 from sys import stdin, stdout
-
+import sys
+sys.setrecursionlimit(20000)
 def melysegi(kezdo,latogatott):
 
     if kezdo in latogatott:
@@ -35,16 +36,16 @@ def main():
     for i in range(szakaszSzam):
        
        honnan,hova=list(map(int,stdin.readline().split()))
-       print(honnan,hova)
+       #print(honnan,hova)
        graf[honnan].append(hova)
        graf2[hova].append(honnan)
 
 
-    print(graf)
-    print(graf2)
+    #print(graf)
+    #print(graf2)
     utvonal=melysegi(kezdopont,set())
     utvonal.discard(kezdopont)
-    print(utvonal)
+    #print(utvonal)
     utvonalakVissza=[]
     """for i in range(pontokSzama):
         utvonal=melysegi(i+1,set())
@@ -59,13 +60,13 @@ def main():
     
     for pont in utvonal:
         elotteLevoCsucsok=graf2[pont]
-        print(pont,elotteLevoCsucsok)
+        #print(pont,elotteLevoCsucsok)
         for i in elotteLevoCsucsok:
             tempUtvonal=melysegi(i,set())
-            print("Valamit",i, tempUtvonal)
+            #print("Valamit",i, tempUtvonal)
             if kezdopont in tempUtvonal:
                 
-                print("Jó célpont",pont)
+                #print("Jó célpont",pont)
                 eredmeny.append(pont)
                 break
 
