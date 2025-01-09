@@ -1,50 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dolgozat</title>
+    <title>Kocka méretének növelése és csökkentése</title>
     <style>
-        #doboz{
-            width: 100px;
-            height: 100px;
-            background-color: green;
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        #kocka {
+            width: 0px;
+            height: 0px;
+            background-color: rgb(3, 119, 23);
+            transition: width 0.1s, height 0.1s;
+            position: relative;
             text-align: center;
-            vertical-align: middle;
-            margin: auto;
-            font-size: 50px;
             color: white;
+            font-size: 20px;
+        }
+
+        #szovegMeret {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
     </style>
 </head>
-<body onload="">
-
-    <div id="doboz"></div>
-
+<body>
+    <div id="kocka">
+        <div id="szovegMeret">0</div>
+    </div>
+   
     <script>
-        let szamlalo = 1;
-        let novel=true;
-        function change(){
-            doboz=document.getElementById("doboz");
-            doboz.innerHTML=szamlalo;
-            /*meret=Number(doboz.style.width.split("px")[0])+szamlalo*/
-            doboz.style.width=100+(szamlalo*2)+"px";
-            doboz.style.height=100+(szamlalo*2)+"px";
-            if (novel){
-                szamlalo++;
-                if (szamlalo==100){
-                    novel=!novel
+        let size = 0;
+        let increasing = true;
+        const kocka = document.getElementById("kocka");
+        const szovegMeret = document.getElementById("szovegMeret");
+        function changeSize() {
+            if (increasing) {
+                size++;
+                if (size >= 99) {
+                    increasing = false;
                 }
-            }
-            else{
-                szamlalo--;
-                if (szamlalo==0){
-                    novel=!novel
+            } else {
+                size--;
+                if (size <= 0) {
+                    increasing = true;
                 }
             }
 
+            kocka.style.width = 100 + size + "px";
+            kocka.style.height = 100 + size + "px";
+            szovegMeret.textContent = size;
+            
+            szovegMeret.style.fontSize=20+size+"px";
         }
-        setInterval(change,25);
+
+       
+        setInterval(changeSize, 50);
     </script>
 </body>
 </html>
