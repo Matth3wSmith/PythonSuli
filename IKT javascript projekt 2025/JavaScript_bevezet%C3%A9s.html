@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)http://verseny2017.mik.uni-pannon.hu/vigyazz/ -->
+<html lang="hu"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>JavaScript bevezetés</title>
+
+
+<style type="text/css" media="screen">
+    body {font-family:Verdana,Geneva,sans-serif;padding: 0 20px;}
+    a:link, a:visited {text-decoration:none;color:#7CAFE0;background-color:transparent}
+    a:hover, a:active {text-decoration:none;color:#222;background-color:transparent}
+    form {margin:0px}
+    nav {padding:10px;background:#1f2839; color:#ffffff;}
+    nav a:link,nav a:visited {text-decoration:none;color:#999;background-color:transparent}
+    nav a:hover,nav a:active {text-decoration:none;color:#fff;background-color:transparent}
+    textarea {width:100%;background:#F5F5F5;border:1px dotted #1f2839;}
+    .feladat {border-style: dotted solid solid dotted;padding: 0px 10px 0px 10px;}
+</style>
+
+<script>
+    // === Textarea hátterének változtatása
+    function overBgColor(x){
+	x.style.background="#FFFFE8";
+	x.style.border="1px dotted #800000";
+    }
+    function normalBgColor(x){
+	x.style.background="#F5F5F5";
+	x.style.border="1px dotted #1f2839";
+    }
+    
+    function oops(id,content){
+	document.getElementById(id).innerHTML=content;
+    }
+</script>
+
+</head>
+
+<body>
+<header><h1>JavaScript bevezetés</h1></header>
+<nav>
+ <a href="javascript:window.history.back()">« Elozo</a> |&nbsp;
+ <a href="http://verseny2017.mik.uni-pannon.hu/vigyazz/#one"><span id="topmenu01" onmouseover="oops(this.id,document.getElementById(theme1.id).innerHTML)" onmouseout="oops(this.id,&quot;HTML&quot;)">HTML</span></a> |&nbsp; 
+ <a href="http://verseny2017.mik.uni-pannon.hu/vigyazz/#two"><span id="topmenu02" onmouseover="oops(this.id,document.getElementById(theme2.id).innerHTML)" onmouseout="oops(this.id,&quot;Script&quot;)">Script</span></a> |&nbsp;
+ <a href="http://verseny2017.mik.uni-pannon.hu/vigyazz/#three"><span id="topmenu03" onmouseover="oops(this.id,document.getElementById(theme3.id).innerHTML)" onmouseout="oops(this.id,&quot;Változók&quot;)">Változók</span></a> |&nbsp;
+ <a href="http://verseny2017.mik.uni-pannon.hu/vigyazz/#four"><span id="topmenu04" onmouseover="oops(this.id,document.getElementById(theme4.id).innerHTML)" onmouseout="oops(this.id,&quot;Vezérlok&quot;)">Vezérlok</span></a> |&nbsp;
+ <a href="http://verseny2017.mik.uni-pannon.hu/vigyazz/#five"><span id="topmenu05" onmouseover="oops(this.id,document.getElementById(theme5.id).innerHTML)" onmouseout="oops(this.id,&quot;Függvények&quot;)">Függvények</span></a> |&nbsp;
+ <a href="http://verseny2017.mik.uni-pannon.hu/vigyazz/#six"><span id="topmenu06" onmouseover="oops(this.id,document.getElementById(theme6.id).innerHTML)" onmouseout="oops(this.id,&quot;Megoldások&quot;)">Megoldások</span></a>
+ </nav>
+
+<section>
+<!--*********************************** 0. start ***-->
+<article id="start">
+<!-- Programötlet: http://www.w3schools.com/js/tryit.asp?filename=tryjs_lightbulb -->
+<h2>1. Kockadobást szimuláló program készítése.</h2>
+<p><strong>Bemenet:</strong> 6 fáziskép egy dobókockáról. Felhasználhatók Juhász Tibor-Kiss Zsolt: <a href="http://www.zmgzeg.sulinet.hu/muszaki/">Programozási ismeretek (MK-4462-3)</a> tankönyv <a href="http://www.zmgzeg.sulinet.hu/bemutatkozunk/tankonyv/progism/ForrasfajlokVB.zip">digitális mellékletének</a> képei, ám az alábbi képek letöltésének sincs akadálya:</p>
+<p><img src="./JavaScript bevezetés_files/Kocka1.png" alt="Kocka1.png"><img src="./JavaScript bevezetés_files/Kocka2.png" alt="Kocka2.png"><img src="./JavaScript bevezetés_files/Kocka3.png" alt="Kocka3.png"><img src="./JavaScript bevezetés_files/Kocka4.png" alt="Kocka4.png"><img src="./JavaScript bevezetés_files/Kocka5.png" alt="Kocka5.png"><img src="./JavaScript bevezetés_files/Kocka6.png" alt="Kocka6.png"></p>
+<p><strong>Kimenet:</strong> Az eloállított véletlen értéket ábrázoló kép.</p>
+<p><strong>Változók:</strong> Random szám 1 és 6 között, String típusú tömb 6 elemmel</p>
+<p><strong>Algoritmus:</strong> Feltöltjük az imgsrc tömböt a képek nevével, majd az eloállított véletlenszám segítségével kiválasztjuk azt a tömbelemet, amellyel a HTML dokumentumban megjelenített kép lecserélheto. A sikeres megoldáshoz a <a href="http://www.w3schools.com/jsref/dom_obj_document.asp">DOM modell</a> felépítését kell megismernünk.</p>
+<p><strong>Eseménykezelés:</strong> Az onclick <a href="http://www.w3schools.com/jsref/dom_obj_event.asp">esemény</a> bekövetkezésekor végrehajtandó utasításokat a changeImage() függvényben rögzítjük.</p>
+
+<p>Az alábbiakban rendszerezzük a megoldáshoz szükséges ismereteket. A platformfüggetlen megoldás elkészítéséhez gyakorlatilag egy böngészo programra, és esetleg egy egyszerubb editorra van szükség. A lecke mintaprogramjai a böngészoben kipróbálhatók és módosíthatók a forráskód alatti "Próbáld&nbsp;ki!&nbsp;»" gombra kattintás után. <a href="http://hu.wikipedia.org/wiki/Alea_iacta_est">Alea iacta est</a>.</p>
+</article>
+<!--*********************************** 1. téma ***-->
+<article id="one">
+<table>
+<tbody><tr>
+<td><a><img src="./JavaScript bevezetés_files/Kocka1.png" alt="Kocka1.png"></a></td>
+<td><h2 id="theme1">Hogyan épül fel egy HTML dokumentum?</h2></td>
+</tr>
+</tbody></table>
+
+<p>Elöszőr gondoljuk át a programozási környezet jellemzőit. A böngészők HTML kódokat jelenítenek meg. A <a href="http://www.w3schools.com/tags/default.asp">HTML</a>
+ nyelvet azonban még nem tekintjük programnyelvnek, mert csupán a 
+tartalmi elemek megjelenítéséhez szükséges információkat írja le. 
+Vizsgáljuk meg HTML dokumentum szerkezetét. Mindig <a href="http://www.w3schools.com/tags/tag_html.asp">&lt;html&gt;</a> és a &lt;/html&gt; tagek (HTML utasítások) között találhatók a tartalmi elemek. A <a href="http://www.w3schools.com/tags/tag_head.asp">&lt;head&gt;</a>
+ és a &lt;/head&gt; között a dokumentum meta (leíró) információi 
+szerepelnek. Az itt található adatok nem jelennek meg a böngészőben, 
+mivel a dokumentum tulajdonságairól adnak információt a böngészőnek és a
+ robotoknak. A dokumentum tartalmi része a <a href="http://www.w3schools.com/tags/tag_body.asp">&lt;body&gt;</a>
+ és a &lt;/body&gt; tagek között található. Egy HTML dokumentumban 
+szöveg, kép, hang és mozgókép jeleníthető meg. Készítéséhez 
+használhatunk egyszerűbb texteditort (pl. notepad, notepad++), vagy HTML
+ fejlesztő programot (pl. Adobe Dreamweaver, CoffeeCup).</p>
+
+<form target="_blank" action="http://verseny2017.mik.uni-pannon.hu/vigyazz/src/tryit.php" method="POST" id="output1" name="output1"><textarea id="textareaNext1" name="textareaNext1" rows="30" cols="80" required="" readonly="readonly" onmouseover="overBgColor(this)" onmouseout="normalBgColor(this)" style="background: rgb(245, 245, 245); border: 1px dotted rgb(31, 40, 57);">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+ &lt;title&gt;HTML dokumentum felépítése&lt;/title&gt;
+ &lt;meta charset="UTF-8"&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+ &lt;h1&gt;Címsor&lt;/h1&gt;
+ 
+ &lt;p&gt;Bekezdés&lt;/p&gt;
+ 
+ &lt;ul&gt;
+    &lt;li&gt;Felsorolás első eleme&lt;/li&gt;
+    &lt;li&gt;Felsorolás második eleme&lt;/li&gt;
+    &lt;li&gt;Felsorolás Harmadik eleme&lt;/li&gt;
+ &lt;/ul&gt;
+ 
+  &lt;p&gt;Hivatkozás:&lt;br /&gt;
+    &lt;a href="http://verseny.mik.uni-pannon.hu" &gt;Ugrás a verseny honlapjára&lt;/a&gt;
+  &lt;/p&gt;
+ 
+ &lt;p&gt;Kép:&lt;br /&gt;&lt;br /&gt;
+ &lt;img id="myimage" src="./img/Kocka6.png" alt="Kocka" width="100" height="100" /&gt;
+ &lt;/p&gt;
+
+&lt;/body&gt;
+
+&lt;/html&gt;</textarea><p><button type="submit" id="bt_submit1" name="bt_submit1" value="html_step01.html">Próbáld ki! »</button></p></form>
+<div class="feladat"><h3>Beküldhető feladatok:</h3><ol type="1">
+<li value="1">A fenti minta tanulmányozása után készítsetek egy 
+bemutatkozó HTML dokumentumot, amelyben megjelenik a csapat neve, az 
+iskolájának neve és címe, a csapattagok kedvenc időtöltésének listája, 
+az iskola weblapjának linkje és egy kép a csapatról. 
+A honlapon jelenjen meg az is, hogy mikor készítettétek el a feladatot (dátum). <p style="text-align:right;"><strong>1000</strong>|<sub>2</sub>&nbsp;pont</p></li>
+<li>Keressetek pár olyan oldalt, ami webprogramozással foglalkozik. Készítsetek egy HTML dokumentumot, amely ezek linkjeit tartalmazza.<p style="text-align:right;"><strong>100</strong>|<sub>2</sub>&nbsp;pont</p></li>
+</ol></div>
+
+<p>A HTML oldalon a <a href="http://www.w3schools.com/tags/tag_form.asp">&lt;form&gt;</a>
+ és a &lt;/form&gt; tagek által közrefogott űrlapról tudunk adatokat 
+beolvasni. Az adatok bekérésének leggyakrabban használt utasítása az <a href="http://www.w3schools.com/tags/tag_input.asp">&lt;input&gt;</a> tag.</p>
+
+<form target="_blank" action="http://verseny2017.mik.uni-pannon.hu/vigyazz/src/tryit.php" method="POST" id="output2" name="output2"><textarea id="textareaNext2" name="textareaNext2" rows="20" cols="80" required="" readonly="readonly" onmouseover="overBgColor(this)" onmouseout="normalBgColor(this)">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+ &lt;title&gt;Űrlap&lt;/title&gt;
+ &lt;meta charset="UTF-8"&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+ &lt;h1&gt;Űrlap demo&lt;/h1&gt;
+ 
+ &lt;form action="./html_step02.php" method="POST"&gt;
+   Vezetéknév: &lt;input type="text" name="veznev" value="Chat"&gt;&lt;br&gt;
+   Keresztnév: &lt;input type="text" name="utonev" value="Elek"&gt;&lt;br&gt;
+   &lt;input type="submit" value="Elküld"&gt;
+ &lt;/form&gt;
+
+ &lt;p&gt;Kattints az elküld gombra, és az űrlapadatokat a szerver html_step02.php oldala feldolgozza.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea><p><button type="submit" id="bt_submit2" name="bt_submit2" value="html_step02.html">Próbáld ki! »</button></p></form>
+<p><strong>&lt;<span id="expert01" onmouseover="oops(this.id,&quot;Haladóknak!&quot;)" onmouseout="oops(this.id,&quot;Experts only!&quot;)">Experts only!</span>&gt;</strong><br>Pusztán
+ az ügyfél-kiszolgáló architektúra megértésének kedvéért, szánjunk pár 
+percet a szerver oldali adatfeldolgozást végző PHP kód áttekintésére is.
+ Figyeljük meg, hogy az űrlap &lt;form&gt; tagja rendelkezik egy <strong>action</strong>
+ attributummal, amelyben megadhatjuk, hogy milyen kódot hajtson végre a 
+szerver az "Elküld" gomb lenyomását követően. Az űrlapmezők adatait a 
+$_POST tömbben fogadja a szerver.</p>
+<textarea id="textareaNext12b" name="textareaNext12b" rows="28" cols="80" required="" readonly="readonly" onmouseover="overBgColor(this)" onmouseout="normalBgColor(this)">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+ &lt;title&gt;Haladóknak - Űrlapfeldolgozás&lt;/title&gt;
+ &lt;meta charset="UTF-8"&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;?php
+  print "&lt;h1&gt;A szerver az alábbi adatokat kapta:&lt;/h1&gt;";
+  print var_dump($_POST);
+  print "&lt;hr /&gt;";
+  print "&lt;h1&gt;Kiszolgáló információk:&lt;/h1&gt;";
+  print "IP cím: ".$_SERVER['SERVER_ADDR']."&lt;br /&gt;";
+  print "Név: ".$_SERVER['SERVER_NAME']."&lt;br /&gt;";
+  print "Szoftver: ".$_SERVER['SERVER_SOFTWARE']."&lt;br /&gt;";
+  print "&lt;hr /&gt;";
+  print "&lt;h1&gt;Ügyfél információk:&lt;/h1&gt;";
+  print "IP cím: ".getenv('REMOTE_ADDR')."&lt;br /&gt;" ;
+  print "Név: ".gethostbyaddr($_SERVER['REMOTE_ADDR'])."&lt;br /&gt;";
+  print "Szoftver: ".$_SERVER['HTTP_USER_AGENT']."&lt;br /&gt;";
+  print "&lt;br /&gt;Hivatkozás: ".$_SERVER['HTTP_REFERER']."&lt;br /&gt;";
+?&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+<p>A fenti kód a szerveren fut, a böngésző csak a futtatás eredményét 
+kapja vissza. Ugye észrevetted, hogy itt a &lt;?php és ?&gt; jelölések 
+között jelentek meg a PHP utasítások. Ha szeretnéd kipróbáni a szerver 
+oldali programozást, akkor telepíts a számítógépedre egy <a href="http://www.wampserver.com/en/">WAMP</a> szervert vagy regisztrálj egy ingyenes webtárhelyet, ám a JavaScript programozáshoz erre egyenlőre nem lesz szükséged.<br><strong>&lt;/<span id="endexpert01" onmouseover="oops(this.id,&quot;Haladóknak!&quot;)" onmouseout="oops(this.id,&quot;Experts only!&quot;)">Experts only!</span>&gt;</strong></p>
+<p style="text-align:right;"><a href="javascript:window.history.back()">« Előző</a> | <a href="http://verseny2017.mik.uni-pannon.hu/vigyazz/#">Lap eleje</a></p>
+</article>
+<!--*********************************** 2. téma ***-->
+<article id="two">
+<table>
+<tbody><tr>
+<td><a><img src="./JavaScript bevezetés_files/Kocka2.png" alt="Kocka2.png"></a></td>
+<td><h2 id="theme2">JavaScript utasítások a HTML dokumentumban</h2></td>
+</tr>
+</tbody></table>
+
+<p>Ha a HTML kódban számításokat akarunk végezni, vagy néhány feltétel 
+teljesülését szeretnénk megvizsgálni, vagy esetleg  utasításokat 
+többször végrahajtani, akkor bizony adat- és vezérlőszerkezetekre lesz 
+szükségünk. Nos, a HTML ezen hiányosságát pótolhatjuk például <a href="http://www.w3schools.com/jsref/default.asp">JavaScript</a> kódok beágyazásával. Ilyenkor a <a href="http://www.w3schools.com/tags/tag_script.asp">&lt;script&gt;</a> és a &lt;/script&gt; tagek közé írjuk a JavaScript utasításokat, melyeket a böngésző program fog értelmezni és végrehajtani. 
+Az alábbi program például az aktuális dátum megjelenítésére szolgál. További infó <a href="https://www.w3schools.com/js/js_dates.asp">itt</a>.</p>
+
+<form target="_blank" action="http://verseny2017.mik.uni-pannon.hu/vigyazz/src/tryit.php" method="POST" id="output3" name="output3"><textarea id="textareaNext3" name="textareaNext3" rows="23" cols="80" required="" readonly="readonly" onmouseover="overBgColor(this)" onmouseout="normalBgColor(this)">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+ &lt;title&gt;Utasítások&lt;/title&gt;
+ &lt;meta charset="UTF-8"&gt;
+&lt;script&gt;
+ function displayDate() {
+  alert("Hello...\n\nMost a böngésző értelmezi a JavaScript kódot.");
+  var d=new Date();
+  document.getElementById("demo").innerHTML=d.toLocaleDateString();
+ }
+&lt;/script&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1&gt;Első JavaScript kódom&lt;/h1&gt;
+&lt;p id="demo"&gt;Ebbe a bekezdésbe kerül a dátum, ha a gombra kattintasz&lt;/p&gt;
+
+&lt;button type="button" onclick="displayDate()"&gt;Dátumkiírás&lt;/button&gt;
+
+&lt;/body&gt;
+&lt;/html&gt; </textarea><p><button type="submit" id="bt_submit3" name="bt_submit3" value="js_instr01.html">Próbáld ki! »</button></p></form>
+<div class="feladat"><h3>Beküldhető feladatok:</h3><ol type="1">
+<li value="3">Jelenítsétek meg a dáumot úgy, hogy az időpont is megjelenjen (óra, perc, másodperc).<p style="text-align:right;"><strong>10</strong>|<sub>2</sub>&nbsp;pont</p></li>
+<li>Írassatok javascript segítségével egy tetszőleges linket.<p style="text-align:right;"><strong>10</strong>|<sub>2</sub>&nbsp;pont</p></li>
+</ol></div>
+
+<p style="text-align:right;"><a href="javascript:window.history.back()">« Előző</a> | <a href="http://verseny2017.mik.uni-pannon.hu/vigyazz/#">Lap eleje</a></p>
+</article>
+<!--*********************************** 3. téma ***-->
+<article id="three">
+<table>
+<tbody><tr>
+<td><a><img src="./JavaScript bevezetés_files/Kocka3.png" alt="Kocka3.png"></a></td>
+<td><h2 id="theme3">JavaScript változók használata</h2></td>
+</tr>
+</tbody></table>
+
+<p>A változót névvel azonosított memóriaterületnek tekintjük, különböző 
+értékek tárolásának illetve feldolgozásának az eszköze. A változókat a <a href="http://www.w3schools.com/js/js_variables.asp">var</a>
+ kulcsszó után deklaráljuk. Értékadó kifejezésekben az egyenlőségjel bal
+ oldalán álló változó veszi fel a jobb oldalon álló kifejezés értékét. A
+ kifejezések kiértékelését a JavaScript értelmező végzi el. Az eredmény a
+ kifejezésben használt változók és a kijelölt műveletek jellegétől 
+függően leggyakrabban <a href="http://www.w3schools.com/js/js_obj_number.asp">szám</a>, <a href="http://www.w3schools.com/js/js_obj_string.asp">szöveg</a> vagy <a href="http://www.w3schools.com/js/js_obj_boolean.asp">logikai</a> típusú.</p>
+
+<form target="_blank" action="http://verseny2017.mik.uni-pannon.hu/vigyazz/src/tryit.php" method="POST" id="output4" name="output4"><textarea id="textareaNext4" name="textareaNext4" rows="30" cols="80" required="" readonly="readonly" onmouseover="overBgColor(this)" onmouseout="normalBgColor(this)">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+ &lt;title&gt;Változók&lt;/title&gt;
+ &lt;meta charset="UTF-8"&gt;
+ &lt;script&gt;
+  // Szám típusú változók
+  var a;
+  var a = 3;
+  var b = 4;
+
+  // Értékadó kifejezések
+  var osszeg = a+b;
+  var c = Math.sqrt(a*a+b*b);
+  
+  // Szöveg típusú változó
+  var s = "Derékszögű háromszög oldalai:";
+ &lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+ &lt;h1&gt;JavaScript változók használata&lt;/h1&gt;
+  &lt;script&gt;
+  document.write(a + " + " + b + " = " + osszeg + "&lt;br /&gt;")
+  document.write("&lt;h2&gt;"+s+"&lt;/h2&gt;")
+  document.write("Befogók: "+a + ", " + b + " =&gt; Átfogó: " + c + "&lt;br /&gt;")
+ &lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</textarea><p><button type="submit" id="bt_submit4" name="bt_submit4" value="js_var01.html">Próbáld ki! »</button></p></form>
+<p>Ha megegyező típusú adatok sorozatát szeretnénk feldolgozni (pl. 
+osztályzatok, hőmérséklet, bevételek, kiadások), akkor tömbösíthetünk, 
+vagyis egy közös azonosítóval hivatkozhatunk az adatsorozatra, miközben 
+annak elemeit sorszámmal jelöljük. Tömb deklarálása az <a href="http://www.w3schools.com/jsref/jsref_obj_array.asp">Array()</a> kulcsszóval történik.</p>
+
+<form target="_blank" action="http://verseny2017.mik.uni-pannon.hu/vigyazz/src/tryit.php" method="POST" id="output5" name="output5"><textarea id="textareaNext5" name="textareaNext5" rows="34" cols="80" required="" readonly="readonly" onmouseover="overBgColor(this)" onmouseout="normalBgColor(this)">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+ &lt;title&gt;Változók&lt;/title&gt;
+ &lt;meta charset="UTF-8"&gt;
+ &lt;script&gt;
+  // Tömb definiálása
+  var autok = new Array();
+  autok[0]="Mercedes";
+  autok[1]="Lexus";
+  autok[2]="Nissan";
+  
+  var jegyek = new Array(3,4,5,4,2,5);
+ &lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+ &lt;h1&gt;JavaScript tömb használata&lt;/h1&gt;
+ &lt;script&gt;
+  document.write("Autók: "+autok[0] + ", " + autok[1] + ", " + autok[2] + "&lt;br /&gt;");
+ &lt;/script&gt;
+ 
+ &lt;h1&gt;JavaScript tömbelemek feldolgozása&lt;/h1&gt;
+ &lt;p&gt;Bővebben a vezérlőszerkezeteknél...&lt;/p&gt;
+ &lt;script&gt;
+  var osszeg=0;
+  for(i=0;i&lt;jegyek.length;i++) {
+   document.write(jegyek[i] + ", ");
+   osszeg+=jegyek[i];
+   }
+   document.write("&lt;h2&gt;Átlag: "+(osszeg/jegyek.length).toFixed(2)+"&lt;/h2&gt;");
+ &lt;/script&gt;
+ &lt;/body&gt;
+&lt;/html&gt;</textarea><p><button type="submit" id="bt_submit5" name="bt_submit5" value="js_var02.html">Próbáld ki! »</button></p></form><p>Billentyűzetről a legegyszerűbben a <a href="http://www.w3schools.com/jsref/met_win_prompt.asp">prompt()</a> metódussal kérhetünk be adatot:</p>
+
+<form target="_blank" action="http://verseny2017.mik.uni-pannon.hu/vigyazz/src/tryit.php" method="POST" id="output6" name="output6"><textarea id="textareaNext6" name="textareaNext6" rows="28" cols="80" required="" readonly="readonly" onmouseover="overBgColor(this)" onmouseout="normalBgColor(this)">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;!-- http://www.w3schools.com/js/tryit.asp?filename=tryjs_prompt --&gt;
+&lt;head&gt;
+ &lt;title&gt;Változók&lt;/title&gt;
+ &lt;meta charset="UTF-8"&gt;
+ &lt;script&gt;
+ function myFunction() {
+  var x;
+
+  var person=prompt("Kérem írja be a nevét","Harry Potter");
+
+  if (person!=null)  {
+   x="Hello " + person + "! Hogy vagy?";
+   document.getElementById("demo").innerHTML=x;
+  }
+ }
+ &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1&gt;Prompt() metódus bemutatása!&lt;/h1&gt;
+
+&lt;button onclick="myFunction()"&gt;Adatbeolvasás&lt;/button&gt;
+
+&lt;p id="demo"&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea><p><button type="submit" id="bt_submit6" name="bt_submit6" value="js_var03.html">Próbáld ki! »</button></p></form>
+<div class="feladat"><h3>Beküldhető feladatok:</h3><ol type="1">
+<li value="5">Készítsetek egy programot, amely bekér 5 egész értéket. Ezeket tároljátok el egy tömbben. 
+A program ezután jelenítse meg az értékek összegét és szorzatát.<p style="text-align:right;"><strong>100</strong>|<sub>2</sub>&nbsp;pont</p></li>
+<li>Kérjetek be egy számot, majd jelenítsétek meg a négyzetgyökét.<p style="text-align:right;"><strong>100</strong>|<sub>2</sub>&nbsp;pont</p></li>
+</ol></div>
+
+<p style="text-align:right;"><a href="javascript:window.history.back()">« Előző</a> | <a href="http://verseny2017.mik.uni-pannon.hu/vigyazz/#">Lap eleje</a></p>
+</article>
+<!--*********************************** 4. téma ***-->
+<article id="four">
+<table>
+<tbody><tr>
+<td><a><img src="./JavaScript bevezetés_files/Kocka4.png" alt="Kocka4.png"></a></td>
+<td><h2 id="theme4">JavaScript vezérlőszerkezetek</h2></td>
+</tr>
+</tbody></table>
+
+<p>Meghatározott logikai feltételek teljesülése esetén a 
+vezérlőszerkezetekkel tudjuk szabályozni az utasítások végrehajtásának 
+sorrendjét. A struktúrált programban alapvetően három vezérlőszerkezet 
+használatos: szekvencia, szelekció, iteráció. Figyeljük meg a 
+mintapéldákban a vezérlőszerkezetek egymásba ágyazódását!</p>
+
+<h3>Szekvencia</h3>
+<p>Szekvencia (utasításblokk) esetén az utasítások a programba írt sorrendjük szerint hajtódnak végre.</p>
+
+<form target="_blank" action="http://verseny2017.mik.uni-pannon.hu/vigyazz/src/tryit.php" method="POST" id="output7" name="output7"><textarea id="textareaNext7" name="textareaNext7" rows="26" cols="80" required="" readonly="readonly" onmouseover="overBgColor(this)" onmouseout="normalBgColor(this)">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+ &lt;title&gt;Vezérlőszerkezetek&lt;/title&gt;
+ &lt;meta charset="UTF-8"&gt;
+ &lt;script&gt;
+  // Szám típusú változo
+  var a = 5;
+ &lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+ &lt;h1&gt;Számítások:&lt;/h1&gt;
+ &lt;script&gt;
+  document.write("&lt;p&gt;"+ a + " cm oldalú négyzet területe: " + a*a + "&lt;/p&gt;");
+  document.write("&lt;p&gt;"+ a + " cm oldalú kocka felszíne: " + 6*a*a + "&lt;/p&gt;");
+  
+  var r=a;
+  var korterulet=r*r*Math.PI;
+  document.write("&lt;p&gt;"+ r + " cm sugarú kör területe: " + korterulet.toFixed(4) + "&lt;/p&gt;");
+  var gombfelszin=4*r*r*Math.PI;
+  document.write("&lt;p&gt;"+ r + " cm sugarú gömb felszíne: " + gombfelszin.toFixed(4) + "&lt;/p&gt;");
+ &lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</textarea><p><button type="submit" id="bt_submit7" name="bt_submit7" value="js_ctrl01.html">Próbáld ki! »</button></p></form>
+<div class="feladat"><h3>Beküldhető feladatok:</h3><ol type="1">
+<li value="7">Adott egy 40cm X 50cm-es papírlap. 
+A program kérjen be két kisebb méretet, és határozza meg, hogy hány darab ilyen kisebb méretű lapot lehet kivágni a nagy lapból.  
+Számoljátok ki ugyanezt, ha a kis lapot elforgatjátok (az oldalak megcserélésével). 
+Például 4X5-ös lapból 100-at lehet kivágni, de ha elforgatjuk 5X4-esre, akkor csak 96-ot.<p style="text-align:right;"><strong>1000</strong>|<sub>2</sub>&nbsp;pont</p></li>
+<li>Olvassátok be egy háromszög oldalainak hosszát, majd mindhárom oldalhoz határozzátok meg, hogy mennyivel kisebb a kerület felénél.<p style="text-align:right;"><strong>100</strong>|<sub>2</sub>&nbsp;pont</p></li>
+<li>Egy egyszerűsített fizikai rendszerben a testekre csak a gravitáció hat, melynek mértéke 9.81 m/s<sup>2</sup>.
+ Egy ilyen rendszerben egy eldobott labda röppályálya könnyen modellezhető.
+ Készítsetek egy programot, ami bekéri a labda eldobását jelző ferde hajítás erősségét (v<sub>0</sub>, pozitív szám) és szögét (α, 0 és 90 fok között),
+ és kiszámolja a dobás maximális magasságát, illetve távolságát.<br>
+ <a href="https://hu.wikipedia.org/wiki/Ferde_haj%C3%ADt%C3%A1s#Ferde_haj.C3.ADt.C3.A1s_felfel.C3.A9">Ferde hajítás segítség</a>
+ <font color="#ff0000">Figyelem, Javascript-ben a sin és cos függvények radiánban várják a szöget, nem fokban!</font><p style="text-align:right;"><strong>1 0000</strong>|<sub>2</sub>&nbsp;pont</p></li>
+</ol></div>
+
+<h3>Szelekció</h3>
+<p>Szelekcióhoz (elágazás) már olyan utasításokat használunk, amelyek valamilyen <a href="http://www.w3schools.com/js/js_comparisons.asp">logikai kifejezés</a> értékétől függően eltérő utasításblokkot hajtanak végre. Megvalósításához használhatjuk az <a href="http://www.w3schools.com/js/js_if_else.asp">if (logikai kifejezés){&nbsp;}</a> utasítást.</p>
+
+<form target="_blank" action="http://verseny2017.mik.uni-pannon.hu/vigyazz/src/tryit.php" method="POST" id="output8" name="output8"><textarea id="textareaNext8" name="textareaNext8" rows="29" cols="80" required="" readonly="readonly" onmouseover="overBgColor(this)" onmouseout="normalBgColor(this)">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+ &lt;title&gt;Vezérlőszerkezetek&lt;/title&gt;
+ &lt;meta charset="UTF-8"&gt;
+ &lt;script&gt;
+  // Szám típusú változók
+  var a = 5;
+  var b = 12;
+ &lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+ 
+ &lt;script&gt;
+  document.write("&lt;h1&gt;"+ a + " vagy " + b + " a nagyobb?" + "&lt;/h1&gt;&lt;br /&gt;");
+  if (a&gt;b) {
+   document.write(a+" nagyobb mint " + b);
+   }
+  else if (b&gt;a) {
+   document.write(b+" nagyobb mint " + a);
+   }
+  else {   
+   document.write(a+ " egyenlő "+ b + "&lt;br /&gt;");
+   }
+ &lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</textarea><p><button type="submit" id="bt_submit8" name="bt_submit8" value="js_ctrl02.html">Próbáld ki! »</button></p></form>
+<div class="feladat"><h3>Beküldhető feladatok:</h3><ol type="1">
+<li value="10">Olvassatok be egy evszámot. A program írja ki, hogy az adott év szökőév-e.
+ Egy év szökőév, ha az évszám osztható 4-gyel. Nem szökőév azonban ha osztható 100-zal, kivéve ha osztható 400-zal is.
+ Pl. szökőév: 1864, 1200, 2000, 2016; nem szökőév: 1943, 1900, 1300, 2014.<p style="text-align:right;"><strong>100</strong>|<sub>2</sub>&nbsp;pont</p></li>
+<li>Készítsetek egy programot, amely 3 bekért szám közül meghatározza a legnagyobbat, a legkisebbet, valamint az átlagukat is.<p style="text-align:right;"><strong>100</strong>|<sub>2</sub>&nbsp;pont</p></li>
+</ol></div>
+
+<h3>Iteráció</h3>
+<p>Az iteráció (ismétlődés, ciklus) teszi lehetővé bizonyos feltételek 
+teljesülése esetén egy utasításblokk többszöri végrehajtását. Ilyenkor a
+ ciklusmagban használt változók értéke feladattól függően folyamatosan 
+változhat. Az <a href="http://www.w3schools.com/js/js_loop_while.asp">while (logikai kifejezés){&nbsp;} </a> elöltesztelő ciklusnál az ismétlési feltételeket a ciklus mag előtt allítjuk be, míg a <a href="http://www.w3schools.com/js/js_loop_while.asp">do {&nbsp;} while (logikai kifejezés) </a>hátultesztelő
+ ciklus esetén a ciklusmag utasításblokkját követően. Létezik még az 
+úgynevezett növeknényes ciklusszervező utasítás a <a href="http://www.w3schools.com/js/js_loop_for.asp">for (ismétlések) {&nbsp;}</a>.
+ Itt az ismétlések tényleges számát már a ciklus indulásakor meg kell 
+adnunk. Figyeljük meg az alábbi mintaprogramban az iterációk 
+felépítését.</p>
+
+<form target="_blank" action="http://verseny2017.mik.uni-pannon.hu/vigyazz/src/tryit.php" method="POST" id="output9" name="output9"><textarea id="textareaNext9" name="textareaNext9" rows="41" cols="80" required="" readonly="readonly" onmouseover="overBgColor(this)" onmouseout="normalBgColor(this)">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+ &lt;title&gt;Vezérlőszerkezetek&lt;/title&gt;
+ &lt;meta charset="UTF-8"&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+ &lt;script&gt;
+  var a=1;
+  var b=12;
+  document.write("&lt;h1&gt;Egész számok "+a+" és "+b+" között&lt;/h1&gt;");
+  for (i=a;i&lt;=b;i++) {
+   document.write(i + ", ");
+  }   
+  document.write("&lt;br /&gt;");
+  
+  document.write("&lt;h1&gt;Páros számok "+a+" és "+b+" között&lt;/h1&gt;");
+  var j=a;
+  while(j&lt;=b) {
+   if(j%2==0) {
+    document.write(j + ", ");
+   }
+   j++;
+  }   
+  document.write("&lt;br /&gt;");
+  
+  document.write("&lt;h1&gt;Páratlan számok "+a+" és "+b+" között&lt;/h1&gt;");
+  var j=a;
+  do {
+   if(j%2!=0) {
+    document.write(j + ", ");
+   }
+   j++;
+  }  while(j&lt;=b)
+  document.write("&lt;br /&gt;");
+  
+ &lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</textarea><p><button type="submit" id="bt_submit9" name="bt_submit9" value="js_ctrl03.html">Próbáld ki! »</button></p></form>
+<p><strong>Gondoltam egy számot</strong>: A program kigondol egy számot 
+egy és tíz között, majd megkérdezi tőlünk, hogy vajon melyikre gondolt. 
+Ezt addig teszi, amíg ki nem találjuk. A probléma megoldására while 
+ciklust és if elágazást használunk. Figyeljétek meg a véletlen egész értékek generálásának módját. Az eredmény lehet 1 is és 10 is.</p>
+
+<form target="_blank" action="http://verseny2017.mik.uni-pannon.hu/vigyazz/src/tryit.php" method="POST" id="output10" name="output10"><textarea id="textareaNext10" name="textareaNext10" rows="34" cols="80" required="" readonly="readonly" onmouseover="overBgColor(this)" onmouseout="normalBgColor(this)">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+ &lt;title&gt;Vezérlőszerkezetek&lt;/title&gt;
+ &lt;meta charset="UTF-8"&gt;
+ &lt;script&gt;
+  function myFunction() {
+   var numberComputer = Math.floor((Math.random()*10)+1);
+   var num = prompt("Gondoltam egy számra egy és tíz között. Találd ki!");
+   var ok = true;
+   while(ok) {
+    if(isNaN(num)){
+      num = prompt("Csak számot adhatsz meg és legyen egy és tíz között!");
+    } else if(num &lt; numberComputer) {
+      num = prompt("Nagyobbra gondoltam!");
+    } else if(num &gt; numberComputer) {
+      num = prompt("Kisebbre gondoltam!");
+    } else if(num == numberComputer) {
+      alert("Igen, erre a számra gondoltam: " + numberComputer);
+      ok = false;
+    }
+   }
+  }
+ &lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+ 
+ &lt;h1&gt;Gondoltam egy számot!&lt;/h1&gt;
+ &lt;button type="button" onclick="myFunction()"&gt;Találd ki!&lt;/button&gt;
+ &lt;p id="demo"&gt;&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</textarea><p><button type="submit" id="bt_submit10" name="bt_submit10" value="js_ctrl04.html">Próbáld ki! »</button></p></form>
+<div class="feladat"><h3>Beküldhető feladatok:</h3><ol type="1">
+<li value="12">Készítsetek egy programot, amely bekér egy számot, majd megjeleníti az összes osztóját.<p style="text-align:right;"><strong>1000</strong>|<sub>2</sub>&nbsp;pont</p></li>
+<li>Készítsetek egy programot, amely egy 20 elemű tömböt feltölt véletlen számokkal. 
+Jelenítsétek meg a generált számokat, majd az összegüket is.<p style="text-align:right;"><strong>100</strong>|<sub>2</sub>&nbsp;pont</p></li>
+<li>Egy számot tökéletesnek nevezünk, ha az összes, nála kisebb pozitív osztójának összege maga a szám. 
+Például az első 2 tökéletes szám a 6 és a 28. (6=1+2+3, 28=1+2+4+7+14). 
+Készítsetek egy programot, amely meghatározza a 10000-nél kisebb tökéletes számokat. 
+(Az egyszerű ellenőrzés céljából elmondjuk, hogy a 6-on és a 28-on kívül még további 2 van.)<p style="text-align:right;"><strong>1100</strong>|<sub>2</sub>&nbsp;pont</p></li>
+</ol></div>
+
+<p style="text-align:right;"><a href="javascript:window.history.back()">« Előző</a> | <a href="http://verseny2017.mik.uni-pannon.hu/vigyazz/#">Lap eleje</a></p>
+</article>
+<!--***********************************5. téma ***-->
+<article id="five">
+<table>
+<tbody><tr>
+<td><a><img src="./JavaScript bevezetés_files/Kocka5.png" alt="Kocka5.png"></a></td>
+<td><h2 id="theme5">JavaScript függvények és az eseménykezelés</h2></td>
+</tr>
+</tbody></table>
+<h2>Függvényhívások</h2>
+<p>A függvény névvel azonosított utasításcsoport. Általában akkor 
+alkalmazzuk, amikor ugyanazokat a műveleteket kell a program különböző 
+részein elvégezni, esetleg más-más adattal. A <a href="http://www.w3schools.com/js/js_functions.asp">function</a>
+ kulcsszó után az általunk magadott néven lesznek elérhetőek az utasítás
+ zárójelek {&nbsp;} között megadott utasítások. Ha a függvény 
+utasításainak adatot szeretnénk átadni, akkor a függvény neve után 
+zárójelben megadott úgynevezett attribútumokkal tehetjük meg. A függvény
+ hívása nevének és attribútumainak megadásával történik.</p>
+
+<form target="_blank" action="http://verseny2017.mik.uni-pannon.hu/vigyazz/src/tryit.php" method="POST" id="output11" name="output11"><textarea id="textareaNext11" name="textareaNext11" rows="28" cols="80" required="" readonly="readonly" onmouseover="overBgColor(this)" onmouseout="normalBgColor(this)">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+ &lt;title&gt;Függvények és események&lt;/title&gt;
+ &lt;meta charset="UTF-8"&gt;
+ &lt;script&gt;
+  function myexplorer() {
+   txt = "&lt;p&gt;Böngésző kódnév: " + navigator.appCodeName + "&lt;/p&gt;";
+   txt+= "&lt;p&gt;Böngésző név:  " + navigator.appName + "&lt;/p&gt;";
+   txt+= "&lt;p&gt;Böngésző verzió: " + navigator.appVersion + "&lt;/p&gt;";
+   txt+= "&lt;p&gt;Süti engedélyezve: " + navigator.cookieEnabled + "&lt;/p&gt;";
+   txt+= "&lt;p&gt;Platform: " + navigator.platform + "&lt;/p&gt;";
+   txt+= "&lt;p&gt;User-agent header: " + navigator.userAgent + "&lt;/p&gt;";
+   txt+= "&lt;p&gt;User-agent nyelv: " + navigator.systemLanguage + "&lt;/p&gt;";
+   document.getElementById("example").innerHTML=txt;
+  }
+ &lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+ 
+  &lt;h1&gt;Függvény hívások&lt;/h1&gt;
+  &lt;p id="example"&gt;Ebbe a bekezdésbe kerülnek a böngésző adatai&lt;/p&gt;
+
+  &lt;button type="button" onclick="myexplorer()"&gt;Böngészőm adatai&lt;/button&gt;
+     
+&lt;/body&gt;
+&lt;/html&gt;</textarea><p><button type="submit" id="bt_submit11" name="bt_submit11" value="js_func01.html">Próbáld ki! »</button></p></form>
+<div class="feladat"><h3>Beküldhető feladatok:</h3><ol type="1">
+<li value="15">A tükörszavak olyan szavak, amelyek visszafelé olvasva is ugyanúgy néznek ki (pl.: görög, kerek).
+ Készítsetek egy programot, amely egy bekért szóról eldönti, hogy az tükörszó-e.<p style="text-align:right;"><strong>1000</strong>|<sub>2</sub>&nbsp;pont</p></li>
+<li>Két szót egymás anagrammáinak nevezünk, ha pontosan ugyanazokból a betűkből állnak, viszont a betűk sorrendje lehet teljesen más.
+ Például a "maradhat" és "hadartam" szavak egymás anagrammái.
+ Készítsetek egy programot, amely két bekért szóról eldönti, hogy egymás anagrammái-e.
+ (Tipp: hogy lehet úgy felsorolni egy szó betűit, hogy az anagrammák esetében ugyanaz legyen az eredmény?)
+ <p style="text-align:right;"><strong>1 0000</strong>|<sub>2</sub>&nbsp;pont</p></li>
+<li>Készítsetek egy függvényt, amely a paraméterben megkapott tömbről (amiben pozitív egészek vannak) eldönti, hogy melyik helyén van a legnagyobb eleme.
+ Készítsetek egy programot, amely bekér egy 10 elemű tömböt.
+ Az előbbi függvény segítségével keressétek meg a legnagyobb elemet, jelenítsétek meg, majd állítsátok át -1-re.
+ Ezt addig ismételjétek, amíg a tömb tartalma csupa -1-es nem lesz. A megjelenített számok ekkor a tömb elemei lesznek, csökkenő sorrendben.
+ <p style="text-align:right;"><strong>1 0000</strong>|<sub>2</sub>&nbsp;pont</p></li>
+</ol></div>
+
+<h2>Eseménykezelés</h2>
+<p>A program működése közben a kezelőfelületről illetve a kommunikációs felületről érkező <a href="http://www.w3schools.com/jsref/dom_obj_event.asp">események</a>
+ üzeneteit folyamatosan dolgozza fel, így a külső (egérről vagy 
+billentyűzetről érkező) és a belső (timertől vagy más működő 
+folyamatoktól érkező) események befolyásolják a futását.</p>
+<p>A külső események érzékelésekor az operációs rendszer üzenetet küld 
+annak az ablaknak, amelyen az esemény bekövetkezett. Az alkalmazás 
+fogadja az üzenetet, és végrehajtja az eseményhez rendelt utasításokat. 
+Ilyen események lehetnek az egérkattintás, az egérkurzor valamelyik 
+dokumentumelem feletti állapota stb.</p>
+
+<form target="_blank" action="http://verseny2017.mik.uni-pannon.hu/vigyazz/src/tryit.php" method="POST" id="output12" name="output12"><textarea id="textareaNext12" name="textareaNext12" rows="26" cols="80" required="" readonly="readonly" onmouseover="overBgColor(this)" onmouseout="normalBgColor(this)">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+ &lt;title&gt;Függvények és események&lt;/title&gt;
+ &lt;meta charset="UTF-8"&gt;
+ &lt;script&gt;
+  function Hatter(color){
+    alert("Háttérszín: "+document.getElementById("myPage").style.backgroundColor+" -&gt; "+color);
+    document.getElementById("myPage").style.background=color;
+  }
+ &lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body id="myPage" style="background:lightyellow;" &gt;
+&lt;h1&gt;Háttérszíncsere egérkatintásra&lt;/h1&gt;
+&lt;table style="text-align:center;padding:5px;"&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;input TYPE="button" value="Piros háttér" onclick="Hatter('red')"&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;input TYPE="button" value="Zöld háttér" onclick="Hatter('green')"&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;input TYPE="button" value="Kék háttér" onclick="Hatter('blue')"&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;input TYPE="button" value="Eredeti háttér" onclick="Hatter('lightyellow')"&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</textarea><p><button type="submit" id="bt_submit12" name="bt_submit12" value="js_func02.html">Próbáld ki! »</button></p></form>
+<p>Szintén külső események vezérlik az űrlapmezők kitöltését, vagy az alábbi <strong>kő-papír-olló</strong> játékot is.</p>
+
+<form target="_blank" action="http://verseny2017.mik.uni-pannon.hu/vigyazz/src/tryit.php" method="POST" id="output13" name="output13"><textarea id="textareaNext13" name="textareaNext13" rows="63" cols="80" required="" readonly="readonly" onmouseover="overBgColor(this)" onmouseout="normalBgColor(this)">&lt;!DOCTYPE
+ html&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+ &lt;title&gt;Ko-papír-olló játék&lt;/title&gt;
+ &lt;meta charset="UTF-8"&gt;
+ &lt;script&gt;
+ function myfunction(){
+   alert("Ko, papír, olló!");
+   document.getElementById("result").style.visibility="hidden";
+   document.getElementById("demo").style.visibility="visible";
+   document.getElementById("hi").innerHTML="&lt;h1&gt;Hello " + 
+document.getElementById("veznev").value+" " + 
+document.getElementById("utonev").value+"!&lt;/h1&gt;&lt;p&gt;Ko, papír 
+vagy olló?&lt;/p&gt;";
+ }
+ function kpofunction(userTip){
+    var compTip=Math.floor((Math.random()*3)+1);
+    document.getElementById("userT").src="./img/KPO"+userTip+".jpg";
+    if (userTip==compTip){
+        document.getElementById("winner").innerHTML=" = ";
+    } else{
+        if ((3+userTip-compTip)%3==1) // Át lehet gondolni, hogy miért jó 
+ez így
+	document.getElementById("winner").innerHTML=" &gt; ";
+        else
+	document.getElementById("winner").innerHTML=" &lt; ";
+
+    }
+    document.getElementById("compT").src="./img/KPO"+compTip+".jpg";
+    document.getElementById("result").style.visibility="visible";
+ }
+ &lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+ &lt;h1&gt;JavaScript ko-papír-olló&lt;/h1&gt;
+ 
+ &lt;form action="javascript:myfunction()"&gt;
+   Vezetéknév: &lt;input type="text" id="veznev" name="veznev" 
+value="Chat"&gt;&lt;br&gt;
+   Keresztnév: &lt;input type="text" id="utonev" name="utonev" 
+value="Elek"&gt;&lt;br&gt;
+   &lt;input type="submit" value="Feldolgoz"&gt;
+ &lt;/form&gt;
+
+ &lt;p&gt;Kattints az feldolgoz gombra.&lt;/p&gt;
+ 
+ &lt;div id="demo" style="visibility:hidden;"&gt;
+ &lt;p id="hi"&gt;&lt;/p&gt;
+ &lt;p id="tip"&gt;
+ &lt;img id="kpo3" src="./img/KPO3.jpg" alt="Ko" 
+onclick="kpofunction(3)"/&gt;
+ &lt;img id="kpo1" src="./img/KPO1.jpg" alt="Papír" 
+onclick="kpofunction(1)"/&gt;
+ &lt;img id="kpo2" src="./img/KPO2.jpg" alt="Olló" 
+onclick="kpofunction(2)"/&gt;
+ &lt;/p&gt;
+ &lt;/div&gt;
+ 
+ &lt;div id="result" style="visibility:hidden;"&gt;
+  &lt;table&gt;
+    &lt;tr&gt;
+     &lt;td&gt;Játékos:&lt;br /&gt;  &lt;img id="userT" alt="Játékos" 
+src="./img/KPO1.jpg" /&gt;&lt;/td&gt;
+     &lt;td style="width:70px;text-align:center;"&gt;&lt;h1 id="winner"&gt;
+ &lt;/h1&gt;&lt;/td&gt;
+     &lt;td&gt;Computer:&lt;br /&gt; &lt;img id="compT" alt="Computer" 
+src="./img/KPO1.jpg" /&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+ &lt;/div&gt;
+  
+&lt;/body&gt;
+&lt;/html&gt;</textarea><p><button type="submit" id="bt_submit13" name="bt_submit13" value="kopapirollo_jo.html">Próbáld ki! »</button></p></form>
+<p>Gondoltad volna, hogy a timer bekapcsolását követően, akár egy négy soros függvénnyel már <strong>digitális órát</strong>
+ lehet megjeleníteni? Ezt a belső időzítést a továbbiakban természetesen
+ más rendszeresen ismétlődő tevékenységek elvégzéséhez is használhatjuk.</p>
+
+<form target="_blank" action="http://verseny2017.mik.uni-pannon.hu/vigyazz/src/tryit.php" method="POST" id="output14" name="output14"><textarea id="textareaNext14" name="textareaNext14" rows="22" cols="80" required="" readonly="readonly" onmouseover="overBgColor(this)" onmouseout="normalBgColor(this)">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+ &lt;title&gt;Függvények és események&lt;/title&gt;
+ &lt;meta charset="UTF-8"&gt;
+ &lt;script&gt;
+  var myVar=setInterval(function(){myTimer()},1000);
+
+  function myTimer() {
+   var d=new Date();
+   var t=d.toLocaleTimeString();
+   document.getElementById("demo").innerHTML=t;
+  }
+ &lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;h1&gt;A pontos idő: &lt;span id="demo" style="color:#00A000;"&gt;&lt;/span&gt;&lt;/h1&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</textarea><p><button type="submit" id="bt_submit14" name="bt_submit14" value="js_func04.html">Próbáld ki! »</button></p></form>
+<div class="feladat"><h3>Beküldhető feladatok:</h3><ol type="1">
+<li value="18">Készítsetek egy képnézegető honlapot.
+ Az oldal tartalmazzon 4 képet, az oldal tetején, kicsi méretben megjelenítve.
+ A kis kép valamelyikére kattintva a neki megfelelő nagyobb méretű párja jelenjen meg a kis képek alatt. Mindig csak egy kép legyen nagy méretben látható.
+<p style="text-align:right;"><strong>1100</strong>|<sub>2</sub>&nbsp;pont</p></li>
+<li>Készítsetek programot, amely a csapatotok nevét és egy rövid mottót 10 karakter széles helyen, fényreklámszerűen a képernyő közepén mozgatja.
+ A felirat színe is változzon az idő múlásával.<p style="text-align:right;"><strong>1000</strong>|<sub>2</sub>&nbsp;pont</p></li>
+<li>Készítsetek egy számláló honlapot.
+ A holnapon legyen egy nagyobb szám, ami a honlap megnyitásakor 0, és minden másodpercben egyel nő.
+ A szám színe minden 10. növekedést követően változzon meg.<p style="text-align:right;"><strong>1100</strong>|<sub>2</sub>&nbsp;pont</p></li>
+</ol></div>
+
+<p style="text-align:right;"><a href="javascript:window.history.back()">« Előző</a> | <a href="http://verseny2017.mik.uni-pannon.hu/vigyazz/#">Lap eleje</a></p>
+</article>
+<!--*********************************** 6. téma ***-->
+<article id="six">
+<table>
+<tbody><tr>
+<td><a><img src="./JavaScript bevezetés_files/Kocka6.png" alt="Kocka6.png"></a></td>
+<td><h2 id="theme6">A kockadobás feladat lehetséges megoldásai</h2></td>
+</tr>
+</tbody></table>
+
+<p>A leckében tárgyaltak összefoglalásaként nézzük meg az eredeti feladat néhány lehetséges megoldását.</p>
+
+<h3>Kockadobás szelekció használatával</h3>
+
+<form target="_blank" action="http://verseny2017.mik.uni-pannon.hu/vigyazz/src/tryit.php" method="POST" id="output15" name="output15"><textarea id="textareaNext15" name="textareaNext15" rows="43" cols="80" required="" readonly="readonly" onmouseover="overBgColor(this)" onmouseout="normalBgColor(this)">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;title&gt;Kockadobás&lt;/title&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;script&gt;
+var rnd;
+function changeImage()
+{
+rnd=Math.floor((Math.random()*6)+1); 
+element=document.getElementById('myimage')
+
+if (rnd==1) {
+  element.src="./img/Kocka1.png";
+  }
+else if (rnd==2) {
+  element.src="./img/Kocka2.png";
+  }
+else if (rnd==3) {
+  element.src="./img/Kocka3.png";
+  }
+else if (rnd==4) {
+  element.src="./img/Kocka4.png";
+  }
+else if (rnd==5) {
+  element.src="./img/Kocka5.png";
+  }
+else {
+  element.src="./img/Kocka6.png";
+  }
+}
+&lt;/script&gt;
+
+&lt;img id="myimage" onclick="changeImage()" src="./img/Kocka6.png" alt="Kocka" width="100" height="100"&gt;
+
+&lt;p&gt;&lt;a href="#" onclick="changeImage()"&gt;Kattints a kockára!&lt;/a&gt;&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</textarea><p><button type="submit" id="bt_submit15" name="bt_submit15" value="Kocka_if.html">Próbáld ki! »</button></p></form>
+<h3>Kockadobás tömb használatával</h3>
+
+<form target="_blank" action="http://verseny2017.mik.uni-pannon.hu/vigyazz/src/tryit.php" method="POST" id="output16" name="output16"><textarea id="textareaNext16" name="textareaNext16" rows="30" cols="80" required="" readonly="readonly" onmouseover="overBgColor(this)" onmouseout="normalBgColor(this)">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;title&gt;Kockadobás&lt;/title&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;script&gt;
+var rnd;
+imgsrc = new Array(6);
+imgsrc[0] = "./img/Kocka1.png";
+imgsrc[1] = "./img/Kocka2.png";
+imgsrc[2] = "./img/Kocka3.png";
+imgsrc[3] = "./img/Kocka4.png";
+imgsrc[4] = "./img/Kocka5.png";
+imgsrc[5] = "./img/Kocka6.png";
+
+function changeImage() {
+   document.getElementById('myimage').setAttribute("src",imgsrc[Math.floor(Math.random()*6)]);
+}
+&lt;/script&gt;
+
+&lt;img id="myimage" onclick="changeImage()" src="./img/Kocka6.png" alt="Kocka" width="100" height="100"&gt;
+
+&lt;p&gt;&lt;a href="#" onclick="changeImage()"&gt;Kattints a kockára!&lt;/a&gt;&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</textarea><p><button type="submit" id="bt_submit16" name="bt_submit16" value="Kocka_array.html">Próbáld ki! »</button></p></form>
+<h3>Kockadobás  iteráció használatával</h3>
+
+<form target="_blank" action="http://verseny2017.mik.uni-pannon.hu/vigyazz/src/tryit.php" method="POST" id="output17" name="output17"><textarea id="textareaNext17" name="textareaNext17" rows="27" cols="80" required="" readonly="readonly" onmouseover="overBgColor(this)" onmouseout="normalBgColor(this)">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+ &lt;title&gt;Kockadobás&lt;/title&gt;
+ &lt;meta charset="UTF-8"&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+ &lt;script&gt;
+  var rnd;
+  imgsrc = new Array(6);
+  for (var i=0;i&lt;imgsrc.length;i++) {
+    imgsrc[i] = "./img/Kocka"+(i+1)+".png";
+  }
+
+  function changeImage() {
+    document.getElementById('myimage').setAttribute("src",imgsrc[Math.floor(Math.random()*6)]);
+  }
+ &lt;/script&gt;
+
+ &lt;img id="myimage" onclick="changeImage()" src="./img/Kocka6.png" alt="Kocka" width="100" height="100"&gt;
+
+ &lt;p&gt;&lt;a href="#" onclick="changeImage()"&gt;Kattints a kockára!&lt;/a&gt;&lt;/p&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;</textarea><p><button type="submit" id="bt_submit17" name="bt_submit17" value="Kocka_for.html">Próbáld ki! »</button></p></form>
+<!-- Beillesztett resz kezdete -->
+
+<table>
+<tbody><tr>
+<td><a><img src="./JavaScript bevezetés_files/Kocka5.png" alt="Kocka5.png"></a></td>
+<td><h2 id="theme5">Egy kis kiegészítés</h2></td>
+</tr>
+</tbody></table>
+<h3 id="theme1">Egyéb beviteli mezők, és kezelésük</h3>
+
+<p>A HTML-ben több lehetőség is rendekezésre áll felhasználói bemenetre. A különböző fajta beviteli mezők között szereplnek szöveget, számot kezelőek, jelölőnégyzetek.</p>
+<p>Az alábbi mintaprogram bemutatja egy pár ilyen mezőnek a kezelését javascript segítségével.</p>
+<form target="_blank" action="http://verseny2017.mik.uni-pannon.hu/vigyazz/src/tryit.php" method="POST" id="output18" name="output18"><textarea id="textareaNext18" name="textareaNext18" rows="75" cols="80" required="" readonly="readonly" onmouseover="overBgColor(this)" onmouseout="normalBgColor(this)">&lt;!DOCTYPE html&gt;
+&lt;html lang="hu"&gt;
+&lt;head&gt;
+ &lt;title&gt;Beviteli mezők&lt;/title&gt;	
+ &lt;meta http-equiv="content-type" content="text/html; charset=UTF-8"&gt;
+ &lt;script&gt;
+  function adatelemzes()
+  {
+    var valasz="";
+    valasz+="Üdvözöllek " + document.getElementById("nev").value + "!&lt;br&gt;\n";
+    valasz+=document.getElementById("kor").value + " a legszebb kor.&lt;br&gt;\n";
+    
+    var nyelv_index=document.getElementById("nyelv").selectedIndex;
+    var nyelv_azonosito = document.getElementById("nyelv").value;
+    var nyelv_szoveg = document.getElementById("nyelv").options[nyelv_index].text;
+    if (nyelv_azonosito=="angol" || nyelv_azonosito=="olasz" || nyelv_azonosito=="orosz")
+      valasz+="Szép is az " + nyelv_szoveg + " nyelv.&lt;br&gt;\n";
+    else
+      valasz+="Szép is a " + nyelv_szoveg + " nyelv.&lt;br&gt;\n";
+    document.getElementById("visszajelzes").innerHTML=valasz;
+    
+    var progok=document.getElementsByName("prog")
+    if (progok[0].checked)
+    {
+      document.getElementById("progvalasz").innerHTML="Nagyon helyes!";
+      document.getElementById("progvalasz").setAttribute("color", "#00ff00");
+    }
+    else
+    {
+      document.getElementById("progvalasz").innerHTML="De akkor miért vagy ezen az oldalon??";
+      document.getElementById("progvalasz").setAttribute("color", "#ff0000");
+    }
+  }
+  
+  function proba_valtozott()
+  {
+    var bejelolve=document.getElementById("proba").checked;
+    if (bejelolve)
+      document.getElementById("probaszoveg").setAttribute("color", "#2222cc");
+    else
+      document.getElementById("probaszoveg").setAttribute("color", "#cc2266");
+  }
+ &lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+ &lt;h1&gt;Beviteli mezők használata&lt;/h1&gt;
+ 
+ 
+ Kérlek add meg a neved:
+ &lt;input type="text" id="nev"&gt;&lt;br&gt;
+ 
+ Életkorod:
+ &lt;input type="number" id="kor"&gt;&lt;br&gt;
+ 
+ Válaszd ki a kedvenc idegen nyelved:
+ &lt;select id="nyelv"&gt;
+   &lt;option value="angol"&gt;Angol&lt;/option&gt;
+   &lt;option value="francia"&gt;Francia&lt;/option&gt;
+   &lt;option value="nemet"&gt;Német&lt;/option&gt;
+   &lt;option value="olasz"&gt;Olasz&lt;/option&gt;
+   &lt;option value="orosz"&gt;Orosz&lt;/option&gt;
+   &lt;option value="spanyol"&gt;Spanyol&lt;/option&gt;
+ &lt;/select&gt;&lt;br&gt;
+ 
+ Szereted a programozást?
+ &lt;input type="radio" name="prog" value="igen"&gt; Igen  
+ &lt;input type="radio" name="prog" value="nem"&gt; Nem &nbsp;&nbsp;&nbsp;
+ &lt;font id="progvalasz"&gt;&lt;/font&gt;&lt;br&gt;
+ 
+ Ezt is próbáld ki!
+ &lt;input type="checkbox" id="proba" onchange="proba_valtozott();"&gt; &lt;font id="probaszoveg"&gt;Próba!!!&lt;/font&gt;&lt;br&gt;
+ 
+ &lt;button onclick="adatelemzes();"&gt;Hagy menjen!!&lt;/button&gt;
+ 
+ &lt;br&gt;&lt;br&gt;&lt;br&gt;
+ &lt;p id="visszajelzes"&gt;&lt;/p&gt;
+ &lt;br&gt;&lt;br&gt;&lt;br&gt;
+ 
+ &lt;/body&gt;
+&lt;/html&gt;
+</textarea><p><button type="submit" id="bt_submit18" name="bt_submit18" value="halloween.html">Próbáld ki! »</button></p></form>
+<!-- Beillesztett resz vege -->
+
+<h3>Kedves Bakonyi Bitfaragók!</h3> <p>Elérkeztünk az első kirándulásunk
+ végére. Nagy utat tettünk meg a bitek birodalmában, de reméljük a 
+bemutatott minták felhasználásával már érdekes megoldásokat tudtok adni 
+az első forduló feladványaira. Tökéletes program ugyan nem létezik, de 
+nagyon jó megközelítéssel érhetünk el egy kifogástalannak tartott 
+állapotot.</p>
+
+<div class="feladat"><h3>Beküldhető feladat:</h3><ol start="1">
+<li value="21"> Készítsetek egy honlapot, ami egy jármű műszerfalát utánozza. Az oldalon legyen néhány kijelző:
+ Egy, ami az aktuális sebességet jeleníti meg, egy ami a fordulatszámát, egy ami a sebességváltó fokozatát, és egy ami az üzemanyag szintjét.
+ Ezek lehetnek egyszerűen számok is.
+ <ul>
+    <li>Legyen két gomb, amik segítségével a jármű sebességét lehet csökkenteni vagy növelni (mondjuk 10km/h-val).</li>
+    <li>Legyen két gomb, amivel a sebességváltót lehet állítani egyel magasabb vagy alacsonyabb sebességbe.</li>
+    <li>A jármű fordulatszámát úgy kell megjeleníteni, hogy ugyanakkora járműsebesség mellett a váltó nagyobb fokozata kisebb fordulatszámot eredményezzen.
+     (A járműnek 3-as fokozatban nagyobb fordulatszám kell az 50km/h-hoz, mint 4-es fokozatban.)
+     Ugyanakkor ha a váltót nem állítjuk, akkor a sebesség növekedésével arányosan változzon a fordulatszám.</li>
+    <li>Az üzemanyag szintje az idő telésével fokozatosan csökkenjen. A csökkenés mértéke a fordulatszámtól függjön.</li>
+    <li>Legyen egy gomb, amivel tankolni tudunk. Ilyenkor az üzemanyag tartályt teletöltjük, és a program írja ki, hogy mennyi üzemanyagot tankoltunk.</li>
+ </ul>
+
+ <p style="text-align:right;"><strong>11 0000</strong>|<sub>2</sub>&nbsp;pont</p></li>
+</ol>
+</div>
+
+
+<!-- Beillesztett resz kezdete -->
+
+<table>
+<tbody><tr>
+<td><a><img src="./JavaScript bevezetés_files/Kocka5.png" alt="Kocka5.png"></a></td>
+<td><h2 id="theme5">Segítség a végfeladathoz</h2></td>
+</tr>
+</tbody></table>
+<h3 id="theme1">Ez most talán nem kell.....</h3>
+
+<!-- Beillesztett resz vege -->
+
+
+
+
+<p style="text-align:right;"><a href="javascript:window.history.back()">« Előző</a> | <a href="http://verseny2017.mik.uni-pannon.hu/vigyazz/#">Lap eleje</a></p>
+</article>
+</section>
+
+
+<nav>
+ <a href="javascript:window.history.back()">« Elozo</a> |&nbsp;
+ <a href="http://verseny2017.mik.uni-pannon.hu/vigyazz/#one"><span id="bottommenu01" onmouseover="oops(this.id,document.getElementById(theme1.id).innerHTML)" onmouseout="oops(this.id,&quot;HTML&quot;)">HTML</span></a> |&nbsp; 
+ <a href="http://verseny2017.mik.uni-pannon.hu/vigyazz/#two"><span id="bottommenu02" onmouseover="oops(this.id,document.getElementById(theme2.id).innerHTML)" onmouseout="oops(this.id,&quot;Script&quot;)">Script</span></a> |&nbsp;
+ <a href="http://verseny2017.mik.uni-pannon.hu/vigyazz/#three"><span id="bottommenu03" onmouseover="oops(this.id,document.getElementById(theme3.id).innerHTML)" onmouseout="oops(this.id,&quot;Változók&quot;)">Változók</span></a> |&nbsp;
+ <a href="http://verseny2017.mik.uni-pannon.hu/vigyazz/#four"><span id="bottommenu04" onmouseover="oops(this.id,document.getElementById(theme4.id).innerHTML)" onmouseout="oops(this.id,&quot;Vezérlok&quot;)">Vezérlok</span></a> |&nbsp;
+ <a href="http://verseny2017.mik.uni-pannon.hu/vigyazz/#five"><span id="bottommenu05" onmouseover="oops(this.id,document.getElementById(theme5.id).innerHTML)" onmouseout="oops(this.id,&quot;Függvények&quot;)">Függvények</span></a> |&nbsp;
+ <a href="http://verseny2017.mik.uni-pannon.hu/vigyazz/#six"><span id="bottommenu06" onmouseover="oops(this.id,document.getElementById(theme6.id).innerHTML)" onmouseout="oops(this.id,&quot;Megoldások&quot;)">Megoldások</span></a>
+ </nav>
+
+<footer>
+<p>Copyright © 2015 <a target="_blank" href="http://verseny.mik.uni-pannon.hu/"><strong>B</strong>akonyi <strong>B</strong>itfaragó <strong>B</strong>ajnokság</a> | <a target="_blank" href="http://www.w3schools.com/js/default.asp">JavaScript Tutorial</a> | <a target="_blank" href="http://jsfiddle.net/">jsfiddle.net</a> | Valid <a href="http://validator.w3.org/check?uri=referer">HTML5</a> and <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS3</a> | Visitor: 8 604</p>
+</footer>
+
+
+</body></html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Képnézegető</title>
+    <style>
+        .img{
+            width: 100px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body onload="onload()">
+    <div id="doboz">
+
+    </div>
+    <script>
+        function onload(){
+            doboz = document.getElementById("doboz")
+            for (let i = 1; i < 5; i++){
+                img=document.createElement("img")
+                img.src=`img${i}.jpg`
+                img.classList.add("kicsi")
+                img.addEventListener("click",nagyba(event))
+                doboz.appendChild(img)
+            }
+
+
+        }
+
+        function nagyba(event){
+            console.log(event)
+        }
+    </script>
+</body>
+</html>
