@@ -1,0 +1,50 @@
+<!--
+Munka kezdete: 2025.01.15
+Munka vége: --
+Feladat: 19.
+Készítő: Kovács Máté
+Fényreklám
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <!--  Az ember valódi értéke azon ismerszik meg, ahogy a könyvekkel bánik.  -->
+    <!-- Mindig a legkézenfekvőbb megoldások jutnak eszünkbe utoljára. -->
+
+    <div><p id="p"></p></div>
+
+    <script>
+        let szoveg = "Mindig a legkézenfekvőbb megoldások jutnak eszünkbe utoljára.";
+        let poz = 0;
+        let szoveg2="";
+        console.log(szoveg)
+        function felirat(){
+            for (let i = poz; i < 10+poz; i++){
+                szoveg2+=szoveg[i];
+                poz++;
+                if (poz>szoveg.length){
+                    i=0
+                    poz=0
+                }
+
+            }
+            document.getElementById("p").innerHTML=szoveg2
+
+        }
+
+        setInterval(felirat,1000)
+
+    </script>
+
+</body>
+</html>
