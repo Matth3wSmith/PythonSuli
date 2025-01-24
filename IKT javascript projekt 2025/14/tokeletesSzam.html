@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tökéletes szám</title>
+</head>
+<body>
+    <h1>Tökéletes számok 1000-ig</h1>
+    <p id="tokelets"></p>
+    <script>
+        let p = document.getElementById("tokeletes")
+        let szamok = []
+        for (let i = 1; i < 1000; i++){
+            let osztokOsszeg = 0;
+            for (let k = 1; k < i; k++ ) {
+                if (i%k==0){
+                    osztokOsszeg+=k
+                }
+            }
+            if (osztokOsszeg==i){
+                szamok.push(osztokOsszeg)
+            }
+        }
+        for (let i = 0; i < szamok.length; i++){
+                p.innerHTML+=szamok[i]+" "
+            
+        }
+    </script>
+</body>
+</html>

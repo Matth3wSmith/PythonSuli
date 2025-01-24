@@ -1,0 +1,48 @@
+<!--
+Munka kezdete: 2025.01.08
+Munka vége: 2025.01.15
+Feladat:  9.
+FERDE HAJÍTÁS 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input{
+            display: block;
+        }
+        button{
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <label for="szog">Labda eldobásának szöge (fok):</label>
+    <input type="text" name="szog" id="szog">
+    <label for="sebesseg">Labda eldobásának sebessége (m/s)</label>
+    <input type="text" name="sebesseg" id="sebesseg">
+    <button onclick="adatok()">Kiértékelés</button>
+    <div id="vegeredmeny">
+        <p>A labda távolsága: <span id="tav"></span></p>
+        <p>A labda magassága: <span id="magassag"></span></p>
+    </div>
+</body>
+<script>
+    function adatok(){
+
+        const alpha = parseFloat(document.getElementsByName("szog")[0].value) * (Math.PI/180);
+        const v = parseFloat(document.getElementsByName("sebesseg")[0].value);
+        const g = 9.81
+        const tavolsag=(Math.pow(v,2)*Math.sin(2*alpha))/g
+        const magassag= (Math.pow(v,2)* Math.pow(Math.sin(alpha),2))/(2*g)
+        console.log(tavolsag,magassag)
+        document.getElementById("tav").innerHTML=tavolsag+" m"
+        document.getElementById("magassag").innerHTML=magassag+" m"
+
+
+    }
+</script>
+</html>
