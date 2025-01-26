@@ -1,0 +1,53 @@
+<!--
+Munka kezdete: 2025.01.25.
+Munka vége: 2025.01.25.
+Feladat: 17.
+Készítő: Kovács Máté
+Tömb kiírás
+-->
+
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tömb kiírás</title>
+</head>
+<body>
+    <h1>Adj meg egy 10 számot!</h1>
+    <input type="number" name="" id="bekeres">
+    <button onclick="bekeres(event)">Rögzítés</button>
+    <h1>A megadott számok csökkenő sorrendben:</h1>
+    <p id="szamok"></p>
+    <script>
+        let szamok = [];
+        function bekeres(e){
+            
+            szamok.push(Number(document.getElementById("bekeres").value));
+            //console.log(szamok)
+            if (szamok.length==10){
+                e.target.disabled;
+                let erdemenyP = document.getElementById("szamok");
+                for (let i = 0; i < szamok.length; i++){
+                    maxI = maxKeres(szamok);
+                    erdemenyP.innerHTML+=szamok[maxI]+" ";
+                    szamok[maxI]=-1;
+                    //console.log(szamok)
+                }
+            }
+        }
+
+        function maxKeres(tomb){
+            let max = -1;
+            let maxI = -1;
+            for (let i = 0; i < tomb.length; i++){
+                if (tomb[i]>max){
+                    max = tomb[i];
+                    maxI = i;
+                }
+            }
+            return maxI;
+        }
+    </script>
+</body>
+</html>

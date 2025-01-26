@@ -1,0 +1,74 @@
+<!--
+Munka kezdete: 2025.01.25
+Munka vége: 2025.01.25
+Feladat: 16.
+Készítő: Kovács Máté
+Anagramma
+-->
+
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anagramma</title>
+</head>
+<body>
+    <h1>Anagramma vizsgáló</h1>
+    <label for="szo1">Első szó:</label>
+    <input type="text" value="maradhat" name="szo1" id="szo1">
+    <label for="szo2" >Második szó:</label>
+    <input type="text" value="hadartam" name="szo2" id="szo2">
+    <button onclick="bekeres()">Kiértkelés</button>
+    <p>A gép szerint a két szó: <span id="eredmeny"></span></p>
+
+    <script>
+        function bekeres(){
+            let szo1 = document.getElementById("szo1").value.split("");
+            let szo2 = document.getElementById("szo2").value.split("");
+
+            let eredmenyP = document.getElementById("eredmeny");
+
+            
+            //Legjobb megoldás
+            szo1 = szo1.sort().join();
+            szo2 = szo2.sort().join();
+            if (szo1==szo2){
+                eredmenyP.innerHTML="A két szó egymás anagrammái!";
+            }
+            else{
+                eredmenyP.innerHTML="A két szó nem egymás anagrammái!";
+            }
+
+
+            //let erdemeny = "A két szó egymás anagrammái!"
+
+            /*
+            Egyik megoldás
+            for (let i = 0; i < szo1.length; i++){
+                if (szo1[i]!=szo2[i]){
+                    erdemeny = "A két szó nem egymás anagrammái!";
+                }
+            }
+
+            eredmenyP.innerHTML=erdemeny;
+            */
+
+            /*
+            Másik megoldás
+            for (let i = 0; i < szo1.length; i++){
+                if(szo1.filter(x => x==szo1[i]).length != szo2.filter(x => x == szo1[i]).length){
+                    erdemeny = "A két szó nem egymás anagrammái!";
+                }
+            
+            }
+            eredmenyP.innerHTML=erdemeny;
+            */
+        
+        }
+
+
+
+    </script>
+</body>
+</html>

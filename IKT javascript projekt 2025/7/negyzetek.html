@@ -1,0 +1,50 @@
+<!--
+Munka kezdete: 2025.01.25.
+Munka vége: 2025.01.25.
+Feladat: 7.
+Készítő: Kovács Máté
+Papír lapok
+-->
+
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papír lapok</title>
+    <style>
+        label{
+            display: block;
+            margin-block: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Adj meg kettő darab papírlap méretér! Legyen kisebb mint 40cm x 50cm-es papírlap.</h1>
+    <label>Első lap szélessége és magassága:</label>
+    <input type="number" name="kisebbX" id="kisebbX">
+    <input type="number" name="kisebbY" id="kisebbY">
+    <button onclick="bekeres()">Beküldés</button>
+    <h2>Ennyi lapot lehet kivágni egy 40cm x 50cm-es lapból: <span id="elsoErdemeny"></span></h2>
+    <h2>Ennyi lapot lehet kivágni egy 40cm x 50cm-es lapból, ha a kisebb lap méretit felcseréljük: <span id="masodikErdemeny"></span></h2>
+
+
+    <script>
+        function bekeres(){
+            nagyLap = [40,50]
+            kisebbLap=[Number(document.getElementById("kisebbX").value),Number(document.getElementById("kisebbY").value)]
+
+            document.getElementById("elsoErdemeny").innerHTML=Math.floor(nagyLap[0]/kisebbLap[0])*Math.floor(nagyLap[1]/kisebbLap[1])
+            document.getElementById("masodikErdemeny").innerHTML=Math.floor(nagyLap[0]/kisebbLap[1])*Math.floor(nagyLap[1]/kisebbLap[0])
+
+
+
+
+        }
+
+
+    </script>
+
+
+</body>
+</html>

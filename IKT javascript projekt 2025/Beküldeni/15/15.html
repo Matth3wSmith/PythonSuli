@@ -1,0 +1,51 @@
+<!--FBALAZS-->
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tükörszó</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #eredmeny {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Tükörszó</h1>
+    <form id="tukorszoForm">
+        <label for="bekeres">Adj meg egy szót:</label>
+        <input type="text" id="bekeres" required>
+        <button type="submit">Start</button>
+    </form>
+
+    <div id="eredmeny"></div>
+
+    <script>
+        document.getElementById('tukorszoForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const bekeres = document.getElementById('bekeres').value;
+            const eredmeny = document.getElementById('eredmeny');
+
+            if (tukorszo(bekeres)) {
+                eredmeny.innerHTML = `${bekeres} tükörszó.`;
+            } else {
+                eredmeny.innerHTML = `${bekeres} nem tükörszó.`;
+            }
+        });
+
+        function tukorszo(word) {
+            const visszafele = word.split('').reverse().join('');
+            return word === visszafele;
+        }
+    </script>
+
+</body>
+</html>

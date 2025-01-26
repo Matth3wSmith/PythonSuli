@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Számláló</title>
+</head>
+<style>
+    #szamlalo{
+        margin: auto;
+        width: fit-content;
+        height: fit-content;
+        font-size: 100px;
+        margin: auto;
+        
+    }
+</style>
+<body>
+    <h3>
+        készítette: Csicskó Réka
+    </h3>
+   
+        <div id="szamlalo">
+            0
+        </div>
+    
+    <script>
+        let szamlalo = document.getElementById("szamlalo")
+
+        function indit(){
+            let szam = szamlalo.innerHTML
+            szam = parseInt(szam)+1
+            let elso = Math. floor(Math. random() * 256)
+            let masodik = Math. floor(Math. random() * 256)
+            let harmadik = Math. floor(Math. random() * 256)
+            szamlalo.innerHTML=szam
+            if(szam%10==0){
+                szamlalo.style.color="rgb(" + elso + "," + masodik + "," + harmadik + ")"
+            }
+        }
+
+        setInterval(indit,1000)
+    </script>
+</body>
+</html>

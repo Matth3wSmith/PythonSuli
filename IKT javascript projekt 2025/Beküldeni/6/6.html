@@ -1,0 +1,27 @@
+<!--FBALAZS-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6</title>
+</head>
+
+<body>
+    <form style="text-align: center;">
+        <input id="bekert" type="number">
+        <button id="start" type="button" onclick="fussLe()">Start</button>
+        <p id="eredmeny">szovegide</p>
+    </form>
+    <script>
+        function fussLe() {
+            let bekert = parseInt(document.getElementById("bekert").value)
+
+            let gyok = Math.sqrt(bekert);
+            document.getElementById("eredmeny").innerHTML = gyok;
+        }
+    </script>
+</body>
+
+</html>

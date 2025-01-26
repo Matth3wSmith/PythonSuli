@@ -1,3 +1,11 @@
+<!--
+Munka kezdete: 2025.01.23.
+Munka vége: 2025.01.25.
+Feladat: 14.
+Készítő: Kovács Máté
+Tökéletes szám
+-->
+
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -6,12 +14,13 @@
     <title>Tökéletes szám</title>
 </head>
 <body>
-    <h1>Tökéletes számok 1000-ig</h1>
-    <p id="tokelets"></p>
+    <h1>Tökéletes számok 10000-ig</h1>
+    <h1 id="tokeletes"></h1>
+
     <script>
-        let p = document.getElementById("tokeletes")
+        let h1 = document.getElementById("tokeletes")
         let szamok = []
-        for (let i = 1; i < 1000; i++){
+        for (let i = 1; i <= 10000; i++){
             let osztokOsszeg = 0;
             for (let k = 1; k < i; k++ ) {
                 if (i%k==0){
@@ -22,10 +31,9 @@
                 szamok.push(osztokOsszeg)
             }
         }
-        for (let i = 0; i < szamok.length; i++){
-                p.innerHTML+=szamok[i]+" "
+        h1.innerHTML=szamok.join(" ")
             
-        }
+        
     </script>
 </body>
 </html>

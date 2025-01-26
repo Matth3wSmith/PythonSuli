@@ -1,0 +1,77 @@
+<!--FBALAZS-->
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2. feladat</title>
+    <style>
+        .jelenes{
+            display: none;
+        }
+
+        div{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <button type="button" id="1">Első oldal</button>
+        <button type="button" id="2">Második oldal</button>
+        <button type="button" id="1">Harmadik oldal</button>
+
+        <p id="szEgy" class="jelenes"><a href="https://www.w3schools.com/">W3Schools</a></p>
+        <p id="szKetto" class="jelenes"><a href="https://www.geeksforgeeks.org/">Geeks for Geeks</a></p>
+        <p id="szHarom" class="jelenes"><a href="https://stackoverflow.com/">StackOverflow</a></p>
+        
+
+
+    </div>
+</body>
+<script>
+    const elso = document.getElementById("1");
+    const masodik = document.getElementById("2");
+    const harmadik = document.getElementById("3");
+
+    const szEgy = document.getElementById("szEgy");
+    const szKetto = document.getElementById("szKetto");
+    const szHarom = document.getElementById("szHarom");
+
+    
+    elso.addEventListener("click", event =>{
+        if(szEgy.classList.contains("jelenes")){
+            szEgy.classList.remove("jelenes");
+        }
+        else{
+            szEgy.classList.add("jelenes");
+        }
+        
+    })
+
+    masodik.addEventListener("click", event =>{
+        if(szKetto.classList.contains("jelenes")){
+            szKetto.classList.remove("jelenes");
+        }
+        else{
+            szKetto.classList.add("jelenes");
+        }
+        
+    })
+
+    harmadik.addEventListener("click", event =>{
+        if(szHarom.classList.contains("jelenes")){
+            szHarom.classList.remove("jelenes");
+        }
+        else{
+            szHarom.classList.add("jelenes");
+        }
+        
+    })
+
+
+
+</script>
+
+</html>

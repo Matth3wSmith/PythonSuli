@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+
+  <body>
+    <h3>
+      készítette: Csicskó Réka
+  </h3>
+
+    <div>
+      <input type="text" id="bekeres" />
+      <button onclick="osztoi()">leadas</button>
+    </div>
+
+    <div id="eredmeny"></div>
+
+    <script>
+      function osztoi() {
+        let szam = document.getElementById("bekeres").value;
+        let szamok = [];
+        let eredmeny = document.getElementById("eredmeny");
+        for (let i = 0; i <= szam; i++) {
+          if (szam % i == 0) {
+            szamok.push(i);
+          }
+        }
+
+        eredmeny.innerHTML = "osztói: " + szamok;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Háromszög</title>
+</head>
+<body>
+    <h3>
+        készítette: Csicskó Réka
+    </h3>
+    <input id="a" type="number" placeholder="1. oldal">
+    <input id="b" type="number" placeholder="2. oldal">
+    <input id="c" type="number" placeholder="3. oldal">
+    <button onclick="szamol()">Számolj</button>
+    <p id="eredmeny"></p>
+
+    <script>
+        function szamol() {
+            let a = +document.getElementById("a").value;
+            let b = +document.getElementById("b").value;
+            let c = +document.getElementById("c").value;
+            let f = (a + b + c) / 2;
+            document.getElementById("eredmeny").innerText = 
+                "1: "+(f - a)+", 2: "+(f - b)+", 3: "+(f - c);
+        }
+    </script>
+</body>
+</html>

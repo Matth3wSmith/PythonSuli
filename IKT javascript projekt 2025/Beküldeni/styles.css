@@ -1,0 +1,114 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url('./img/Poppins-Black.ttf') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background-image: url(./img/hatter.gif);
+    background-size: cover;
+}
+
+h1 {
+    font-family: 'Poppins', serif;
+    color: white;
+}
+
+h2 {
+    margin-top: 20px;
+    font-family: 'Poppins', serif;
+    color: white;
+    -webkit-text-stroke-width: 1.3px;
+    -webkit-text-stroke-color: black;
+}
+
+div {
+    text-align: center;
+}
+
+#fokep {
+    height: 100%;
+    margin-bottom: 5rem;
+}
+
+/*Gombok*/
+
+.shadow-button-set {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2.5vmin;
+    align-items: center;
+
+    &>li {
+        display: inline-flex;
+        background: rgba(106, 3, 119, 0.384);
+
+        &:is(:hover, :focus-within)>button:not(:active) {
+            --distance: -10px;
+        }
+    }
+
+    & button {
+        appearance: none;
+        outline: none;
+        font-size: 5vmin;
+        border: 3px solid black;
+        background: white;
+        padding: 1px;
+        --distance: 0;
+        transform: translateX(var(--distance)) translateY(var(--distance));
+
+        @media (prefers-reduced-motion: no-preference) {
+            will-change: transform;
+            transition: transform .2s ease;
+        }
+		width: 450px;
+    }
+}
+
+.fomenu {
+    min-block-size: 100%;
+    font-family: system-ui, sans-serif;
+    padding: 10px;
+    display: grid;
+    place-content: center;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+    font-family: "Poppins";
+    font-weight: 900;
+    :hover{
+        text-decoration: none;
+        color: inherit;
+    }
+
+}
+
+.hidden {
+    display: none;
+}
+
+
+.float-left{
+  float: left;
+}
+
+.progress{
+    margin-left: 20%;
+    margin-right: 20%;
+    height: 50px;
+}
+
+h3{
+    font-size: 40px;
+    text-align: center;
+    font-family: 'Poppins', serif;
+    color: white;
+    -webkit-text-stroke-width: 1.6px;
+    -webkit-text-stroke-color: black;
+}

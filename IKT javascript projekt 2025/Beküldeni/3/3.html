@@ -1,0 +1,70 @@
+<!--FBALAZS-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3. feladat</title>
+</head>
+
+<body>
+    <div>
+        <p id="datum">ide jon a datum</p>
+        <p id="orapercmasodperc">ide jon az ido</p>
+    </div>
+</body>
+<script>
+    let currentTimeDate = new Date();
+
+    /*Datum*/
+
+    let Ev = currentTimeDate.getFullYear();
+
+    let Honap = currentTimeDate.getMonth() + 1;
+
+    if (Honap < 10) {
+        Honap = "0" + Honap
+
+    }
+
+    let Nap = currentTimeDate.getDate();
+
+    if (Nap < 10) {
+        Nap = "0" + Nap
+
+    }
+    
+    let fullDate = `${Ev} ${Honap} ${Nap}  `;
+
+    document.getElementById("datum").innerHTML = fullDate;
+
+    /*Idő*/
+
+    let Ora = currentTimeDate.getHours();
+
+    if (Ora < 10) {
+        Ora = "0" + Ora
+
+    }
+
+    let Perc = currentTimeDate.getMinutes();
+
+    if (Perc < 10) {
+        Perc = "0" + Perc
+
+    }
+
+    let Masodperc = currentTimeDate.getSeconds();
+
+    if (Masodperc < 10) {
+        Masodperc = "0" + Masodperc
+
+    }
+
+    let Ido = `${Ora} ${Perc} ${Masodperc}  `;
+
+    document.getElementById("orapercmasodperc").innerHTML = Ido;
+</script>
+
+</html>

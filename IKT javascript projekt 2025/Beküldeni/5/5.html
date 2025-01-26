@@ -1,0 +1,49 @@
+<!--FBALAZS-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5</title>
+</head>
+<!--Készítsetek egy programot, amely bekér 5 egész számot. Ezeket tároljátok el egy tömbben. A program ezután jelenítse meg az értékek összegét és szorzatát.-->
+<body>
+    <form style="text-align: center;">
+        <input id="elso" type="number"><br>
+        <input id="masodik" type="number"><br>
+        <input id="harmadik" type="number"><br>
+        <input id="negyedik" type="number"><br>
+        <input id="otodik" type="number"><br>
+
+        <button id="start" type="button" onclick="fussLe()">Start</button>
+        <p id="osszead">szovegide</p>
+        <p id="szoroz">szovegide</p>
+    </form>
+    <script>
+        function fussLe() {
+            let elso = parseInt(document.getElementById("elso").value);
+            let masodik = parseInt(document.getElementById("masodik").value);
+            let harmadik = parseInt(document.getElementById("harmadik").value);
+            let negyedik = parseInt(document.getElementById("negyedik").value);
+            let otodik = parseInt(document.getElementById("otodik").value);
+
+            const tomb = [elso, masodik, harmadik, negyedik, otodik];
+
+            let osszeadva =  0
+            
+            let szorozva = 1
+
+            for(let i = 0; i < tomb.length; i++){
+                szorozva *= tomb[i]
+                osszeadva += tomb[i]
+            }
+
+
+            document.getElementById("osszead").innerHTML = osszeadva;
+            document.getElementById("szoroz").innerHTML = szorozva;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!--
+Munka kezdete: 2025.01.15.
+Munka vége: 2025.01.18.
+Feladat:  18.
+Képnézegető
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Képnézegető</title>
+    <style>
+        img{
+            width: 300px;
+            height: 300px;
+        }
+        .hidden{
+            visibility: hidden;
+        }
+        .nagykep{
+            width: 1000px;
+            height: 1000px;
+        }
+    </style>
+</head>
+<body onload="onload()">
+    <div id="doboz"></div>
+    <div><img src="" alt="" class="hidden" id="nagyKep"></div>
+    <script>
+        function onload(){
+            doboz = document.getElementById("doboz");
+            for (let i = 1; i < 5; i++){
+                let img=document.createElement("img");
+                img.src=`img${i}.jpg`;
+                img.classList.add("kicsi");
+                img.addEventListener("click",nagyba);
+                doboz.appendChild(img);
+            }
+        }
+
+        function nagyba(){
+            
+            console.log(event.srcElement.src);
+            let nagykep = document.getElementById("nagyKep");
+            nagykep.classList.add("nagykep")
+            nagykep.src=event.srcElement.src
+            nagykep.classList.remove("hidden")
+        }
+    </script>
+</body>
+</html>

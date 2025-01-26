@@ -1,0 +1,37 @@
+<!--
+Munka kezdete: 2025.01.17
+Munka vége: 2025.01.26.
+Feladat: 21.
+Készítő: Kovács Máté
+Műszerfal
+-->
+
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Műszerfal</title>
+    <script src="muszarfal.js"></script>
+    <style>
+        canvas{
+            border: 1px black solid;
+        }
+        button{
+            display: inline;
+        }
+    </style>
+</head>
+<body onload="onload()">
+    <canvas id="muszer"></canvas>
+    <div id="gombok">
+        <button id="sebessegnoveles" onclick="sebessegNov()">Sebesség növelése</button>
+        <button id="sebessegcsokkentes" onclick="sebessegCsok()">Sebesség csökkentése</button>
+        <button id="valtoNovel" onclick="valtoNov()">Sebességváltó magasabb sebességbe</button>
+        <button id="valtoCsok" onclick="valtoCsok()">Sebességváltó alacsonyabb sebességbe</button>
+        <button id="tankolas" onclick="tankolas()">Tankolás</button>
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Szökőév</title>
+    <link rel="stylesheet" href="css.css">
+</head>
+<body>
+    <h3>
+        készítette: Csicskó Réka
+    </h3>
+    <input id="ev" type="number" placeholder="Írd be az évszámot">
+    <button onclick="ellenorzes()">Ellenőrzés</button>
+    <p id="eredmeny"></p>
+
+    <script>
+        function ellenorzes() {
+            let ev = +document.getElementById("ev").value;
+            let szokoev = false 
+            if (ev % 4 == 0 && ev % 100 != 0 || ev % 400 == 0){
+                szokoev=true
+            }
+            document.getElementById("eredmeny").innerText = szokoev ? "Szökőév" : "Nem szökőév";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IKT13</title>
+</head>
+<body>
+    <h3>
+        készítette: Csicskó Réka
+    </h3>
+    <p id="p"></p>
+    <script>
+        let randomszamok = [];
+        let p = document.getElementById("p")
+        for (let i = 0; i < 20; i++) 
+            {
+                randomszamok.push(Math.floor(Math.random() * 100) + 1); 
+            }
+
+        console.log(randomszamok);
+
+        let sum = 0;
+
+        for (let i = 0; i < randomszamok.length; i++) 
+        {
+            sum += randomszamok[i];
+        }
+        console.log("a véletlen számok összege: " +sum)
+    </script>
+</body>
+</html>
