@@ -29,12 +29,33 @@
     SELECT DISTINCT nev FROM csapat JOIN megoldas ON csapat.id=csapatid JOIN feladat ON feladatid=feladat.id WHERE feladat.pontszam=megoldas.pontszam;
 
 --- 8. feladat ---- 8#win ----
-    SELECT feladatsor.id,COUNT(feladatsorid) FROM feladat JOIN feladatsor ON feladatsor.id=feladatsorid GROUP BY feladatsor.id;
+    SELECT nevado, COUNT(*)
+        FROM feladatsor
+            JOIN feladat ON feladatsor.id=feladatsorid
+        WHERE feladat.id 
+                NOT IN(
+                    SELECT feladatid
+                        FROM csapat
+                            JOIN megoldas ON csapat.id=csapatid
+                            right JOIN feladat ON feladat.id=feladatid
+                        WHERE csapat.nev="#win"
+                        )
+        GROUP BY nevado;
+--- 9. feladat ---- 9ugyanabban ----
+    SELECT nevado FROM feladatsor WHERE MONTH(kituzes)=MONTH(hatarido);
 
-    SELECT feladat.id, megoldas.id FROM feladat LEFT JOIN megoldas ON feladat.id=feladatid JOIN csapat ON csapat.id=csapatid WHERE megoldas.id IS NULL;
+--- 10. feladat ---- 10legrovidebb ----
+    SELECT nevado FROM feladatsor WHERE DATEDIFF(hatarido,kituzes)=(SELECT MIN(DATEDIFF(hatarido,kituzes)) FROM feladatsor);
 
-    SELECT feladat.id, megoldas.id FROM csapat JOIN megoldas ON csapat.id=csapatid RIGHT JOIN feladat ON feladat.id=feladatid WHERE megoldas.id IS NULL;
+--- 11. feladat ---- 11rogton ----
+    SELECT nevado,kituzes 
+        FROM feladatsor AS folekerdezes 
+        WHERE DATEDIFF(kituzes, 
+            (SELECT hatarido 
+                FROM feladatsor 
+            WHERE id=folekerdezes.id-1)) =1;
 
-
-
-    SELECT feladat.id, megoldas.id FROM feladat, csapat LEFT JOIN megoldas ON csapatid=csapat.id;
+    SELECT nevado,hatarido,kituzes 
+        FROM feladatsor 
+        WHERE kituzes IN
+            (SELECT ADDDATE(hatarido,INTERVAL 1 DAY) FROM feladatsor);
