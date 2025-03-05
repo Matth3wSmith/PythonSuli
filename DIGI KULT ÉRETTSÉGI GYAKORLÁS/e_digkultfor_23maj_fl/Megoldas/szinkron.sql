@@ -20,4 +20,7 @@
             AND hang != "Pap Kati" 
         ORDER BY 1, 2;
 
+--- 10. feladat --- 10harom ---
+    
+
 
