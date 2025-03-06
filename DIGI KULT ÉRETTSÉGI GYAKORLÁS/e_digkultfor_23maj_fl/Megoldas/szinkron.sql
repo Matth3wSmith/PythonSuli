@@ -21,6 +21,18 @@
         ORDER BY 1, 2;
 
 --- 10. feladat --- 10harom ---
-    
+    SELECT szinesz, hang, COUNT(*) FROM szinkron GROUP BY szinesz HAVING COUNT(*)>=3 ORDER BY 3 DESC;
+
+--- 11. feladat --- 11egyev ---
+    SELECT ev, hang 
+        FROM film as fo, join szinkron on film.filmaz=szinkron.filmaz
+        WHERE (ev,hang)
+            IN
+            (SELECT ev, hang 
+                FROM szinkron 
+                    JOIN film 
+                        ON film.filmaz=szinkron.filmaz 
+                WHERE studio!="Mafilm Audio Kft." and ev=fo.ev);
+
 
 
