@@ -1,11 +1,17 @@
 --- 2. feladat --- 2csapatok ----
 
-    SELECT nev FROM csapat 
-        WHERE nev LIKE "#%";
+    SELECT nev 
+    FROM csapat 
+    WHERE nev LIKE "#%";
 --- 3. feladat ---- 3csakegy ----
 
-    SELECT nevado FROM feladatsor 
-        WHERE CHAR_LENGTH(nevado)==CHAR_LENGTH(REPLACE(nevado," ",""))+1;
+    SELECT nevado 
+    FROM feladatsor 
+    WHERE CHAR_LENGTH(nevado)=CHAR_LENGTH(REPLACE(nevado," ",""))+1;
+    --- megoldókulcs
+    SELECT nevado FROM feladatsor WHERE nevado NOT LIKE "% % %" AND nevado LIKE "% %";
+    --- vagy
+    SELECT nevado FROM feladatsor WHERE LOCATE(" ", SUBSTRING(nevado, LOCATE(" ", nevado)+1))=0 AND LOCATE(" ", nevado)<>0;
 --- 4. feladat ---- 4szilveszter ----
 
     SELECT nevado
@@ -43,6 +49,9 @@
         GROUP BY nevado;
 --- 9. feladat ---- 9ugyanabban ----
     SELECT nevado FROM feladatsor WHERE MONTH(kituzes)=MONTH(hatarido);
+    
+    
+    SELECT nevado  FROM feladatsor WHERE MONTH(kituzes)=MONTH(hatarido)       AND ag="irodalom"; 
 
 --- 10. feladat ---- 10legrovidebb ----
     SELECT nevado FROM feladatsor WHERE DATEDIFF(hatarido,kituzes)=(SELECT MIN(DATEDIFF(hatarido,kituzes)) FROM feladatsor);
@@ -59,3 +68,8 @@
         FROM feladatsor 
         WHERE kituzes IN
             (SELECT ADDDATE(hatarido,INTERVAL 1 DAY) FROM feladatsor);
+
+    --- megoldókulcs ---
+    SELECT kovetkezo.nevado, kovetkezo.kituzes FROM feladatsor AS kovetkezo, feladatsor AS elozo WHERE DATEDIFF(kovetkezo.kituzes, elozo.hatarido)=1; 
+
+    SELECT nevado, elozo.hatarido FROM feladatsor, (SELECT hatarido FROM feladatsor) as elozo WHERE DATEDIFF(feladatsor.kituzes, elozo.hatarido)=1; 
