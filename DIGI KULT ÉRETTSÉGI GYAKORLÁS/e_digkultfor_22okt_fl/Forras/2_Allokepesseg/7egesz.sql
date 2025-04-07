@@ -1,0 +1,1 @@
+SELECT megye.nev, aerob.letszam FROM aerob JOIN megye ON mkod = megye.kod JOIN allapot ON allkod=allapot.kod WHERE allapot.nev = "egészséges" AND NOT nem ORDER BY 2 DESC; 

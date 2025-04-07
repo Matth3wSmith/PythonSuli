@@ -1,0 +1,1 @@
+SELECT aerob.letszam FROM aerob JOIN megye ON megye.kod=mkod JOIN allapot ON allapot.kod=allkod WHERE megye.nev="Zala" AND nem AND allapot.nev="egészséges";

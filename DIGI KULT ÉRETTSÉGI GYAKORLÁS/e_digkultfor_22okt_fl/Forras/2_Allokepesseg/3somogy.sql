@@ -1,0 +1,1 @@
+SELECT SUM(aerob.letszam) FROM aerob JOIN megye ON mkod=megye.kod WHERE nev = "Somogy";

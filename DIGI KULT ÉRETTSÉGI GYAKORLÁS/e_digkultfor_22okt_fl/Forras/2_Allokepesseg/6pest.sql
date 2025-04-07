@@ -1,0 +1,1 @@
+SELECT (SELECT SUM(aerob.letszam) FROM aerob JOIN megye ON megye.kod = mkod WHERE megye.nev="Pest") / letszam FROM megye WHERE nev = "Pest";

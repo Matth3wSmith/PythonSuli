@@ -1,0 +1,1 @@
+SELECT megye.nev AS "Megyenév", SUM(aerob.letszam)/megye.letszam AS "Arány" FROM megye JOIN aerob ON mkod=megye.kod JOIN allapot ON allkod = allapot.kod WHERE allapot.nev <> "egészséges" GROUP BY megye.nev HAVING SUM((aerob.letszam)/megye.letszam)> 0.25;
