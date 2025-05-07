@@ -1,0 +1,1 @@
+SELECT kozterulet, hazszam, datum FROM hirdetes JOIN ingatlan ON ingatlan.id=ingatlanid WHERE ingatlanid NOT IN(SELECT ingatlanid FROM hirdetes WHERE allapot = "módosítva" OR allapot = "eladva") ORDER BY 3 LIMIT 1;

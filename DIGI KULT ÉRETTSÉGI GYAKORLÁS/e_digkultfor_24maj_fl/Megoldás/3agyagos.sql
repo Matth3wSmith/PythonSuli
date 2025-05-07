@@ -1,0 +1,1 @@
+SELECT hazszam, ar FROM ingatlan JOIN hirdetes ON ingatlan.id=ingatlanid WHERE kozterulet = "Agyagos utca";

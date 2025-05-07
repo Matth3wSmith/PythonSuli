@@ -51,7 +51,6 @@ namespace utemez
 
             //6. feladat
             Console.WriteLine("6. feladat");
-            Console.WriteLine(sorszam(6,17));
             Console.Write("hó: ");
             int KertHo = int.Parse(Console.ReadLine());
             Console.Write("nap: ");
@@ -67,12 +66,16 @@ namespace utemez
             string tanulo = Console.ReadLine();
             List<Tabor> erdeklodik = taborok.Where(x => x.nevek.Contains(tanulo)).ToList();
             StreamWriter ir = new StreamWriter("egytanulo.txt");
+            
+            erdeklodik.Sort((left,right)=>sorszam(left.kezdHo,left.kezdNap).CompareTo(sorszam(right.kezdHo,right.kezdNap)));
+
             foreach (Tabor tabor in erdeklodik)
             {
-                ir.WriteLine(tabor.datum()+" "+tabor.tema+"\n");
+                ir.WriteLine(tabor.datum()+" "+tabor.tema);
             }
             ir.Close();
-            for (int i = 1; i < erdeklodik.Count - 1; i++)
+
+            for (int i = 1; i < erdeklodik.Count; i++)
             {
                 int aktKezd = sorszam(erdeklodik[i].kezdHo, erdeklodik[i].kezdNap);
                 int elozoVeg = sorszam(erdeklodik[i-1].vegHo, erdeklodik[i-1].vegNap);

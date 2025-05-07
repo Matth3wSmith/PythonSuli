@@ -1,0 +1,1 @@
+SELECT SUM(ar)*0.015 FROM hirdetes WHERE YEAR(datum)=2021;

@@ -1,0 +1,1 @@
+SELECT MAX(ar)/MIN(ar) AS arany FROM hirdetes WHERE allapot = "meghirdetve";

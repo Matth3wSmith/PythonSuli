@@ -1,0 +1,1 @@
+SELECT DISTINCT kozterulet FROM ingatlan ORDER BY 1;

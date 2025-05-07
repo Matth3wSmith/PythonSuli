@@ -1,0 +1,1 @@
+SELECT DISTINCT nev FROM diak WHERE evfolyam = "10" AND betujel = "C" ORDER BY 1;
