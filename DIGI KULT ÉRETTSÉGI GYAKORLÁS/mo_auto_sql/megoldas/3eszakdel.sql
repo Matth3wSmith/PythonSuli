@@ -1,0 +1,3 @@
+SELECT DISTINCT ut 
+FROM europa 
+WHERE LENGTH(eurout)=3 AND SUBSTRING(eurout,3,1) = "5";

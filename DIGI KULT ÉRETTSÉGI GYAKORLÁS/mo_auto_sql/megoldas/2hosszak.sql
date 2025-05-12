@@ -1,0 +1,1 @@
+SELECT ut, kesz+epul+terv AS "teljes hosssz" FROM palya ORDER BY 2 DESC;
