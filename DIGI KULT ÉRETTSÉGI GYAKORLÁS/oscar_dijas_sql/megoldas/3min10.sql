@@ -1,0 +1,1 @@
+SELECT ev FROM film GROUP BY ev HAVING COUNT(id) >= 10;

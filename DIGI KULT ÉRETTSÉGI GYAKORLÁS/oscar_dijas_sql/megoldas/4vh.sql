@@ -1,0 +1,3 @@
+SELECT cim, ev, bemutato 
+FROM film 
+WHERE (ev BETWEEN 1939 AND 1945) AND (YEAR(bemutato) BETWEEN 1939 AND 1945);

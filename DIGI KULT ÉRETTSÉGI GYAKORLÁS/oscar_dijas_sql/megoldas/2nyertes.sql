@@ -1,0 +1,1 @@
+SELECT ev, cim FROM film WHERE nyert ORDER BY 1;

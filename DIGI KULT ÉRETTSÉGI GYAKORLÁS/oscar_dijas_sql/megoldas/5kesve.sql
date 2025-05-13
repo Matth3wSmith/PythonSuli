@@ -1,0 +1,1 @@
+SELECT cim FROM film WHERE nyert AND ev+10 <= YEAR(bemutato);
