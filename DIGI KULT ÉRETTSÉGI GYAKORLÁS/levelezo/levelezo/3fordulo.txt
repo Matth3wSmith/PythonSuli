@@ -1,0 +1,18 @@
+max. pontszám	8	8	14	10
+Név	1. feladat	2. feladat	3. feladat	4. feladat	összesen
+Arany Áron	5	7	12	7
+Asztalos Amália	8	8	12	1
+Balog Barna				
+Esztergom Andrea	7	8	13	10
+Esztergom Eszter	8	8	13	10
+Farkas Ferenc	8	8	12	4
+Havasi Hedvig	7	4	8	9
+Kala Pál	8	7	14	9
+Major Anna	7	8	12,5	10
+Mezei Virág	5	5	10	5
+Mustár Márta	6	7	10	4
+Pécsi Péter				
+Reszet Elek	8	7	14	9
+Ultra Viola	8	8	13	10
+Vincs Eszter				
+Zöld Piroska	8	5	13	5

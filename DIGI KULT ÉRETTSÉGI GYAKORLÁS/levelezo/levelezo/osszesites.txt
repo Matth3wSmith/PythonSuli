@@ -1,0 +1,31 @@
+max. pontszám
+Név	1. forduló	2. forduló	3. forduló	összesítés
+Arany Áron
+Asztalos Amália
+Balog Barna
+Esztergom Andrea
+Esztergom Eszter
+Farkas Ferenc
+Havasi Hedvig
+Kala Pál
+Major Anna
+Mezei Virág
+Mustár Márta
+Pécsi Péter
+Reszet Elek
+Ultra Viola
+Wincs Eszter
+Zöld Piroska
+átlag
+
+
+
+100,5	120
+80,5	100
+60,5	80
+0	60
+
+helyezés	pont	név
+1
+2
+3
